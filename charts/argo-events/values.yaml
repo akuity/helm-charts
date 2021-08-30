@@ -1,0 +1,99 @@
+# docker registry
+registry: quay.io
+
+# The image pull policy
+imagePullPolicy: Always
+
+# Secrets with credentials to pull images from a private registry
+imagePullSecrets: []
+# - name: argo-pull-secret
+
+# ServiceAccount to use for running controller.
+serviceAccount: argo-events-sa
+
+# serviceAccountAnnotations can be used to enable GKE workload identity, or other use-cases
+serviceAccountAnnotations: {}
+
+# Create service accounts in additional namespaces specified
+# The SA will always be created in the release namespaces
+additionalSaNamespaces: []
+  # - argo-prod
+additionalServiceAccountRules:
+- apiGroups:
+    - apiextensions.k8s.io
+  verbs:
+    - create
+    - delete
+    - deletecollection
+    - get
+    - list
+    - patch
+    - update
+    - watch
+  resources:
+    - customresourcedefinitions
+
+instanceID: argo-events
+
+# set `singleNamespace` to false to have the controllers
+# listen on all namespaces.  Otherwise the controllers will listen
+# on the namespace provided
+namespace: argo-events
+singleNamespace: true
+
+# sensor controller
+sensorController:
+  name: sensor-controller
+  image: argoproj/sensor-controller
+  tag: v1.3.1
+  replicaCount: 1
+  extraEnv: []
+    # - name: DEBUG_LOG
+    #   value: "true"
+  sensorImage: argoproj/sensor
+  podAnnotations: {}
+  nodeSelector: {}
+  podLabels: {}
+  priorityClassName: ""
+  tolerations: []
+  affinity: {}
+  resources: {}
+
+eventsourceController:
+  name: eventsource-controller
+  image: argoproj/eventsource-controller
+  tag: v1.3.1
+  replicaCount: 1
+  extraEnv: []
+    # - name: DEBUG_LOG
+    #   value: "true"
+  eventsourceImage: argoproj/eventsource
+  podAnnotations: {}
+  nodeSelector: {}
+  podLabels: {}
+  priorityClassName: ""
+  tolerations: []
+  affinity: {}
+  resources: {}
+
+eventbusController:
+  name: eventbus-controller
+  image: argoproj/eventbus-controller
+  tag: v1.3.1
+  replicaCount: 1
+  extraEnv: []
+    # - name: DEBUG_LOG
+    #   value: "true"
+  podAnnotations: {}
+  nodeSelector: {}
+  podLabels: {}
+  priorityClassName: ""
+  tolerations: []
+  affinity: {}
+  resources: {}
+  natsStreamingImage: nats-streaming:0.17.0
+  natsMetricsExporterImage: synadia/prometheus-nats-exporter:0.6.2
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 9731

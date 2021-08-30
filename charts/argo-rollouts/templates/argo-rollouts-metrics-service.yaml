@@ -1,0 +1,22 @@
+{{- if .Values.controller.metrics.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "argo-rollouts.fullname" . }}-metrics
+  labels:
+    app.kubernetes.io/component: {{ .Values.controller.component }}
+    {{- include "argo-rollouts.labels" . | nindent 4 }}
+  {{- with .Values.serviceAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ports:
+  - name: metrics
+    protocol: TCP
+    port: 8090
+    targetPort: 8090
+  selector:
+    app.kubernetes.io/component: {{ .Values.controller.component }}
+    {{- include "argo-rollouts.selectorLabels" . | nindent 4 }}
+{{- end }}
