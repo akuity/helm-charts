@@ -10,8 +10,9 @@ keywords:
 sources:
   - https://github.com/argoproj/argo-events
 maintainers:
-  - name: VaibhavPage
-  - name: whynowy
+  - name: terrytangyuan
+  - name: jessesuen
+  - name: wanghong230
 appVersion: 1.3.1
 icon: https://argoproj.github.io/argo-events/assets/logo.png
 home: https://github.com/argoproj/argo-helm
