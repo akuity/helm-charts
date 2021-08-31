@@ -35,7 +35,7 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-Uninstalling Argo CD (replacing):
+Uninstalling Argo CD:
 
 ```
 helm uninstall argo-cd-1630429278
