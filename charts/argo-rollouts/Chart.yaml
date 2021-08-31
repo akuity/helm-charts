@@ -6,9 +6,9 @@ version: 0.0.1
 icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
 home: https://github.com/argoproj/argo-helm
 maintainers:
-  - name: alexmt
-  - name: dthomson25
+  - name: terrytangyuan
   - name: jessesuen
+  - name: wanghong230
 annotations:
   artifacthub.io/changes: |
     - "[Fixed]: ServiceMonitor selector labels match metrics Service"
