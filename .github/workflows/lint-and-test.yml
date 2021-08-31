@@ -4,10 +4,10 @@ name: Linting and Testing
 on:
   push:
     branches:
-      - "master"
+      - master
   pull_request:
     branches:
-      - "master"
+      - master
 jobs: 
   chart-test:
     runs-on: ubuntu-latest

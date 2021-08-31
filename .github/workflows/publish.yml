@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - rewrite-build
 jobs:
   publish:
     runs-on: ubuntu-latest

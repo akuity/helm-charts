@@ -2,13 +2,16 @@
 
 Akuity Helm is a collection of charts for Argo projects. The charts can be added using following command:
 
+## User Installation
+
+To install a published Helm Chart, run the following:
+
 ```
-# TODO: Need a site to host
-helm repo add argo https://akuityio.github.io/helm-builds
+helm repo add akuity https://akuityio.github.io/helm-builds
+helm install akuity/argo-cd -n argo --generate-name
 ```
 
-## Testing
-
+## Local Development and Testing
 
 ### Argo CD
 
