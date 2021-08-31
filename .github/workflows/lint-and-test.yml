@@ -1,7 +1,13 @@
 ## Reference: https://github.com/helm/chart-testing-action
 ---
 name: Linting and Testing
-on: pull_request
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
 jobs: 
   chart-test:
     runs-on: ubuntu-latest
