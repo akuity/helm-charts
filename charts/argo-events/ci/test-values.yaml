@@ -1,3 +1,0 @@
-serviceAccount: argo-events-sa-test
-instanceID: test-argo-events
-singleNamespace: false

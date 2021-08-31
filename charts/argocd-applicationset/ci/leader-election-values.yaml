@@ -1,4 +1,0 @@
-args:
-  enableLeaderElection: true
-
-replicaCount: 3
