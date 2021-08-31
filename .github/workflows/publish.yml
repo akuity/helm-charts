@@ -19,7 +19,7 @@ jobs:
 
       - name: Add dependency chart repos
         run: |
-          helm repo add argo https://argoproj.github.io/argo-helm
+          helm repo add akuity https://akuityio.github.io/helm-builds
           helm repo add minio https://helm.min.io/
           helm repo add dandydeveloper https://dandydeveloper.github.io/charts/
           helm repo add stable https://charts.helm.sh/stable
