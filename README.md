@@ -12,12 +12,31 @@ helm repo add argo https://akuityio.github.io/helm-builds
 
 ### Argo CD
 
-```
-helm repo add redis-ha https://dandydeveloper.github.io/charts/
-helm dependency update # TODO: Error: Chart.yaml file is missing
-```
+Installing dependencies first:
 
 ```
+cd charts/argo-cd
+helm dependency update
+```
+
+Installing Argo CD:
+```
+cd -
 helm install charts/argo-cd -n argo --generate-name
-helm uninstall argo-cd-xxxx
+```
+
+
+```
+> NAME: argo-cd-1630429278
+LAST DEPLOYED: Tue Aug 31 13:01:21 2021
+NAMESPACE: argo
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+```
+
+Uninstalling Argo CD (replacing):
+
+```
+helm uninstall argo-cd-1630429278
 ```
