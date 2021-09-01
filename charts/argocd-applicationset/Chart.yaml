@@ -2,7 +2,7 @@ apiVersion: v2
 name: argocd-applicationset
 description: A Helm chart for installing ArgoCD ApplicationSet
 type: application
-version: 0.0.2
+version: 0.0.3
 appVersion: "v0.2.0"
 home: https://github.com/argoproj/argo-helm
 icon: https://argocd-applicationset.readthedocs.io/en/stable/assets/logo.png
@@ -11,7 +11,6 @@ keywords:
   - appset
   - gitops
 maintainers:
-  - name: maruina
-annotations:
-  artifacthub.io/changes: |
-    - "[Added]: Configuration for Pod labels"
+  - name: terrytangyuan
+  - name: jessesuen
+  - name: wanghong230
