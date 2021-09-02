@@ -1,9 +1,14 @@
 name: Image Publish
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      sourceImg:
+        description: 'The source image, e.g. argoproj/argocd:v2.1.1'
+        required: true
+      targetImg:
+        description: 'The target image, e.g. akuity/argocd:v0.0.1'
+        required: true
 
 defaults:
   run:
@@ -34,8 +39,8 @@ jobs:
         env:
           DOCKERIO_ORG: "quay.io"
         run: |
-          SOURCE_REPO=argoproj
-          TARGET_REPO=akuity
-          docker pull ${DOCKERIO_ORG}/${SOURCE_REPO}/argocd:v2.1.1
-          docker tag ${DOCKERIO_ORG}/${SOURCE_REPO}/argocd:v2.1.1 ${DOCKERIO_ORG}/${TARGET_REPO}/argocd:v0.0.1
-          docker push ${DOCKERIO_ORG}/${TARGET_REPO}/argocd:v0.0.1
+          SOURCE_IMG=${{ github.event.inputs.sourceImg }}
+          TARGET_IMG=${{ github.event.inputs.targetImg }}
+          docker pull ${DOCKERIO_ORG}/${SOURCE_IMG}
+          docker tag ${DOCKERIO_ORG}/${SOURCE_IMG} ${DOCKERIO_ORG}/${TARGET_IMG}
+          docker push ${DOCKERIO_ORG}/${TARGET_IMG}
