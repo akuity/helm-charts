@@ -13,6 +13,17 @@ helm install akuity/argo-cd -n argo --generate-name
 
 ## Local Development and Testing
 
+### Pre-commit Hook
+
+We use [helm-docs](https://github.com/norwoodj/helm-docs) to automatically generate reference for the charts and we use a [pre-commit](https://pre-commit.com/) hook to make sure we always update the docs when there are any changes in `values.yaml`.
+
+To install `pre-commit`, run:
+
+```
+brew install pre-commit
+pre-commit install
+```
+
 ### Argo CD
 
 Installing dependencies first:
