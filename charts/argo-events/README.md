@@ -1,20 +1,88 @@
-# Argo-Events Chart
+# argo-events
 
-This is a **community maintained** chart. It installs the [argo-events](https://github.com/argoproj/argo-events) application. This application comes packaged with:
-- Sensor Custom Resource Definition (See CRD Notes)
-- EventSource Custom Resource Definition (See CRD Notes)
-- EventBus Custom Resource Definition (See CRD Notes)
-- Sensor Controller Deployment
-- EventSource Controller Deployment
-- EventBus Controller Deployment
-- Service Account
-- Roles
-- Role Bindings
-- Cluster Roles
-- Cluster Role Bindings
+![Version: 0.0.3](https://img.shields.io/badge/Version-0.0.3-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
 
-## Notes on CRD Installation
+A Helm chart to install Argo-Events in k8s Cluster
 
-Some users would prefer to install the CRDs _outside_ of the chart. You can disable the CRD installation of this chart by using `--skip-crds` when installing the chart.
+**Homepage:** <https://github.com/argoproj/argo-helm>
 
-You can install the CRDs manually from `crds` folder.
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| terrytangyuan |  |  |
+| jessesuen |  |  |
+| wanghong230 |  |  |
+
+## Source Code
+
+* <https://github.com/argoproj/argo-events>
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| additionalSaNamespaces | list | `[]` |  |
+| additionalServiceAccountRules[0].apiGroups[0] | string | `"apiextensions.k8s.io"` |  |
+| additionalServiceAccountRules[0].resources[0] | string | `"customresourcedefinitions"` |  |
+| additionalServiceAccountRules[0].verbs[0] | string | `"create"` |  |
+| additionalServiceAccountRules[0].verbs[1] | string | `"delete"` |  |
+| additionalServiceAccountRules[0].verbs[2] | string | `"deletecollection"` |  |
+| additionalServiceAccountRules[0].verbs[3] | string | `"get"` |  |
+| additionalServiceAccountRules[0].verbs[4] | string | `"list"` |  |
+| additionalServiceAccountRules[0].verbs[5] | string | `"patch"` |  |
+| additionalServiceAccountRules[0].verbs[6] | string | `"update"` |  |
+| additionalServiceAccountRules[0].verbs[7] | string | `"watch"` |  |
+| eventbusController.affinity | object | `{}` |  |
+| eventbusController.extraEnv | list | `[]` |  |
+| eventbusController.image | string | `"argoproj/eventbus-controller"` |  |
+| eventbusController.name | string | `"eventbus-controller"` |  |
+| eventbusController.natsMetricsExporterImage | string | `"synadia/prometheus-nats-exporter:0.6.2"` |  |
+| eventbusController.natsStreamingImage | string | `"nats-streaming:0.17.0"` |  |
+| eventbusController.nodeSelector | object | `{}` |  |
+| eventbusController.podAnnotations | object | `{}` |  |
+| eventbusController.podLabels | object | `{}` |  |
+| eventbusController.priorityClassName | string | `""` |  |
+| eventbusController.replicaCount | int | `1` |  |
+| eventbusController.resources | object | `{}` |  |
+| eventbusController.tag | string | `"v1.3.1"` |  |
+| eventbusController.tolerations | list | `[]` |  |
+| eventsourceController.affinity | object | `{}` |  |
+| eventsourceController.eventsourceImage | string | `"argoproj/eventsource"` |  |
+| eventsourceController.extraEnv | list | `[]` |  |
+| eventsourceController.image | string | `"argoproj/eventsource-controller"` |  |
+| eventsourceController.name | string | `"eventsource-controller"` |  |
+| eventsourceController.nodeSelector | object | `{}` |  |
+| eventsourceController.podAnnotations | object | `{}` |  |
+| eventsourceController.podLabels | object | `{}` |  |
+| eventsourceController.priorityClassName | string | `""` |  |
+| eventsourceController.replicaCount | int | `1` |  |
+| eventsourceController.resources | object | `{}` |  |
+| eventsourceController.tag | string | `"v1.3.1"` |  |
+| eventsourceController.tolerations | list | `[]` |  |
+| imagePullPolicy | string | `"Always"` |  |
+| imagePullSecrets | list | `[]` |  |
+| instanceID | string | `"argo-events"` |  |
+| namespace | string | `"argo-events"` |  |
+| registry | string | `"quay.io"` |  |
+| securityContext.runAsNonRoot | bool | `true` |  |
+| securityContext.runAsUser | int | `9731` |  |
+| sensorController.affinity | object | `{}` |  |
+| sensorController.extraEnv | list | `[]` |  |
+| sensorController.image | string | `"argoproj/sensor-controller"` |  |
+| sensorController.name | string | `"sensor-controller"` |  |
+| sensorController.nodeSelector | object | `{}` |  |
+| sensorController.podAnnotations | object | `{}` |  |
+| sensorController.podLabels | object | `{}` |  |
+| sensorController.priorityClassName | string | `""` |  |
+| sensorController.replicaCount | int | `1` |  |
+| sensorController.resources | object | `{}` |  |
+| sensorController.sensorImage | string | `"argoproj/sensor"` |  |
+| sensorController.tag | string | `"v1.3.1"` |  |
+| sensorController.tolerations | list | `[]` |  |
+| serviceAccount | string | `"argo-events-sa"` |  |
+| serviceAccountAnnotations | object | `{}` |  |
+| singleNamespace | bool | `true` |  |
+
+----------------------------------------------
+Autogenerated from chart metadata using [helm-docs v1.5.0](https://github.com/norwoodj/helm-docs/releases/v1.5.0)
