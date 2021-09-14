@@ -9,7 +9,7 @@ global:
   image:
     repository: quay.io/argoproj/argocd
     tag: v2.1.1
-    imagePullPolicy: IfNotPresent
+    imagePullPolicy: Always
   ## Annotations applied to all pods
   podAnnotations: {}
   ## Labels applied to all pods
