@@ -10,7 +10,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| terrytangyuan |  |  |
+| terrytangyuan | terrytangyuan@gmail.com |  |
 | jessesuen |  |  |
 | wanghong230 |  |  |
 

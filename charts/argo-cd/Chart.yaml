@@ -11,6 +11,7 @@ keywords:
   - gitops
 maintainers:
   - name: terrytangyuan
+    email: "terrytangyuan@gmail.com"
   - name: jessesuen
   - name: wanghong230
 dependencies:
