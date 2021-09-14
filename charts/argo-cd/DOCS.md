@@ -159,7 +159,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.volumes[0].name | string | `"static-files"` |  |
 | fullnameOverride | string | `""` |  |
 | global.hostAliases | list | `[]` |  |
-| global.image.imagePullPolicy | string | `"Always"` |  |
+| global.image.imagePullPolicy | string | `"IfNotPresent"` |  |
 | global.image.repository | string | `"quay.io/argoproj/argocd"` |  |
 | global.image.tag | string | `"v2.1.1"` |  |
 | global.imagePullSecrets | list | `[]` |  |
