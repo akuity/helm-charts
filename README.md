@@ -14,8 +14,11 @@ helm repo update
 # Check available charts in the repo
 helm search repo akuity
 
-# Install Argo CD
-helm install akuity/argo-cd --version 0.0.6 -n argo --generate-name
+# Install Argo CD (latest version)
+helm install akuity/argo-cd -n argo --generate-name
+
+# Install Argo CD (specific version)
+helm install akuity/argo-cd --version 0.0.8 -n argo --generate-name
 ```
 
 ## Local Development and Testing
