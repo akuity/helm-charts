@@ -1,5 +1,5 @@
 apiVersion: v2
-version: 0.0.4
+version: 0.0.5
 appVersion: 0.2.0
 name: argocd-applicationset
 description: A Helm chart for installing ArgoCD ApplicationSet
