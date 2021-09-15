@@ -3,7 +3,7 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.1.1
-    created: "2021-09-15T13:35:42.619891949Z"
+    created: "2021-09-01T14:27:34.227819667Z"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -11,25 +11,27 @@ entries:
       version: 4.12.17
     description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
       tool for Kubernetes.
-    digest: 0aefb0bc3379b06e23572755dc8c29cd0342e1150e8b4c7329871c5bef65cdb9
-    home: https://github.com/akuityio/helm-builds
+    digest: 5a9c7c614c253972a878e341f35b58b5538adcf5bcd0f6892afe9b05b6de1cab
+    home: https://github.com/argoproj/argo-helm
     icon: https://argoproj.github.io/argo-cd/assets/logo.png
     keywords:
     - argoproj
     - argocd
     - gitops
     maintainers:
-    - email: terrytangyuan@gmail.com
-      name: terrytangyuan
+    - name: terrytangyuan
     - name: jessesuen
     - name: wanghong230
     name: argo-cd
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argo-cd-0.0.7/argo-cd-0.0.7.tgz
-    version: 0.0.7
-  - apiVersion: v2
+    - https://github.com/akuityio/helm-builds/releases/download/argo-cd-0.0.3/argo-cd-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Changed]: Make AWS ALB GRPC backend protocol version configurable"
+    apiVersion: v2
     appVersion: 2.1.1
-    created: "2021-09-15T13:13:30.438940707Z"
+    created: "2021-08-31T20:43:41.983633479Z"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -37,28 +39,27 @@ entries:
       version: 4.12.17
     description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
       tool for Kubernetes.
-    digest: 374b867138c028f022a9992e550262dff69d45cd5824e971682cfde28894da6b
-    home: https://github.com/akuityio/helm-builds
+    digest: 07291ff4a9e303ca86dbaf52cbdf2498c2b0c8011f088b25087422876d509391
+    home: https://github.com/argoproj/argo-helm
     icon: https://argoproj.github.io/argo-cd/assets/logo.png
     keywords:
     - argoproj
     - argocd
     - gitops
     maintainers:
-    - email: terrytangyuan@gmail.com
-      name: terrytangyuan
+    - name: terrytangyuan
     - name: jessesuen
     - name: wanghong230
     name: argo-cd
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argo-cd-0.0.6/argo-cd-0.0.6.tgz
-    version: 0.0.6
+    - https://github.com/akuityio/helm-builds/releases/download/argo-cd-0.0.2/argo-cd-0.0.2.tgz
+    version: 0.0.2
   argo-events:
   - apiVersion: v2
     appVersion: 1.3.1
-    created: "2021-09-15T13:13:30.628737247Z"
+    created: "2021-09-01T14:27:34.382689948Z"
     description: A Helm chart to install Argo-Events in k8s Cluster
-    digest: 4019ce832639496d99b221120f5e8cbd16c94e3cb50b50620970842a027f12b2
+    digest: 2760025fe827aa41dd7448d75455bc69204aa56e0ee6aab4810b382dd52bc61f
     home: https://github.com/argoproj/argo-helm
     icon: https://argoproj.github.io/argo-events/assets/logo.png
     keywords:
@@ -74,14 +75,40 @@ entries:
     sources:
     - https://github.com/argoproj/argo-events
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argo-events-0.0.5/argo-events-0.0.5.tgz
-    version: 0.0.5
+    - https://github.com/akuityio/helm-builds/releases/download/argo-events-0.0.3/argo-events-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Added]: Ability to specify additional/custom environment variables"
+        - "[Fixed]: Charts icon url"
+    apiVersion: v2
+    appVersion: 1.3.1
+    created: "2021-08-31T20:43:42.149185537Z"
+    description: A Helm chart to install Argo-Events in k8s Cluster
+    digest: b54ce9855177311b49dc3d818089a2a4c41ab1094e82ddf7f702927d14108e6f
+    home: https://github.com/argoproj/argo-helm
+    icon: https://argoproj.github.io/argo-events/assets/logo.png
+    keywords:
+    - argo-events
+    - sensor-controller
+    - eventsource-controller
+    - eventbus-controller
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-events
+    sources:
+    - https://github.com/argoproj/argo-events
+    urls:
+    - https://github.com/akuityio/helm-builds/releases/download/argo-events-0.0.2/argo-events-0.0.2.tgz
+    version: 0.0.2
   argo-rollouts:
   - apiVersion: v2
-    appVersion: 1.0.2
-    created: "2021-09-15T13:13:30.831262377Z"
+    appVersion: v1.0.2
+    created: "2021-09-01T14:27:34.568828609Z"
     description: A Helm chart for Argo Rollouts
-    digest: 874988f256378325b916026a1ff6fbf8827600f02c9b41336bfb8dc026d967c7
+    digest: 5cc11cb72d643b57609e1c8eb50b71c9052697463b6a6698959776bce156ac84
     home: https://github.com/argoproj/argo-helm
     icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
     maintainers:
@@ -90,14 +117,32 @@ entries:
     - name: wanghong230
     name: argo-rollouts
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argo-rollouts-0.0.5/argo-rollouts-0.0.5.tgz
-    version: 0.0.5
+    - https://github.com/akuityio/helm-builds/releases/download/argo-rollouts-0.0.3/argo-rollouts-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Fixed]: ServiceMonitor selector labels match metrics Service"
+    apiVersion: v2
+    appVersion: v1.0.2
+    created: "2021-08-31T20:43:42.311261454Z"
+    description: A Helm chart for Argo Rollouts
+    digest: 3c5687b9b561b835e2c4b3ee14c9630e039b477996383118b0b98669541857b0
+    home: https://github.com/argoproj/argo-helm
+    icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-rollouts
+    urls:
+    - https://github.com/akuityio/helm-builds/releases/download/argo-rollouts-0.0.2/argo-rollouts-0.0.2.tgz
+    version: 0.0.2
   argo-workflows:
   - apiVersion: v2
-    appVersion: 3.1.8
-    created: "2021-09-15T13:13:31.039364991Z"
+    appVersion: v3.1.8
+    created: "2021-09-01T14:27:34.771214773Z"
     description: A Helm chart for Argo Workflows
-    digest: 79e617523f1ca73f9b7106d86143a225bdf2b4481940bebe091946da4d69ac02
+    digest: 65a356b342a45321ff9eae76937a3c957937e2c9dca5cbbe5af22dc15094acfd
     home: https://github.com/argoproj/argo-helm
     icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
     maintainers:
@@ -109,14 +154,36 @@ entries:
     - https://github.com/argoproj/argo-workflows
     type: application
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argo-workflows-0.0.5/argo-workflows-0.0.5.tgz
-    version: 0.0.5
+    - https://github.com/akuityio/helm-builds/releases/download/argo-workflows-0.0.3/argo-workflows-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Added]: Add controller namespaceParallelism param to configmap"
+    apiVersion: v2
+    appVersion: v3.1.8
+    created: "2021-08-31T20:43:42.482215976Z"
+    description: A Helm chart for Argo Workflows
+    digest: cb8722fa7bedf7e3826509fbc96ba461dfa32c18c23a5d3e3a0055f2c4da3c17
+    home: https://github.com/argoproj/argo-helm
+    icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
+    maintainers:
+    - name: alexec
+    - name: alexmt
+    - name: jessesuen
+    - name: benjaminws
+    name: argo-workflows
+    sources:
+    - https://github.com/argoproj/argo-workflows
+    type: application
+    urls:
+    - https://github.com/akuityio/helm-builds/releases/download/argo-workflows-0.0.2/argo-workflows-0.0.2.tgz
+    version: 0.0.2
   argocd-applicationset:
   - apiVersion: v2
-    appVersion: 0.2.0
-    created: "2021-09-15T13:13:31.234186406Z"
+    appVersion: v0.2.0
+    created: "2021-09-01T14:27:34.918734217Z"
     description: A Helm chart for installing ArgoCD ApplicationSet
-    digest: f583f27ca4ecbac528072e4d1d08836e154786678547a0f7485b8fccc266cc02
+    digest: 7490fdff4b93066ff9df7c86da59cba01c4fc40778c632a6ff2b90e500d80a97
     home: https://github.com/argoproj/argo-helm
     icon: https://argocd-applicationset.readthedocs.io/en/stable/assets/logo.png
     keywords:
@@ -130,15 +197,36 @@ entries:
     name: argocd-applicationset
     type: application
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argocd-applicationset-0.0.5/argocd-applicationset-0.0.5.tgz
-    version: 0.0.5
+    - https://github.com/akuityio/helm-builds/releases/download/argocd-applicationset-0.0.3/argocd-applicationset-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Added]: Configuration for Pod labels"
+    apiVersion: v2
+    appVersion: v0.2.0
+    created: "2021-08-31T20:43:42.637173008Z"
+    description: A Helm chart for installing ArgoCD ApplicationSet
+    digest: 5c7184550d4e8831fae51ab7c3209574bdcfab4a90fe187f80e0550acedab519
+    home: https://github.com/argoproj/argo-helm
+    icon: https://argocd-applicationset.readthedocs.io/en/stable/assets/logo.png
+    keywords:
+    - argoproj
+    - appset
+    - gitops
+    maintainers:
+    - name: maruina
+    name: argocd-applicationset
+    type: application
+    urls:
+    - https://github.com/akuityio/helm-builds/releases/download/argocd-applicationset-0.0.2/argocd-applicationset-0.0.2.tgz
+    version: 0.0.2
   argocd-image-updater:
   - apiVersion: v2
-    appVersion: 0.10.1
-    created: "2021-09-15T13:13:31.433340586Z"
+    appVersion: v0.10.1
+    created: "2021-09-01T14:27:35.087327852Z"
     description: A Helm chart for Argo CD Image Updater, a tool to automatically update
       the container images of Kubernetes workloads which are managed by Argo CD
-    digest: bc3645cb04efef59a109a9d8552b6804de46148e5cbae87780f4bd56886d76cd
+    digest: a8bdbec99d88a1a09257a062f093cf4d26b427cc7eceeba45d3e53d771a27a37
     home: https://github.com/argoproj-labs/argocd-image-updater
     icon: https://argocd-image-updater.readthedocs.io/en/stable/assets/logo.png
     keywords:
@@ -152,14 +240,37 @@ entries:
     name: argocd-image-updater
     type: application
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argocd-image-updater-0.0.5/argocd-image-updater-0.0.5.tgz
-    version: 0.0.5
+    - https://github.com/akuityio/helm-builds/releases/download/argocd-image-updater-0.0.3/argocd-image-updater-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Added]: First chart release"
+    apiVersion: v2
+    appVersion: v0.10.1
+    created: "2021-08-31T20:43:42.845416971Z"
+    description: A Helm chart for Argo CD Image Updater, a tool to automatically update
+      the container images of Kubernetes workloads which are managed by Argo CD
+    digest: 50494b41bc76667ba8f211f54ed11c05e38291c5abf4f5ba22d992746d6a09e6
+    home: https://github.com/argoproj-labs/argocd-image-updater
+    icon: https://argocd-image-updater.readthedocs.io/en/stable/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - name: argoproj
+      url: https://argoproj.github.io/
+    name: argocd-image-updater
+    type: application
+    urls:
+    - https://github.com/akuityio/helm-builds/releases/download/argocd-image-updater-0.0.2/argocd-image-updater-0.0.2.tgz
+    version: 0.0.2
   argocd-notifications:
   - apiVersion: v2
     appVersion: 1.1.1
-    created: "2021-09-15T13:13:31.62210481Z"
+    created: "2021-09-01T14:27:35.265599667Z"
     description: A Helm chart for ArgoCD notifications, an add-on to ArgoCD.
-    digest: 7261c6faca11846daa0fca45b9ca15dd49a389169144bb92e3a99f9c3fb6c7c8
+    digest: d4df9c3d4cdd7aff1c9f45619dfd54a844cce226db600b97662d271a4849c0e1
     home: https://github.com/argoproj/argo-helm
     icon: https://argocd-notifications.readthedocs.io/en/stable/assets/logo.png
     keywords:
@@ -173,6 +284,28 @@ entries:
     name: argocd-notifications
     type: application
     urls:
-    - https://github.com/akuityio/helm-builds/releases/download/argocd-notifications-0.0.5/argocd-notifications-0.0.5.tgz
-    version: 0.0.5
-generated: "2021-09-15T13:35:42.619906149Z"
+    - https://github.com/akuityio/helm-builds/releases/download/argocd-notifications-0.0.3/argocd-notifications-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - "[Added]: Configuration for Pod labels"
+    apiVersion: v2
+    appVersion: 1.1.1
+    created: "2021-08-31T20:43:43.001901922Z"
+    description: A Helm chart for ArgoCD notifications, an add-on to ArgoCD.
+    digest: 8b96dea3db3018aba06003c61caa9c49cecda6b2ef8bfb6e2bad64b9122209e3
+    home: https://github.com/argoproj/argo-helm
+    icon: https://argocd-notifications.readthedocs.io/en/stable/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - argocd-notifications
+    maintainers:
+    - name: alexmt
+    - name: andyfeller
+    name: argocd-notifications
+    type: application
+    urls:
+    - https://github.com/akuityio/helm-builds/releases/download/argocd-notifications-0.0.2/argocd-notifications-0.0.2.tgz
+    version: 0.0.2
+generated: "2021-09-01T14:27:35.265635668Z"
