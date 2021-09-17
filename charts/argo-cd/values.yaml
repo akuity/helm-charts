@@ -60,54 +60,52 @@ controller:
     tag: # defaults to global.image.tag
     imagePullPolicy: # IfNotPresent
 
-  # If changing the number of replicas you must pass the number as ARGOCD_CONTROLLER_REPLICAS as an environment variable
+  # -- If changing the number of replicas you must pass the number as ARGOCD_CONTROLLER_REPLICAS as an environment variable
   replicas: 1
 
-  # Deploy the application as a StatefulSet instead of a Deployment, this is required for HA capability.
-  # This is a feature flag that will become the default in chart version 3.x
+  # -- Deploy the application as a StatefulSet instead of a Deployment, this is required for HA capability. This is a feature flag that will become the default in chart version 3.x
   enableStatefulSet: false
 
-  ## Argo controller commandline flags
+  # -- Argo controller commandline flags
   args:
+    # -- Define the controller `--status-processors`
     statusProcessors: "20"
+    # -- Define the controller `--operation-processors`
     operationProcessors: "10"
+    # -- Define the controller `--app-resync`
     appResyncPeriod: "180"
+    # -- Define the controller `--self-heal-timeout-seconds`
     selfHealTimeout: "5"
     repoServerTimeoutSeconds: "60"
 
-  ## Argo controller log format: text|json
+  # -- Argo controller log format: text|json
   logFormat: text
-  ## Argo controller log level
+  # -- Argo controller log level
   logLevel: info
 
-  ## Additional command line arguments to pass to argocd-controller
-  ##
+  # -- Additional command line arguments to pass to argocd-controller
   extraArgs: []
 
-  ## Environment variables to pass to argocd-controller
-  ##
+  # -- Environment variables to pass to argocd-controller
   env:
     []
     # - name: "ARGOCD_CONTROLLER_REPLICAS"
     #   value: ""
 
-  ## envFrom to pass to argocd-controller
-  ##
+  # -- envFrom to pass to argocd-controller
   envFrom: []
   # - configMapRef:
   #     name: config-map-name
   # - secretRef:
   #     name: secret-name
 
-  ## Annotations to be added to controller pods
-  ##
+  # -- Annotations to be added to controller pods
   podAnnotations: {}
 
-  ## Labels to be added to controller pods
-  ##
+  # -- Labels to be added to controller pods
   podLabels: {}
 
-  ## Labels to set container specific security contexts
+  # -- Labels to set container specific security contexts
   containerSecurityContext:
     {}
     # capabilities:
@@ -116,18 +114,17 @@ controller:
     # readOnlyRootFilesystem: true
     # runAsNonRoot: true
 
-  ## Configures the controller port
+  # -- Controller listening port
   containerPort: 8082
 
-  ## Readiness and liveness probes for default backend
-  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
-  ##
+  # -- Readiness probe for default backend. Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   readinessProbe:
     failureThreshold: 3
     initialDelaySeconds: 10
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 1
+  # -- Liveness probe for default backend. Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   livenessProbe:
     failureThreshold: 3
     initialDelaySeconds: 10
@@ -135,26 +132,26 @@ controller:
     successThreshold: 1
     timeoutSeconds: 1
 
-  ## Additional volumeMounts to the controller main container.
+  # -- Additional volumeMounts to the controller main container.
   volumeMounts: []
 
-  ## Additional volumes to the controller pod.
+  # -- Additional volumes to the controller pod.
   volumes: []
 
-  ## Controller service configuration
+  # -- Controller service configuration
   service:
     annotations: {}
     labels: {}
     port: 8082
     portName: https-controller
 
-  ## Node selectors and tolerations for server scheduling to nodes with taints
-  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-  ##
+  # -- Node selectors and tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   nodeSelector: {}
   tolerations: []
+  # -- [Assign custom affinity rules to the deployment](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)
   affinity: {}
 
+  # -- Priority class name
   priorityClassName: ""
 
   resources: {}
@@ -168,12 +165,12 @@ controller:
   serviceAccount:
     create: true
     name: argocd-application-controller
-    ## Annotations applied to created service account
+    # -- Annotations applied to created service account
     annotations: {}
-    ## Automount API credentials for the Service Account
+    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
-  ## Server metrics controller configuration
+  # -- Server metrics controller configuration
   metrics:
     enabled: false
     service:
@@ -221,13 +218,10 @@ controller:
     #   namespace: monitoring
     #   additionalLabels: {}
 
-  ## Enable Admin ClusterRole resources.
-  ## Enable if you would like to grant rights to ArgoCD to deploy to the local Kubernetes cluster.
   clusterAdminAccess:
+    # -- Enable RBAC for local cluster deployments if you would like to grant rights to ArgoCD to deploy to the local Kubernetes cluster.
     enabled: true
-  ## Enable Custom Rules for the Application Controller's Cluster Role resource
-  ## Enable this and set the rules: to whatever custom rules you want for the Cluster Role resource.
-  ## Defaults to off
+  # -- Enable Custom Rules for the Application Controller's Cluster Role resource. Enable this and set the rules: to whatever custom rules you want for the Cluster Role resource.
   clusterRoleRules:
     enabled: false
     rules: []
@@ -262,27 +256,23 @@ dex:
     tag:
     imagePullPolicy:
 
-  ## Environment variables to pass to the Dex server
-  ##
+  # -- Environment variables to pass to the Dex server
   env: []
 
-  ## envFrom to pass to the Dex server
+  # -- envFrom to pass to the Dex server
   envFrom: []
   # - configMapRef:
   #     name: config-map-name
   # - secretRef:
   #     name: secret-name
 
-  ## Annotations to be added to the Dex server pods
-  ##
+  # -- Annotations to be added to the Dex server pods
   podAnnotations: {}
 
-  ## Labels to be added to the Dex server pods
-  ##
+  # -- Labels to be added to the Dex server pods
   podLabels: {}
 
-  ## Probes for Dex server
-  ## Supported from Dex >= 2.28.0
+  # -- Probes for Dex server. Supported from Dex >= 2.28.0
   livenessProbe:
     enabled: false
     failureThreshold: 3
@@ -301,22 +291,22 @@ dex:
   serviceAccount:
     create: true
     name: argocd-dex-server
-    ## Annotations applied to created service account
+    # -- Annotations applied to created service account
     annotations: {}
-    ## Automount API credentials for the Service Account
+    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
-  ## Additional volumeMounts to the controller main container.
+  # -- Additional volumeMounts to the controller main container
   volumeMounts:
     - name: static-files
       mountPath: /shared
 
-  ## Additional volumes to the controller pod.
+  # -- Additional volumes to the controller pod
   volumes:
     - name: static-files
       emptyDir: {}
 
-  ## Dex deployment container ports
+  # -- Dex deployment container ports
   containerPortHttp: 5556
   servicePortHttp: 5556
   servicePortHttpName: http
@@ -326,16 +316,14 @@ dex:
   containerPortMetrics: 5558
   servicePortMetrics: 5558
 
-  ## Node selectors and tolerations for server scheduling to nodes with taints
-  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-  ##
+  # -- Node selectors and tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   nodeSelector: {}
   tolerations: []
   affinity: {}
 
   priorityClassName: ""
 
-  ## Labels to set container specific security contexts
+  # -- Labels to set container specific security contexts
   containerSecurityContext:
     {}
     # capabilities:
@@ -351,7 +339,7 @@ dex:
   #    cpu: 10m
   #    memory: 32Mi
 
-## Redis
+# -- Redis configurations
 redis:
   enabled: true
   name: redis
@@ -361,8 +349,7 @@ redis:
     tag: 6.2.4-alpine
     imagePullPolicy: IfNotPresent
 
-  ## Additional command line arguments to pass to redis-server
-  ##
+  # -- Additional command line arguments to pass to redis-server
   extraArgs: []
   # - --bind
   # - "0.0.0.0"
@@ -370,36 +357,30 @@ redis:
   containerPort: 6379
   servicePort: 6379
 
-  ## Environment variables to pass to the Redis server
-  ##
+  # -- Environment variables to pass to the Redis server
   env: []
 
-  ## envFrom to pass to the Redis server
-  ##
+  # -- envFrom to pass to the Redis server
   envFrom: []
   # - configMapRef:
   #     name: config-map-name
   # - secretRef:
   #     name: secret-name
 
-  ## Annotations to be added to the Redis server pods
-  ##
+  # -- Annotations to be added to the Redis server pods
   podAnnotations: {}
 
-  ## Labels to be added to the Redis server pods
-  ##
+  # -- Labels to be added to the Redis server pods
   podLabels: {}
 
-  ## Node selectors and tolerations for server scheduling to nodes with taints
-  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-  ##
+  # -- Node selectors and tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   nodeSelector: {}
   tolerations: []
   affinity: {}
 
   priorityClassName: ""
 
-  ## Labels to set container specific security contexts
+  # -- Labels to set container specific security contexts
   containerSecurityContext:
     {}
     # capabilities:
@@ -407,7 +388,7 @@ redis:
     #     - all
     # readOnlyRootFilesystem: true
 
-  ## Redis Pod specific security context
+  # -- Redis Pod specific security context
   securityContext:
     runAsNonRoot: true
     runAsUser: 999
@@ -415,9 +396,9 @@ redis:
   serviceAccount:
     create: false
     name: ""
-    ## Annotations applied to created service account
+    # -- Annotations applied to created service account
     annotations: {}
-    ## Automount API credentials for the Service Account
+    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: false
 
   resources: {}
@@ -431,11 +412,10 @@ redis:
   volumeMounts: []
   volumes: []
 
-# This key configures Redis-HA subchart and when enabled (redis-ha.enabled=true)
-# the custom redis deployment is omitted
+# -- This key configures Redis-HA subchart and when enabled (redis-ha.enabled=true) the custom redis deployment is omitted
 redis-ha:
   enabled: false
-  # Check the redis-ha chart for more properties
+  # -- Check the redis-ha chart for more properties
   exporter:
     enabled: true
   persistentVolume:
@@ -451,7 +431,7 @@ redis-ha:
   image:
     tag: 6.2.4-alpine
 
-## Server
+# -- Server configurations
 server:
   name: server
 
@@ -469,56 +449,49 @@ server:
     tag: # defaults to global.image.tag
     imagePullPolicy: # IfNotPresent
 
-  ## Additional command line arguments to pass to argocd-server
-  ##
+  # -- Additional command line arguments to pass to argocd-server
   extraArgs: []
   #  - --insecure
 
-  # This flag is used to either remove or pass the CLI flag --staticassets /shared/app to the argocd-server app
+  # -- This flag is used to either remove or pass the CLI flag --staticassets /shared/app to the argocd-server app
   staticAssets:
     enabled: true
 
-  ## Environment variables to pass to argocd-server
-  ##
+  # -- Environment variables to pass to argocd-server
   env: []
 
-  ## envFrom to pass to argocd-server
-  ##
+  # -- envFrom to pass to argocd-server
   envFrom: []
   # - configMapRef:
   #     name: config-map-name
   # - secretRef:
   #     name: secret-name
 
-  ## Specify postStart and preStop lifecycle hooks for your argo-cd-server container
-  ##
+  # -- Specify postStart and preStop lifecycle hooks for your argo-cd-server container
   lifecycle: {}
 
-  ## Argo server log format: text|json
+  # -- Argo server log format: text|json
   logFormat: text
-  ## Argo server log level
+  # -- Argo server log level
   logLevel: info
 
-  ## Annotations to be added to controller pods
-  ##
+  # -- Annotations to be added to controller pods
   podAnnotations: {}
 
-  ## Labels to be added to controller pods
-  ##
+  # -- Labels to be added to controller pods
   podLabels: {}
 
-  ## Configures the server port
+  # -- Configures the server port
   containerPort: 8080
 
-  ## Readiness and liveness probes for default backend
-  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
-  ##
+  # -- Readiness probe for default backend. Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   readinessProbe:
     failureThreshold: 3
     initialDelaySeconds: 10
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 1
+  # -- Liveness probe for default backend. Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   livenessProbe:
     failureThreshold: 3
     initialDelaySeconds: 10
@@ -526,22 +499,20 @@ server:
     successThreshold: 1
     timeoutSeconds: 1
 
-  ## Additional volumeMounts to the server main container.
+  # -- Additional volumeMounts to the server main container.
   volumeMounts: []
 
-  ## Additional volumes to the controller pod.
+  # -- Additional volumes to the controller pod.
   volumes: []
 
-  ## Node selectors and tolerations for server scheduling to nodes with taints
-  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-  ##
+  # -- Node selectors and tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   nodeSelector: {}
   tolerations: []
   affinity: {}
 
   priorityClassName: ""
 
-  ## Labels to set container specific security contexts
+  # -- Labels to set container specific security contexts
   containerSecurityContext:
     {}
     # capabilities:
@@ -557,7 +528,7 @@ server:
   #    cpu: 50m
   #    memory: 64Mi
 
-  ## Certificate configuration
+  # -- Certificate configuration
   certificate:
     enabled: false
     domain: argocd.example.com
@@ -567,12 +538,12 @@ server:
     additionalHosts: []
     secretName: argocd-server-tls
 
-  ## Server service configuration
+  # -- Server service configuration
   service:
     annotations: {}
     labels: {}
     type: ClusterIP
-    ## For node port default ports
+    # -- For node port default ports
     nodePortHttp: 30080
     nodePortHttps: 30443
     servicePortHttp: 80
@@ -586,7 +557,7 @@ server:
     externalTrafficPolicy: ""
     sessionAffinity: ""
 
-  ## Server metrics service configuration
+  # -- Server metrics service configuration
   metrics:
     enabled: false
     service:
@@ -606,9 +577,9 @@ server:
   serviceAccount:
     create: true
     name: argocd-server
-    ## Annotations applied to created service account
+    # -- Annotations applied to created service account
     annotations: {}
-    ## Automount API credentials for the Service Account
+    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
   ingress:
@@ -617,10 +588,7 @@ server:
     labels: {}
     ingressClassName: ""
 
-    ## Argo Ingress.
-    ## Hostnames must be provided if Ingress is enabled.
-    ## Secrets must be manually created in the namespace
-    ##
+    # -- Hostnames must be provided if Ingress is enabled. Secrets must be manually created in the namespace
     hosts:
       []
       # - argocd.example.com
@@ -647,8 +615,7 @@ server:
       #   hosts:
       #     - argocd.example.com
     https: false
-  # dedicated ingress for gRPC as documented at
-  # https://argoproj.github.io/argo-cd/operator-manual/ingress/
+  # -- Dedicated ingress for gRPC as documented at https://argoproj.github.io/argo-cd/operator-manual/ingress/
   ingressGrpc:
     enabled: false
     isAWSALB: false
@@ -657,19 +624,12 @@ server:
     ingressClassName: ""
 
     awsALB:
-      ## Service Type if isAWSALB is set to true
-      ## Can be of type NodePort or ClusterIP depending on which mode you are
-      ## are running. Instance mode needs type NodePort, IP mode needs type
-      ## ClusterIP
-      ## Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/how-it-works/#ingress-traffic
+      # -- Service Type if isAWSALB is set to true. Can be of type NodePort or ClusterIP depending on which mode you are running. Instance mode needs type NodePort, IP mode needs type ClusterIP. Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/how-it-works/#ingress-traffic
       serviceType: NodePort
-      # This tells AWS to send traffic from the ALB using HTTP2. Can use GRPC as well if you want to leverage GRPC specific features
+      # -- This tells AWS to send traffic from the ALB using HTTP2. Can use GRPC as well if you want to leverage GRPC specific features
       backendProtocolVersion: HTTP2
 
-    ## Argo Ingress.
-    ## Hostnames must be provided if Ingress is enabled.
-    ## Secrets must be manually created in the namespace
-    ##
+    # -- Hostnames must be provided if Ingress is enabled. Secrets must be manually created in the namespace
     hosts:
       []
       # - argocd.example.com
@@ -697,21 +657,17 @@ server:
       #     - argocd.example.com
     https: false
 
-  # Create a OpenShift Route with SSL passthrough for UI and CLI
-  # Consider setting 'hostname' e.g. https://argocd.apps-crc.testing/ using your Default Ingress Controller Domain
-  # Find your domain with: kubectl describe --namespace=openshift-ingress-operator ingresscontroller/default | grep Domain:
-  # If 'hostname' is an empty string "" OpenShift will create a hostname for you.
+  # -- Create a OpenShift Route with SSL passthrough for UI and CLI. Consider setting 'hostname' e.g. https://argocd.apps-crc.testing/ using your Default Ingress Controller Domain. Find your domain with: `kubectl describe --namespace=openshift-ingress-operator ingresscontroller/default | grep Domain`. If 'hostname' is an empty string "" OpenShift will create a hostname for you.
   route:
     enabled: false
     hostname: ""
 
-  ## ArgoCD config
-  ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
   configEnabled: true
+  # -- ArgoCD config. Reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
   config:
-    # Argo CD's externally facing base URL (optional). Required when configuring SSO
+    # -- Argo CD's externally facing base URL (optional). Required when configuring SSO
     url: https://argocd.example.com
-    # Argo CD instance label key
+    # -- Argo CD instance label key
     application.instanceLabelKey: argocd.argoproj.io/instance
 
     # DEPRECATED: Please instead use configs.credentialTemplates and configs.repositories
@@ -740,11 +696,10 @@ server:
     #     - profile
     #     - email
 
-  ## Annotations to be added to ArgoCD ConfigMap
+  # -- Annotations to be added to ArgoCD ConfigMap
   configAnnotations: {}
 
-  ## ArgoCD rbac config
-  ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
+  # -- ArgoCD rbac config. Reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
   rbacConfig:
     {}
     # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
@@ -766,16 +721,13 @@ server:
     # If omitted, defaults to: '[groups]'. The scope value can be a string, or a list of strings.
     # scopes: '[cognito:groups, email]'
 
-  ## Annotations to be added to ArgoCD rbac ConfigMap
+  # -- Annotations to be added to ArgoCD rbac ConfigMap
   rbacConfigAnnotations: {}
 
-  # Boolean determining whether or not to create the configmap. If false, it is expected the configmap will be created
-  # by something else. ArgoCD will not work if there is no configMap created with the name above.
+  # -- Boolean determining whether or not to create the configmap. If false, it is expected the configmap will be created by something else. ArgoCD will not work if there is no configMap created with the name above.
   rbacConfigCreate: true
 
-  ## Not well tested and not well supported on release v1.0.0.
-  ## Applications
-  ## reference: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+  # -- Additional applications. Not well tested and not well supported on release v1.0.0.
   additionalApplications: []
   # - name: guestbook
   #   namespace: argocd
@@ -796,8 +748,7 @@ server:
   #      prune: false
   #      selfHeal: false
 
-  ## Projects
-  ## reference: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+  # -- Additional projects. Reference: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
   additionalProjects: []
   # - name: guestbook
   #   namespace: argocd
@@ -834,12 +785,11 @@ server:
   #     - '*-prod'
   #     manualSync: true
 
-  ## Enable Admin ClusterRole resources.
-  ## Enable if you would like to grant rights to ArgoCD to deploy to the local Kubernetes cluster.
+  # -- Enable Admin ClusterRole resources. Enable if you would like to grant rights to ArgoCD to deploy to the local Kubernetes cluster.
   clusterAdminAccess:
     enabled: true
 
-  ## Enable BackendConfig custom resource for Google Kubernetes Engine
+  # -- Enable BackendConfig custom resource for Google Kubernetes Engine
   GKEbackendConfig:
     enabled: false
     spec: {}
@@ -849,9 +799,8 @@ server:
   #      oauthclientCredentials:
   #        secretName: argocd-secret
 
+  # -- Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
   extraContainers: []
-  ## Additional containers to be added to the controller pod.
-  ## See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
   # - name: my-sidecar
   #   image: nginx:latest
   # - name: lemonldap-ng-controller
@@ -873,7 +822,7 @@ server:
   #   - name: copy-portal-skins
   #     mountPath: /srv/var/lib/lemonldap-ng/portal/skins
 
-## Repo Server
+# -- Repo Server
 repoServer:
   name: repo-server
 
@@ -891,41 +840,34 @@ repoServer:
     tag: # defaults to global.image.tag
     imagePullPolicy: # IfNotPresent
 
-  ## Additional command line arguments to pass to argocd-repo-server
-  ##
+  # -- Additional command line arguments to pass to argocd-repo-server
   extraArgs: []
 
-  ## Environment variables to pass to argocd-repo-server
-  ##
+  # -- Environment variables to pass to argocd-repo-server
   env: []
 
-  ## envFrom to pass to argocd-repo-server
-  ##
+  # -- envFrom to pass to argocd-repo-server
   envFrom: []
   # - configMapRef:
   #     name: config-map-name
   # - secretRef:
   #     name: secret-name
 
-  ## Argo repoServer log format: text|json
+  # -- Argo repoServer log format: text|json
   logFormat: text
-  ## Argo repoServer log level
+  # -- Argo repoServer log level
   logLevel: info
 
-  ## Annotations to be added to repo server pods
-  ##
+  # -- Annotations to be added to repo server pods
   podAnnotations: {}
 
-  ## Labels to be added to repo server pods
-  ##
+  # -- Labels to be added to repo server pods
   podLabels: {}
 
-  ## Configures the repo server port
+  # -- Configures the repo server port
   containerPort: 8081
 
-  ## Readiness and liveness probes for default backend
-  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
-  ##
+  # -- Readiness and liveness probes for default backend. Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   readinessProbe:
     failureThreshold: 3
     initialDelaySeconds: 10
@@ -939,22 +881,20 @@ repoServer:
     successThreshold: 1
     timeoutSeconds: 1
 
-  ## Additional volumeMounts to the repo server main container.
+  # -- Additional volumeMounts to the repo server main container.
   volumeMounts: []
 
-  ## Additional volumes to the repo server pod.
+  # -- Additional volumes to the repo server pod.
   volumes: []
 
-  ## Node selectors and tolerations for server scheduling to nodes with taints
-  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-  ##
+  # -- Node selectors and tolerations for server scheduling to nodes with taints. Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   nodeSelector: {}
   tolerations: []
   affinity: {}
 
   priorityClassName: ""
 
-  ## Labels to set container specific security contexts
+  # -- Labels to set container specific security contexts
   containerSecurityContext:
     {}
     # capabilities:
@@ -970,14 +910,14 @@ repoServer:
   #    cpu: 10m
   #    memory: 64Mi
 
-  ## Repo server service configuration
+  # -- Repo server service configuration
   service:
     annotations: {}
     labels: {}
     port: 8081
     portName: https-repo-server
 
-  ## Repo server metrics service configuration
+  # -- Repo server metrics service configuration
   metrics:
     enabled: false
     service:
@@ -994,14 +934,13 @@ repoServer:
     #   namespace: monitoring
     #   additionalLabels: {}
 
-  ## Repo server service account
-  ## If create is set to true, make sure to uncomment the name and update the rbac section below
+  # -- Repo server service account. If create is set to true, make sure to uncomment the name and update the rbac section below
   serviceAccount:
     create: false
     #  name: argocd-repo-server
-    ## Annotations applied to created service account
+    # -- Annotations applied to created service account
     annotations: {}
-    ## Automount API credentials for the Service Account
+    # -- Automount API credentials for the Service Account
     automountServiceAccountToken: true
 
   ## Repo server rbac rules
@@ -1037,7 +976,7 @@ repoServer:
   #    name: custom-tools
   #    subPath: helm
 
-## Argo Configs
+# -- Argo Configs
 configs:
   # -- Provide one or multiple [external cluster credentials](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters)
   clusterCredentials: []
