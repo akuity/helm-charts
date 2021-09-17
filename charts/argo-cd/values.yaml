@@ -1,42 +1,54 @@
 ## ArgoCD configuration
 ## Ref: https://github.com/argoproj/argo-cd
 ##
+# -- Provide a name in place of argocd
 nameOverride: argocd
+# -- String to fully override "argo-cd.fullname"
 fullnameOverride: ""
+# -- Override the Kubernetes version, which is used to evaluate certain manifests
 kubeVersionOverride: ""
 
 global:
   image:
+    # -- If defined, a repository applied to all ArgoCD deployments
     repository: quay.io/argoproj/argocd
+    # -- If defined, a tag applied to all ArgoCD deployments
     tag: v2.1.1
+    # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     imagePullPolicy: IfNotPresent
-  ## Annotations applied to all pods
+  # -- Annotations for the all deployed pods
   podAnnotations: {}
-  ## Labels applied to all pods
+  # -- Labels applied to all deployed pods
   podLabels: {}
+  # -- Toggle and define the security context
   securityContext: {}
   #  runAsUser: 999
   #  runAsGroup: 999
   #  fsGroup: 999
+  # -- If defined, uses a Secret to pull an image from a private Docker registry or repository
   imagePullSecrets: []
+  # -- Mapping between IP and hostnames that will be injected as entries in the pod's hosts files
   hostAliases: []
   # - ip: 10.20.30.40
   #   hostnames:
   #   - git.myhostname
 
   networkPolicy:
+    # -- Create NetworkPolicy objects for all components
     create: false
+    # -- Default deny all ingress traffic
     defaultDenyIngress: false
 
 # Override APIVersions
 # If you want to template helm charts but cannot access k8s API server
 # you can set api versions here
 apiVersionOverrides:
+  # -- String to override apiVersion of certmanager resources rendered by this helm chart
   certmanager: "" # cert-manager.io/v1
+  # -- String to override apiVersion of ingresses rendered by this helm chart
   ingress: "" # networking.k8s.io/v1beta1
 
-## Create clusterroles that extend existing clusterroles to interact with argo-cd crds
-## Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles
+# -- Create clusterroles that extend existing clusterroles to interact with argo-cd crds. Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles
 createAggregateRoles: false
 
 ## Controller
@@ -1031,6 +1043,7 @@ configs:
   ## reference:
   ## - https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
   ## - https://argoproj.github.io/argo-cd/operator-manual/security/#external-cluster-credentials
+  # -- Provide one or multiple [external cluster credentials](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters)
   clusterCredentials: []
     # - name: mycluster
     #   server: https://mycluster.com

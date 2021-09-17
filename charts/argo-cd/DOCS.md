@@ -24,8 +24,8 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| apiVersionOverrides.certmanager | string | `""` |  |
-| apiVersionOverrides.ingress | string | `""` |  |
+| apiVersionOverrides.certmanager | string | `""` | String to override apiVersion of certmanager resources rendered by this helm chart |
+| apiVersionOverrides.ingress | string | `""` | String to override apiVersion of ingresses rendered by this helm chart |
 | configs.clusterCredentials | list | `[]` |  |
 | configs.credentialTemplates | object | `{}` |  |
 | configs.gpgKeys | object | `{}` |  |
@@ -103,7 +103,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | controller.tolerations | list | `[]` |  |
 | controller.volumeMounts | list | `[]` |  |
 | controller.volumes | list | `[]` |  |
-| createAggregateRoles | bool | `false` |  |
+| createAggregateRoles | bool | `false` | Create clusterroles that extend existing clusterroles to interact with argo-cd crds. Ref: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles |
 | dex.affinity | object | `{}` |  |
 | dex.containerPortGrpc | int | `5557` |  |
 | dex.containerPortHttp | int | `5556` |  |
@@ -157,18 +157,18 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.volumeMounts[0].name | string | `"static-files"` |  |
 | dex.volumes[0].emptyDir | object | `{}` |  |
 | dex.volumes[0].name | string | `"static-files"` |  |
-| fullnameOverride | string | `""` |  |
-| global.hostAliases | list | `[]` |  |
-| global.image.imagePullPolicy | string | `"IfNotPresent"` |  |
-| global.image.repository | string | `"quay.io/argoproj/argocd"` |  |
-| global.image.tag | string | `"v2.1.1"` |  |
+| fullnameOverride | string | `""` | String to fully override "argo-cd.fullname" |
+| global.hostAliases | list | `[]` | Mapping between IP and hostnames that will be injected as entries in the pod's hosts files |
+| global.image.imagePullPolicy | string | `"IfNotPresent"` | If defined, an image pull policy will be applied to all ArgoCD deployments |
+| global.image.repository | string | `"quay.io/argoproj/argocd"` | If defined, a repository applied to all ArgoCD deployments |
+| global.image.tag | string | `"v2.1.1"` | If defined, a tag applied to all ArgoCD deployments |
 | global.imagePullSecrets | list | `[]` |  |
-| global.networkPolicy.create | bool | `false` |  |
-| global.networkPolicy.defaultDenyIngress | bool | `false` |  |
-| global.podAnnotations | object | `{}` |  |
-| global.podLabels | object | `{}` |  |
-| global.securityContext | object | `{}` |  |
-| kubeVersionOverride | string | `""` |  |
+| global.networkPolicy.create | bool | `false` | Create NetworkPolicy objects for all components |
+| global.networkPolicy.defaultDenyIngress | bool | `false` | Default deny all ingress traffic |
+| global.podAnnotations | object | `{}` | Annotations for the all deployed pods |
+| global.podLabels | object | `{}` | Labels applied to all deployed pods |
+| global.securityContext | object | `{}` | Toggle and define the security context |
+| kubeVersionOverride | string | `""` | Override the Kubernetes version, which is used to evaluate certain manifests |
 | nameOverride | string | `"argocd"` |  |
 | openshift.enabled | bool | `false` |  |
 | redis-ha.enabled | bool | `false` |  |
