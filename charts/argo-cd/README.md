@@ -135,47 +135,6 @@ NAME: my-release
 ...
 ```
 
-## Chart Values
-
-| Parameter | Description | Default |
-|-----|------|---------|
-| global.image.imagePullPolicy | If defined, a imagePullPolicy applied to all ArgoCD deployments. | `"IfNotPresent"` |
-| global.image.repository | If defined, a repository applied to all ArgoCD deployments. | `"argoproj/argocd"` |
-| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v2.0.5"` |
-| global.podAnnotations | Annotations for the all deployed pods |
-| global.podLabels | Labels for the all deployed pods |
-| global.securityContext | Toggle and define securityContext | See [values.yaml](values.yaml) |
-| global.imagePullSecrets | If defined, uses a Secret to pull an image from a private Docker registry or repository. | `[]` |
-| global.hostAliases | Mapping between IP and hostnames that will be injected as entries in the pod's hosts files | `[]` |
-| global.networkPolicy.create | Create NetworkPolicy objects for all components | `false` |
-| global.networkPolicy.defaultDenyIngress | Default deny all ingress traffic | `false` |
-| kubeVersionOverride | Override the Kubernetes version, which is used to evaluate certain manifests | `""` |
-| nameOverride | Provide a name in place of `argocd` | `"argocd"` |
-| fullnameOverride | String to fully override `"argo-cd.fullname"` | `""` |
-| apiVersionOverrides.certmanager | String to override apiVersion of certmanager resources rendered by this helm chart | `""` |
-| apiVersionOverrides.ingress | String to override apiVersion of ingresses rendered by this helm chart | `""` |
-| createAggregateRoles | Create clusterroles that extend aggregated roles to use argo-cd crds | `false` |
-| configs.clusterCredentials | Provide one or multiple [external cluster credentials](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters) | `[]` (See [values.yaml](values.yaml)) |
-| configs.gpgKeysAnnotations | GnuPG key ring annotations | `{}` |
-| configs.gpgKeys | [GnuPG](https://argoproj.github.io/argo-cd/user-guide/gpg-verification/) keys to add to the key ring | `{}` (See [values.yaml](values.yaml)) |
-| configs.knownHostsAnnotations | Known Hosts configmap annotations | `{}` |
-| configs.knownHosts.data.ssh_known_hosts | Known Hosts | See [values.yaml](values.yaml) |
-| configs.secret.annotations | Annotations for argocd-secret | `{}` |
-| configs.secret.argocdServerAdminPassword | Bcrypt hashed admin password | `null` |
-| configs.secret.argocdServerAdminPasswordMtime | Admin password modification time | `date "2006-01-02T15:04:05Z" now` if configs.secret.argocdServerAdminPassword is set |
-| configs.secret.bitbucketSecret | BitBucket incoming webhook secret | `""` |
-| configs.secret.createSecret | Create the argocd-secret. | `true` |
-| configs.secret.githubSecret | GitHub incoming webhook secret | `""` |
-| configs.secret.gitlabSecret | GitLab incoming webhook secret | `""` |
-| configs.repositoryCredentials | DEPRECATED: Instead, use configs.credentialTemplates and/or configs.repositories. | `{}` |
-| configs.credentialTemplates | Repository credentials to be used as Templates for other repos. | `{}` |
-| configs.repositories | Repositories list to be used by applications. | `{}` |
-| configs.tlsCertsAnnotations | TLS certificate configmap annotations | `{}` |
-| configs.tlsCerts.data."argocd.example.com" | TLS certificate | See [values.yaml](values.yaml) |
-| configs.secret.extra | add additional secrets to be added to argocd-secret | `{}` |
-| configs.styles | Define custom CSS styles for your argo instance ([Read More](https://argo-cd.readthedocs.io/en/stable/operator-manual/custom-styles/)). This Settings will automatically mount the provided css and reference it in the argo configuration. | `""` (See [values.yaml](values.yaml)) |
-| openshift.enabled | enables using arbitrary uid for argo repo server | `false` |
-
 ## ArgoCD Controller
 
 | Parameter | Description | Default |

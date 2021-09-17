@@ -1039,10 +1039,6 @@ repoServer:
 
 ## Argo Configs
 configs:
-  ## External Cluster Credentials
-  ## reference:
-  ## - https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters
-  ## - https://argoproj.github.io/argo-cd/operator-manual/security/#external-cluster-credentials
   # -- Provide one or multiple [external cluster credentials](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#clusters)
   clusterCredentials: []
     # - name: mycluster
@@ -1065,7 +1061,9 @@ configs:
     #       insecure: false
     #       caData: "<base64 encoded certificate>"
 
+  # -- GnuPG key ring annotations
   gpgKeysAnnotations: {}
+  # -- [GnuPG](https://argoproj.github.io/argo-cd/user-guide/gpg-verification/) keys to add to the key ring
   gpgKeys: {}
     # 4AEE18F83AFDEB23: |
     #     -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -1086,9 +1084,11 @@ configs:
     #     =Bvzs
     #     -----END PGP PUBLIC KEY BLOCK-----
 
+  # -- Known Hosts configmap annotations
   knownHostsAnnotations: {}
   knownHosts:
     data:
+      # -- Known Hosts
       ssh_known_hosts: |
         bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
         github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
@@ -1097,7 +1097,9 @@ configs:
         gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
         ssh.dev.azure.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
         vs-ssh.visualstudio.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
+  # -- TLS certificate configmap annotations
   tlsCertsAnnotations: {}
+  # -- TLS certificate
   tlsCerts:
     {}
     # data:
@@ -1136,11 +1138,12 @@ configs:
     #     +LB9LGh4OAp68ImTjqf6ioGKG0RBSznwME+r4nXtT1S/qLR6ASWUS4ViWRhbRlNK
     #     XWyb96wrUlv+E8I=
     #     -----END CERTIFICATE-----
-## # Creates a secret with optional repository credentials
-## DEPRECATED: Instead, use configs.credentialTemplates and/or configs.repositories
+
+  # -- DEPRECATED: Creates a secret with optional repository credentials. Instead, use configs.credentialTemplates and/or configs.repositories
   repositoryCredentials: {}
 
 ## Creates a secret for each key/value specified below to create repository credentials
+  # -- Repository credentials to be used as Templates for other repos
   credentialTemplates: {}
     # github-enterprise-creds-1:
     #   url: https://github.com/argoproj
@@ -1164,6 +1167,7 @@ configs:
 
 ## Creates a secret for each key/value specified below to create repositories
 ## Note: the last example in the list would use a repository credential template, configured under "configs.repositoryCredentials".
+  # -- Repositories list to be used by applications
   repositories: {}
     # istio-helm-repo:
     #   url: https://storage.googleapis.com/istio-prerelease/daily-build/master-latest-daily/charts
@@ -1179,21 +1183,22 @@ configs:
     #   url: https://github.com/argoproj/private-repo
 
   secret:
+    # -- Whether to create the argocd-secret
     createSecret: true
-    ## Annotations to be added to argocd-secret
-    ##
+    # -- Annotations to be added to argocd-secret
     annotations: {}
 
     # Webhook Configs
+    # -- GitHub incoming webhook secret
     githubSecret: ""
+    # -- GitLab incoming webhook secret
     gitlabSecret: ""
+    # -- BitBucket incoming webhook secret 
     bitbucketServerSecret: ""
     bitbucketUUID: ""
     gogsSecret: ""
 
-    # Custom secrets. Useful for injecting SSO secrets into environment variables.
-    # Ref: https://argoproj.github.io/argo-cd/operator-manual/sso/
-    # Note that all values must be non-empty.
+    # -- Add additional secrets to be added to argocd-secret. Useful for injecting SSO secrets into environment variables. Note that all values must be non-empty. Ref: https://argoproj.github.io/argo-cd/operator-manual/sso/. 
     extra:
       {}
       # LDAP_PASSWORD: "mypassword"
@@ -1212,16 +1217,19 @@ configs:
 
     # Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
     # `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
+    # # -- Bcrypt hashed admin password
     # argocdServerAdminPassword: ""
-    # Password modification time defaults to current time if not set
+    # # -- Password modification time defaults to current time if not set
     # argocdServerAdminPasswordMtime: "2006-01-02T15:04:05Z"
 
   ## Custom CSS Styles
   ## Reference: https://argo-cd.readthedocs.io/en/stable/operator-manual/custom-styles/
+  # # -- Define custom CSS styles for your argo instance ([Read More](https://argo-cd.readthedocs.io/en/stable/operator-manual/custom-styles/)). This Settings will automatically mount the provided css and reference it in the argo configuration
   # styles: |
   #  .nav-bar {
   #    background: linear-gradient(to bottom, #999, #777, #333, #222, #111);
   #  }
 
 openshift:
+  # -- Whether to enable arbitrary uid for argo repo server
   enabled: false
