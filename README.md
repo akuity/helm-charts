@@ -15,10 +15,25 @@ helm repo update
 helm search repo akuity
 
 # Install Argo CD (latest version)
-helm install akuity/argo-cd -n argo --generate-name
+helm install argo-cd akuity/argo-cd -n argo
 
 # Install Argo CD (specific version)
-helm install akuity/argo-cd --version 0.0.8 -n argo --generate-name
+helm install argo-cd akuity/argo-cd --version 0.0.9 -n argo
+```
+
+Port-forwarding Argo CD UI and API server:
+```
+kubectl port-forward svc/argo-cd-argocd-server -n argo 8080:443
+```
+
+Login [localhost:8080](localhost:8080) via username `admin` and the auto-generated password accessed via the following:
+```
+kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+To uninstall Argo CD, run the following:
+```
+helm uninstall argo-cd
 ```
 
 ## Local Development and Testing
