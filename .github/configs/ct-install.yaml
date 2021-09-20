@@ -5,7 +5,7 @@ remote: origin
 chart-dirs:
   - charts
 chart-repos:
-  - akuity=https://akuityio.github.io/helm-builds
+  - akuity=https://akuity.github.io/helm-builds
   - minio=https://helm.min.io/
   - dandydeveloper=https://dandydeveloper.github.io/charts/
   - stable=https://charts.helm.sh/stable

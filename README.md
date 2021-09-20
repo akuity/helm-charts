@@ -8,7 +8,7 @@ To install a published Helm Chart, run the following:
 
 ```
 # Add/update Akuity Helm repository
-helm repo add akuity https://akuityio.github.io/helm-builds
+helm repo add akuity https://akuity.github.io/helm-builds
 helm repo update
 
 # Check available charts in the repo
