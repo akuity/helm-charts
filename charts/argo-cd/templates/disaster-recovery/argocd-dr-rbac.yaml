@@ -1,0 +1,53 @@
+{{- if .Values.disasterRecovery.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-dr-s3
+  annotations:
+    eks.amazonaws.com/role-arn: {{ .Values.disasterRecovery.eks.roleARN | quote }}
+--- 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-dr
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  - configmaps
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+  - delete
+- apiGroups:
+  - argoproj.io
+  resources:
+  - applications
+  - appprojects
+  - applicationsets
+  verbs:
+  - get
+  - list
+  - create
+  - update
+  - patch
+  - delete
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-dr-s3
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-dr
+subjects:
+- kind: ServiceAccount
+  name: argocd-dr-s3
+  namespace: {{ .Release.Namespace }}
+{{- end }}

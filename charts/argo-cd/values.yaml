@@ -11,9 +11,9 @@ kubeVersionOverride: ""
 global:
   image:
     # -- If defined, a repository applied to all ArgoCD deployments
-    repository: quay.io/argoproj/argocd
+    repository: quay.io/akuity/argocd
     # -- If defined, a tag applied to all ArgoCD deployments
-    tag: v2.1.1
+    tag: v0.0.1-rc10
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     imagePullPolicy: IfNotPresent
   # -- Annotations for the all deployed pods
@@ -1172,3 +1172,21 @@ configs:
 openshift:
   # -- Whether to enable arbitrary uid for argo repo server
   enabled: false
+
+# -- Disaster recovery configurations
+disasterRecovery:
+  enabled: true
+  # -- The schedule to perform backup
+  backupSchedule: "*/10 * * * *"
+  # -- Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes
+  activeDeadlineSeconds: 540
+  image:
+    # -- The image repository used to run backup
+    repository: ""
+    # -- The version of the image used to run backup
+    tag: ""
+    # -- The image pull policy
+    imagePullPolicy: ""
+
+  eks:
+    roleARN: ""

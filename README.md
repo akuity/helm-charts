@@ -61,12 +61,12 @@ helm dependency update
 Installing Argo CD:
 ```
 cd -
-helm install charts/argo-cd -n argo --generate-name
+helm install argo-cd charts/argo-cd -n argo
 ```
 
 
 ```
-> NAME: argo-cd-1630429278
+> NAME: argo-cd
 LAST DEPLOYED: Tue Aug 31 13:01:21 2021
 NAMESPACE: argo
 STATUS: deployed
@@ -77,5 +77,5 @@ TEST SUITE: None
 Uninstalling Argo CD:
 
 ```
-helm uninstall argo-cd-1630429278
+helm uninstall argo-cd
 ```
