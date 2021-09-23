@@ -124,10 +124,10 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.tolerations | list | `[]` |  |
 | dex.volumeMounts | list | `[{"mountPath":"/shared","name":"static-files"}]` | Additional volumeMounts to the controller main container |
 | dex.volumes | list | `[{"emptyDir":{},"name":"static-files"}]` | Additional volumes to the controller pod |
-| disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","command":"argocd-dr.sh","eks":{"roleARN":""},"enabled":true,"env":[],"image":{"pullPolicy":"","repository":"","tag":""}}` | Disaster recovery configurations |
+| disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","command":"argocd-backup.sh","eks":{"roleARN":""},"enabled":true,"env":[],"image":{"pullPolicy":"","repository":"","tag":""}}` | Disaster recovery configurations |
 | disasterRecovery.activeDeadlineSeconds | int | `540` | Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes |
 | disasterRecovery.backupSchedule | string | `"*/10 * * * *"` | The schedule to perform backup |
-| disasterRecovery.command | string | `"argocd-dr.sh"` | The command to run back (useful for testing) |
+| disasterRecovery.command | string | `"argocd-backup.sh"` | The command to run backup (useful for testing) |
 | disasterRecovery.env | list | `[]` | Environment variables to pass to the backup job |
 | disasterRecovery.image.pullPolicy | string | `""` | The image pull policy |
 | disasterRecovery.image.repository | string | `""` | The image repository used to run backup |
@@ -136,7 +136,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | global.hostAliases | list | `[]` | Mapping between IP and hostnames that will be injected as entries in the pod's hosts files |
 | global.image.imagePullPolicy | string | `"IfNotPresent"` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
-| global.image.tag | string | `"v0.0.1-rc10"` | If defined, a tag applied to all ArgoCD deployments |
+| global.image.tag | string | `"v2.1.1-ak0"` | If defined, a tag applied to all ArgoCD deployments |
 | global.imagePullSecrets | list | `[]` |  |
 | global.networkPolicy.create | bool | `false` | Create NetworkPolicy objects for all components |
 | global.networkPolicy.defaultDenyIngress | bool | `false` | Default deny all ingress traffic |

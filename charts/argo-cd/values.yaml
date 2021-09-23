@@ -13,7 +13,7 @@ global:
     # -- If defined, a repository applied to all ArgoCD deployments
     repository: quay.io/akuity/argocd
     # -- If defined, a tag applied to all ArgoCD deployments
-    tag: v0.0.1-rc10
+    tag: v2.1.1-ak0
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     imagePullPolicy: IfNotPresent
   # -- Annotations for the all deployed pods
@@ -1187,14 +1187,16 @@ disasterRecovery:
     tag: ""
     # -- The image pull policy
     pullPolicy: ""
-  # -- The command to run back (useful for testing)
-  command: "argocd-dr.sh"
+  # -- The command to run backup (useful for testing)
+  command: "argocd-backup.sh"
   # -- Environment variables to pass to the backup job
   env:
     []
     # - name: "BUCKET_NAME"
     #   value: ""
     # - name: "ARGOCD_INSTANCE_NAME"
+    #   value: ""
+    # - name: "NAMESPACE"
     #   value: ""
 
   eks:
