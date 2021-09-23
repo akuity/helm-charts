@@ -124,9 +124,10 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.tolerations | list | `[]` |  |
 | dex.volumeMounts | list | `[{"mountPath":"/shared","name":"static-files"}]` | Additional volumeMounts to the controller main container |
 | dex.volumes | list | `[{"emptyDir":{},"name":"static-files"}]` | Additional volumes to the controller pod |
-| disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","eks":{"roleARN":""},"enabled":true,"image":{"imagePullPolicy":"","repository":"","tag":""}}` | Disaster recovery configurations |
+| disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","eks":{"roleARN":""},"enabled":true,"image":{"command":"argocd-dr.sh","imagePullPolicy":"","repository":"","tag":""}}` | Disaster recovery configurations |
 | disasterRecovery.activeDeadlineSeconds | int | `540` | Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes |
 | disasterRecovery.backupSchedule | string | `"*/10 * * * *"` | The schedule to perform backup |
+| disasterRecovery.image.command | string | `"argocd-dr.sh"` | The command to run back (useful for testing) |
 | disasterRecovery.image.imagePullPolicy | string | `""` | The image pull policy |
 | disasterRecovery.image.repository | string | `""` | The image repository used to run backup |
 | disasterRecovery.image.tag | string | `""` | The version of the image used to run backup |

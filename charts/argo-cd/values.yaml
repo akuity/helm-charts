@@ -1187,6 +1187,8 @@ disasterRecovery:
     tag: ""
     # -- The image pull policy
     imagePullPolicy: ""
+    # -- The command to run back (useful for testing)
+    command: "argocd-dr.sh"
 
   eks:
     roleARN: ""
