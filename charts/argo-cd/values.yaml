@@ -1186,9 +1186,16 @@ disasterRecovery:
     # -- The version of the image used to run backup
     tag: ""
     # -- The image pull policy
-    imagePullPolicy: ""
-    # -- The command to run back (useful for testing)
-    command: "argocd-dr.sh"
+    pullPolicy: ""
+  # -- The command to run back (useful for testing)
+  command: "argocd-dr.sh"
+  # -- Environment variables to pass to the backup job
+  env:
+    []
+    # - name: "BUCKET_NAME"
+    #   value: ""
+    # - name: "ARGOCD_INSTANCE_NAME"
+    #   value: ""
 
   eks:
     roleARN: ""
