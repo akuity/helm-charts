@@ -20,16 +20,10 @@ spec:
     protocol: TCP
     port: {{ .Values.server.service.servicePortHttp }}
     targetPort: {{- if .Values.server.service.namedTargetPort }} {{ .Values.server.name }} {{- else }} {{ .Values.server.containerPort }} {{- end }}
-    # {{- if eq .Values.server.service.type "NodePort" }}
-    # nodePort: {{ .Values.server.service.nodePortHttp }}
-    # {{- end }}
   - name: {{ .Values.server.service.servicePortHttpsName }}
     protocol: TCP
     port: {{ .Values.server.service.servicePortHttps }}
     targetPort: {{- if .Values.server.service.namedTargetPort }} {{ .Values.server.name }} {{- else }} {{ .Values.server.containerPort }} {{- end }}
-    # {{- if eq .Values.server.service.type "NodePort" }}
-    # nodePort: {{ .Values.server.service.nodePortHttps }}
-    # {{- end }}
   selector:
     {{- include "argo-cd.selectorLabels" (dict "context" . "name" .Values.server.name) | nindent 4 }}
 {{- if eq .Values.server.service.type "LoadBalancer" }}
