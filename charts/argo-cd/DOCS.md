@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 0.0.12](https://img.shields.io/badge/Version-0.0.12-informational?style=flat-square) ![AppVersion: 2.1.1](https://img.shields.io/badge/AppVersion-2.1.1-informational?style=flat-square)
+![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.13-informational?style=flat-square) ![AppVersion: 2.1.1](https://img.shields.io/badge/AppVersion-2.1.1-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -124,11 +124,10 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.tolerations | list | `[]` |  |
 | dex.volumeMounts | list | `[{"mountPath":"/shared","name":"static-files"}]` | Additional volumeMounts to the controller main container |
 | dex.volumes | list | `[{"emptyDir":{},"name":"static-files"}]` | Additional volumes to the controller pod |
-| disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","command":"argocd-backup.sh","eks":{"roleARN":""},"enabled":true,"env":[],"image":{"pullPolicy":"","repository":"","tag":""}}` | Disaster recovery configurations |
+| disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","command":"argocd-backup.sh","enabled":false,"env":[],"image":{"pullPolicy":"","repository":"","tag":""}}` | Disaster recovery configurations |
 | disasterRecovery.activeDeadlineSeconds | int | `540` | Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes |
 | disasterRecovery.backupSchedule | string | `"*/10 * * * *"` | The schedule to perform backup |
 | disasterRecovery.command | string | `"argocd-backup.sh"` | The command to run backup (useful for testing) |
-| disasterRecovery.eks.roleARN | string | `""` | The EKS role ARN that annotates the K8s service account running the backup. |
 | disasterRecovery.env | list | `[]` | Environment variables to pass to the backup job |
 | disasterRecovery.image.pullPolicy | string | `""` | The image pull policy |
 | disasterRecovery.image.repository | string | `""` | The image repository used to run backup |

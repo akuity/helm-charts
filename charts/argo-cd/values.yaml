@@ -1175,7 +1175,7 @@ openshift:
 
 # -- Disaster recovery configurations
 disasterRecovery:
-  enabled: true
+  enabled: false
   # -- The schedule to perform backup
   backupSchedule: "*/10 * * * *"
   # -- Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes
@@ -1199,9 +1199,9 @@ disasterRecovery:
     # - name: "NAMESPACE"
     #   value: ""
 
-  eks:
-    # -- The EKS role ARN that annotates the K8s service account running the backup.
-    roleARN: ""
+  # eks:
+  #   # -- The EKS role ARN that annotates the K8s service account running the backup.
+  #   roleARN: ""
 
   # gke:
   #   # -- The GCP service account that annotates the K8s service account running the backup.
