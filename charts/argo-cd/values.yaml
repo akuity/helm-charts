@@ -13,7 +13,7 @@ global:
     # -- If defined, a repository applied to all ArgoCD deployments
     repository: quay.io/akuity/argocd
     # -- If defined, a tag applied to all ArgoCD deployments
-    tag: v2.1.1-ak0
+    tag: v2.1.1-ak2
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     imagePullPolicy: IfNotPresent
   # -- Annotations for the all deployed pods
@@ -1200,4 +1200,13 @@ disasterRecovery:
     #   value: ""
 
   eks:
+    # -- The EKS role ARN that annotates the K8s service account running the backup.
     roleARN: ""
+
+  # gke:
+  #   # -- The GCP service account that annotates the K8s service account running the backup.
+  #   gcpServiceAccount: ""
+  #   # -- The name to the GCP service account key that has access GCP bucket.
+  #   gcpServiceAccountKeyName: ""
+  #   # -- The key file path to the GCP secret to GCP service account that has access GCP bucket.
+  #   gcpServiceAccountKeyFilePath: "privateKey"

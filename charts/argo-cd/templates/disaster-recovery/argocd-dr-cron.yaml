@@ -13,15 +13,34 @@ spec:
         spec:
           serviceAccountName: argocd-dr-s3
           restartPolicy: Never
+          {{- if .Values.disasterRecovery.gke }}
+          volumes:
+          - name: google-cloud-key
+            secret:
+              secretName: {{ .Values.disasterRecovery.gke.gcpServiceAccountKeyName }}
+          {{- end }}
           containers:
           - name: argocd-dr
             image: {{ default .Values.global.image.repository .Values.disasterRecovery.image.repository }}:{{ default .Values.global.image.tag .Values.disasterRecovery.image.tag }}
             imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.disasterRecovery.image.pullPolicy }}
             command: [ "/bin/bash", "-c", "--" ]
+            {{- if .Values.disasterRecovery.gke }}
+            args:
+              - "gcloud auth activate-service-account --key-file=/var/secrets/google/{{ .Values.disasterRecovery.gke.gcpServiceAccountKeyFilePath }}; {{ .Values.disasterRecovery.command }}"
+            volumeMounts:
+            - name: google-cloud-key
+              mountPath: /var/secrets/google
+            {{- end -}}
+            {{- if .Values.disasterRecovery.eks }}
             args:
               - {{ .Values.disasterRecovery.command | quote}}
+            {{- end -}}
             {{- if .Values.disasterRecovery.env }}
             env:
 {{- toYaml .Values.disasterRecovery.env | nindent 12 }}
             {{- end }}
+            {{- if .Values.disasterRecovery.gke }}
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/{{ .Values.disasterRecovery.gke.gcpServiceAccountKeyFilePath }}
+            {{- end -}}
 {{- end }}

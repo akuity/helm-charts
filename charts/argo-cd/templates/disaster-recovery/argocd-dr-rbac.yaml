@@ -4,7 +4,14 @@ kind: ServiceAccount
 metadata:
   name: argocd-dr-s3
   annotations:
+    {{- if .Values.disasterRecovery.eks }}
     eks.amazonaws.com/role-arn: {{ .Values.disasterRecovery.eks.roleARN | quote }}
+    {{- end -}}
+    {{- if .Values.disasterRecovery.gke }}
+    iam.gke.io/gcp-service-account: {{ .Values.disasterRecovery.gke.gcpServiceAccount | quote }}
+    {{- end -}}
+{{- end }}
+{{- if .Values.disasterRecovery.enabled }}
 --- 
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
