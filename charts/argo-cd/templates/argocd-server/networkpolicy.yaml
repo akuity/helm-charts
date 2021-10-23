@@ -1,16 +1,14 @@
-{{- if .Values.global.networkPolicy.create }}
+{{- if .Values.server.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  labels:
-    {{- include "argo-cd.labels" (dict "context" . "component" .Values.server.name "name" .Values.server.name) | nindent 4 }}
-  name: {{ template "argo-cd.server.fullname" . }}
+  name: argocd-server-network-policy
 spec:
   ingress:
   - {}
   podSelector:
     matchLabels:
-      {{- include "argo-cd.selectorLabels" (dict "context" . "name" .Values.server.name) | nindent 6 }}
+      app.kubernetes.io/name: argocd-server
   policyTypes:
   - Ingress
 {{- end }}

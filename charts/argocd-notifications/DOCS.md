@@ -4,7 +4,7 @@
 
 A Helm chart for ArgoCD notifications, an add-on to ArgoCD.
 
-**Homepage:** <https://github.com/akuity/helm-builds>
+**Homepage:** <https://github.com/akuity/helm-charts>
 
 ## Maintainers
 

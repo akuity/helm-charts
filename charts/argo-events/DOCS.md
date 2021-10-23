@@ -4,7 +4,7 @@
 
 A Helm chart to install Argo-Events in k8s Cluster
 
-**Homepage:** <https://github.com/akuity/helm-builds>
+**Homepage:** <https://github.com/akuity/helm-charts>
 
 ## Maintainers
 

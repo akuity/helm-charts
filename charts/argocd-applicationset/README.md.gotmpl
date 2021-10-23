@@ -6,7 +6,7 @@ Source code can be found [here](https://github.com/argoproj-labs/applicationset/
 
 ## Additional Information
 
-This is a **community maintained** chart. This chart installs the [applicationset](https://github.com/argoproj-labs/applicationset) controller.
+This chart installs the [applicationset](https://github.com/argoproj-labs/applicationset) controller.
 
 This chart currently installs the non-HA version of Argo CD ApplicationSet.
 

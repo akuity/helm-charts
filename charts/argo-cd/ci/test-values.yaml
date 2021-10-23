@@ -1,0 +1,57 @@
+# typical configuration
+config:
+  argocd:
+    url: https://cd.company.com
+    admin.enabled: 'false'
+    statusbadge.enabled: 'true'
+    users.anonymous.enabled: 'true'
+    dex.config: |
+      connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: $dex.github.clientID
+          clientSecret: $dex.github.clientSecret
+          orgs:
+          - name: company
+          teamNameField: slug
+          useLoginAsID: true
+  rbac:
+    policy.csv: |
+      g, company:admins, role:admin
+    policy.default: role:readonly
+  params:
+    server.tls.minversion: "1.2"
+    server.tls.maxversion: "1.3"
+  secret:
+    dex.github.clientID: 1345679a31682dc6bbcc
+    dex.github.clientSecret: aaabbbcccdddeeefffggghhhiiijjjkkklllmm
+    server.secretkey: J3bcC2LjNYbCGf8s2sScN7JpPVUiduiiogDK7uvtLAU=
+    # bcrypt of the string: "password"
+    admin.password": $2a$04$PJ/GxgRlyVyx/bvKQhlYouPRumbizCm89xy31u/eLbWapmUoFEn1K
+    admin.passwordMtime": "2021-10-21T09:00:07Z"
+
+server:
+  insecure: false
+  ingress:
+    enabled: true
+    host: cd.company.com
+    ingressClassName: alb
+    annotations:
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/ssl-redirect: '443'
+      kubernetes.io/ingress.class: alb
+    tls:
+      enabled: true
+      secretName: my-tls-secret
+
+disasterRecovery:
+  enabled: true
+  backupSchedule: "0 1 * * *"
+  bucket: my-backup-bucket
+  instanceName: argocd-prod
+  aws:
+    region: us-west-2
+    roleARN: "arn:aws:iam::012345678910:role/argocd-dr"

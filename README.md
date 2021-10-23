@@ -8,22 +8,22 @@ To install a published Helm Chart, run the following:
 
 ```
 # Add/update Akuity Helm repository
-helm repo add akuity https://akuity.github.io/helm-builds
+helm repo add akuity https://charts.akuity.io
 helm repo update
 
 # Check available charts in the repo
 helm search repo akuity
 
 # Install Argo CD (latest version)
-helm install argo-cd akuity/argo-cd -n argo
+helm install argo-cd akuity/argo-cd -n argocd
 
 # Install Argo CD (specific version)
-helm install argo-cd akuity/argo-cd --version 0.0.9 -n argo
+helm install argo-cd akuity/argo-cd --version 0.0.9 -n argocd
 ```
 
 Port-forwarding Argo CD UI and API server:
 ```
-kubectl port-forward svc/argo-cd-argocd-server -n argo 8080:443
+kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
 Login [localhost:8080](localhost:8080) via username `admin` and the auto-generated password accessed via the following:
