@@ -1,3 +1,7 @@
+controller:
+  extraArgs:
+  - --aws-verify-target-group
+
 dashboard:
   enabled: true
   ingress:

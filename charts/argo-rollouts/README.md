@@ -1,6 +1,6 @@
 # argo-rollouts
 
-![Version: 0.0.12](https://img.shields.io/badge/Version-0.0.11-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.11-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 A Helm chart for Argo Rollouts
 

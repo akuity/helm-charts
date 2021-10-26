@@ -12,6 +12,9 @@ controller:
   #    cpu: 50m
   #    memory: 64Mi
 
+  extraArgs:
+  # - --aws-verify-target-group
+
 notifications:
   # -- Includes the notifications ConfigMap with predefined notification templates
   enabled: false

@@ -22,7 +22,7 @@ spec:
         image: {{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}
         imagePullPolicy: Always
         {{- with .Values.controller.extraArgs }}
-        command:
+        args:
         {{- . | toYaml | nindent 8 }}
         {{- end }}
         {{- with .Values.controller.resources }}
