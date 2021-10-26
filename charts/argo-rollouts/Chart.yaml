@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 0.0.11
-appVersion: 1.0.2
+version: 0.0.12
+appVersion: 1.1.0
 description: A Helm chart for Argo Rollouts
 name: argo-rollouts
 icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
