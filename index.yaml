@@ -196,6 +196,21 @@ entries:
     version: 0.0.10
   argo-rollouts:
   - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2021-10-26T09:40:32.92741503Z"
+    description: A Helm chart for Argo Rollouts
+    digest: e6506d82cc00238c0fb5ef68960ff1778032bb6e3c94f057b9441c697edc02c2
+    home: https://github.com/akuity/helm-charts
+    icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-rollouts
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-rollouts-0.0.12/argo-rollouts-0.0.12.tgz
+    version: 0.0.12
+  - apiVersion: v2
     appVersion: 1.0.2
     created: "2021-10-26T01:40:18.449742097Z"
     description: A Helm chart for Argo Rollouts
@@ -387,4 +402,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2021-10-26T02:31:20.261339634Z"
+generated: "2021-10-26T09:40:32.927449031Z"
