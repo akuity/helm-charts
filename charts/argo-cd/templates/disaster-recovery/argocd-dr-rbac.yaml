@@ -2,19 +2,18 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: argocd-dr-s3
+  name: argocd-dr
   annotations:
-    {{- if .Values.disasterRecovery.eks }}
-    eks.amazonaws.com/role-arn: {{ .Values.disasterRecovery.eks.roleARN | quote }}
-    {{- end -}}
-    {{- if .Values.disasterRecovery.gke }}
-    iam.gke.io/gcp-service-account: {{ .Values.disasterRecovery.gke.gcpServiceAccount | quote }}
-    {{- end -}}
-{{- end }}
-{{- if .Values.disasterRecovery.enabled }}
+    {{- if .Values.disasterRecovery.aws }}
+    eks.amazonaws.com/role-arn: {{ .Values.disasterRecovery.aws.roleARN | quote }}
+    {{- end }}
+    {{- if .Values.disasterRecovery.gcp }}
+    iam.gke.io/gcp-service-account: {{ .Values.disasterRecovery.gcp.serviceAccount | quote }}
+    {{- end }}
+
 --- 
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   name: argocd-dr
 rules:
@@ -46,15 +45,14 @@ rules:
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
-  name: argocd-dr-s3
+  name: argocd-dr
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
+  kind: Role
   name: argocd-dr
 subjects:
 - kind: ServiceAccount
-  name: argocd-dr-s3
-  namespace: {{ .Release.Namespace }}
+  name: argocd-dr
 {{- end }}

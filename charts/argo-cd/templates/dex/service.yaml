@@ -1,35 +1,26 @@
-{{- if .Values.dex.enabled }}
+{{- if and .Values.server.enabled .Values.dex.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "argo-cd.dex.fullname" . }}
-{{- if .Values.dex.metrics.service.annotations }}
-  annotations:
-  {{- range $key, $value := .Values.dex.metrics.service.annotations }}
-    {{ $key }}: {{ $value | quote }}
-  {{- end }}
-{{- end }}
   labels:
-    {{- include "argo-cd.labels" (dict "context" . "component" .Values.dex.name "name" .Values.dex.name) | nindent 4 }}
-{{- if .Values.dex.metrics.service.labels }}
-{{- toYaml .Values.dex.metrics.service.labels | nindent 4 }}
-{{- end }}
+    app.kubernetes.io/component: dex-server
+    app.kubernetes.io/name: argocd-dex-server
+    app.kubernetes.io/part-of: argocd
+  name: argocd-dex-server
 spec:
   ports:
-  - name: {{ .Values.dex.servicePortHttpName }}
+  - name: http
+    port: 5556
     protocol: TCP
-    port: {{ .Values.dex.servicePortHttp }}
-    targetPort: http
-  - name: {{ .Values.dex.servicePortGrpcName }}
+    targetPort: 5556
+  - name: grpc
+    port: 5557
     protocol: TCP
-    port: {{ .Values.dex.servicePortGrpc }}
-    targetPort: grpc
-{{- if .Values.dex.metrics.enabled }}
+    targetPort: 5557
   - name: metrics
+    port: 5558
     protocol: TCP
-    port: {{ .Values.dex.servicePortMetrics }}
-    targetPort: metrics
-{{- end }}
+    targetPort: 5558
   selector:
-    {{- include "argo-cd.selectorLabels" (dict "context" . "name" .Values.dex.name) | nindent 4 }}
+    app.kubernetes.io/name: argocd-dex-server
 {{- end }}

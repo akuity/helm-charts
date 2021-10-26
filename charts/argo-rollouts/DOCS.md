@@ -4,7 +4,7 @@
 
 A Helm chart for Argo Rollouts
 
-**Homepage:** <https://github.com/akuity/helm-builds>
+**Homepage:** <https://github.com/akuity/helm-charts>
 
 ## Maintainers
 

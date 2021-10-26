@@ -1,11 +1,11 @@
 apiVersion: v2
-version: 0.0.10
+version: 0.0.11
 appVersion: 3.1.8
 name: argo-workflows
 description: A Helm chart for Argo Workflows
 type: application
 icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
-home: https://github.com/akuity/helm-builds
+home: https://github.com/akuity/helm-charts
 sources:
   - https://github.com/argoproj/argo-workflows
 maintainers:

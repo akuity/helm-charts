@@ -1,25 +1,18 @@
-{{- if .Values.server.metrics.enabled }}
+{{- if .Values.server.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  {{- if .Values.server.metrics.service.annotations }}
-  annotations:
-  {{- range $key, $value := .Values.server.metrics.service.annotations }}
-    {{ $key }}: {{ $value | quote }}
-  {{- end }}
-{{- end }}
   labels:
-    {{- include "argo-cd.labels" (dict "context" . "component" .Values.server.name "name" (printf "%s-metrics" .Values.server.name)) | nindent 4 }}
-{{- if .Values.server.metrics.service.labels }}
-{{- toYaml .Values.server.metrics.service.labels | nindent 4 }}
-{{- end }}
-  name: {{ template "argo-cd.server.fullname" . }}-metrics
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: argocd-server-metrics
+    app.kubernetes.io/part-of: argocd
+  name: argocd-server-metrics
 spec:
   ports:
   - name: metrics
+    port: 8083
     protocol: TCP
-    port: {{ .Values.server.metrics.service.servicePort }}
-    targetPort: metrics
+    targetPort: 8083
   selector:
-    {{- include "argo-cd.selectorLabels" (dict "context" . "name" .Values.server.name) | nindent 4 }}
+    app.kubernetes.io/name: argocd-server
 {{- end }}

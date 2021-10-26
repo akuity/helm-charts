@@ -11,36 +11,41 @@ spec:
       activeDeadlineSeconds: {{ .Values.disasterRecovery.activeDeadlineSeconds }}
       template:
         spec:
-          serviceAccountName: argocd-dr-s3
+          serviceAccountName: argocd-dr
           restartPolicy: Never
-          {{- if .Values.disasterRecovery.gke }}
+          {{- if .Values.disasterRecovery.gcp }}
           volumes:
           - name: google-cloud-key
             secret:
-              secretName: {{ .Values.disasterRecovery.gke.gcpServiceAccountKeyName }}
+              secretName: {{ .Values.disasterRecovery.gcp.ServiceAccountKeyName }}
           {{- end }}
           containers:
           - name: argocd-dr
             image: {{ default .Values.global.image.repository .Values.disasterRecovery.image.repository }}:{{ default .Values.global.image.tag .Values.disasterRecovery.image.tag }}
             imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.disasterRecovery.image.pullPolicy }}
             command: [ "/bin/bash", "-c", "--" ]
-            {{- if .Values.disasterRecovery.gke }}
+            {{- if .Values.disasterRecovery.gcp }}
             args:
-              - "gcloud auth activate-service-account --key-file=/var/secrets/google/{{ .Values.disasterRecovery.gke.gcpServiceAccountKeyFilePath }}; {{ .Values.disasterRecovery.command }}"
+              - "gcloud auth activate-service-account --key-file=/var/secrets/google/{{ .Values.disasterRecovery.gcp.serviceAccountKeyFilePath }}; {{ .Values.disasterRecovery.command }}"
             volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
-            {{- end -}}
-            {{- if .Values.disasterRecovery.eks }}
+            {{- end }}
+            {{- if .Values.disasterRecovery.aws }}
             args:
               - {{ .Values.disasterRecovery.command | quote}}
-            {{- end -}}
-            {{- if .Values.disasterRecovery.env }}
-            env:
-{{- toYaml .Values.disasterRecovery.env | nindent 12 }}
             {{- end }}
-            {{- if .Values.disasterRecovery.gke }}
+            env:
+            - name: BUCKET
+              value: {{ required "disasterRecovery.bucket is required" .Values.disasterRecovery.bucket }}
+            - name: ARGOCD_INSTANCE_NAME
+              value: {{ required "disasterRecovery.instanceName is required" .Values.disasterRecovery.instanceName }}
+            {{- if .Values.disasterRecovery.aws }}
+            - name: AWS_REGION
+              value: {{ required "disasterRecovery.aws.region is required" .Values.disasterRecovery.aws.region }}
+            {{- end }}
+            {{- if .Values.disasterRecovery.gcp }}
             - name: GOOGLE_APPLICATION_CREDENTIALS
-              value: /var/secrets/google/{{ .Values.disasterRecovery.gke.gcpServiceAccountKeyFilePath }}
-            {{- end -}}
+              value: /var/secrets/google/{{ .Values.disasterRecovery.gcp.serviceAccountKeyFilePath }}
+            {{- end }}
 {{- end }}
