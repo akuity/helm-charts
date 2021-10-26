@@ -30,10 +30,10 @@ spec:
             pathType: Prefix
 {{- if .Values.server.ingress.tls.enabled }}
   tls:
+  - hosts:
+    - {{ .Values.server.ingress.host }}
 {{- with .Values.server.ingress.tls.secretName }}
     secretName: {{ . }}
 {{- end }}
-    hosts:
-    - {{ .Values.server.ingress.host }}
 {{- end }}
 {{- end }}
