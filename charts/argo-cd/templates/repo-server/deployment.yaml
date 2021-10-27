@@ -124,7 +124,7 @@ spec:
         - name: HELM_DATA_HOME
           value: /helm-working-dir
         image: {{ default .Values.global.image.repository .Values.repoServer.image.repository }}:{{ default .Values.global.image.tag .Values.repoServer.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.repoServer.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.repoServer.image.pullPolicy }}
         livenessProbe:
           failureThreshold: 3
           httpGet:

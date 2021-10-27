@@ -14,8 +14,8 @@ metadata:
   {{- end }}
 {{- end }}
 spec:
-{{- if .Values.dashboard.ingress.ingressClassName }}
-  ingressClassName: {{ .Values.dashboard.ingress.ingressClassName }}
+{{- with .Values.dashboard.ingress.className }}
+  ingressClassName: {{ . }}
 {{- end }}
   rules:
     - host: {{ .Values.dashboard.ingress.host }}

@@ -1,8 +1,8 @@
 controller:
   image:
     repository: quay.io/argoproj/argo-rollouts
-    tag: v1.1.0
-    imagePullPolicy: # IfNotPresent
+    tag:             # defaults is the chart appVersion.
+    pullPolicy: IfNotPresent
 
   resources:
   #  limits:
@@ -27,8 +27,8 @@ dashboard:
 
   image:
     repository: quay.io/argoproj/kubectl-argo-rollouts
-    tag: v1.1.0
-    pullPolicy: # IfNotPresent
+    tag:        # defaults is the chart appVersion.
+    pullPolicy: IfNotPresent
 
   resources:
   #  limits:
@@ -44,7 +44,7 @@ dashboard:
 
     host: rollouts.example.com
     annotations: {}
-    ingressClassName: ""
+    className: ""
 
     tls:
       enabled: false

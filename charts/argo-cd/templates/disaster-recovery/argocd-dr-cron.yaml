@@ -22,7 +22,7 @@ spec:
           containers:
           - name: argocd-dr
             image: {{ default .Values.global.image.repository .Values.disasterRecovery.image.repository }}:{{ default .Values.global.image.tag .Values.disasterRecovery.image.tag }}
-            imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.disasterRecovery.image.pullPolicy }}
+            imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.disasterRecovery.image.pullPolicy }}
             command: [ "/bin/bash", "-c", "--" ]
             {{- if .Values.disasterRecovery.gcp }}
             args:

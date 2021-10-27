@@ -30,7 +30,7 @@ spec:
         - /shared/argocd-dex
         - rundex
         image: {{ .Values.dex.image.repository }}:{{ .Values.dex.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.dex.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.dex.image.pullPolicy }}
         name: dex
         ports:
         - containerPort: 5556
@@ -52,7 +52,7 @@ spec:
         - /usr/local/bin/argocd
         - /shared/argocd-dex
         image: {{ default .Values.global.image.repository }}:{{ default .Values.global.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.dex.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.dex.image.pullPolicy }}
         name: copyutil
         volumeMounts:
         - mountPath: /shared

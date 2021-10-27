@@ -10,8 +10,10 @@ helm template \
     --include-crds=true \
     --set controller.image.repository=quay.io/argoproj/argo-rollouts \
     --set controller.image.tag=latest \
+    --set controller.image.pullPolicy=Always \
     --set dashboard.image.repository=quay.io/argoproj/kubectl-argo-rollouts \
     --set dashboard.image.tag=latest \
+    --set dashboard.image.pullPolicy=Always \
     --namespace argo-rollouts $PROJECT_ROOT/charts/argo-rollouts > $mytmpdir/helm.yaml
 
 echo """

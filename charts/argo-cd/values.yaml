@@ -8,7 +8,7 @@ global:
     # -- If defined, a tag applied to all ArgoCD deployments
     tag: v2.1.5
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
-    imagePullPolicy: # IfNotPresent
+    pullPolicy: # IfNotPresent
 
 # -- Installs necessary ClusterRoles to allow Argo CD to deploy to the same cluster Argo CD is installed in
 clusterRoles:
@@ -25,9 +25,9 @@ server:
   insecure: false
 
   image:
-    repository:      # defaults to global.image.repository
-    tag:             # defaults to global.image.tag
-    imagePullPolicy: # IfNotPresent
+    repository: # defaults to global.image.repository
+    tag:        # defaults to global.image.tag
+    pullPolicy: # IfNotPresent
 
   # -- Additional command line arguments to pass to argocd-server
   extraArgs:
@@ -52,7 +52,7 @@ server:
 
     host: argocd.example.com
     annotations: {}
-    ingressClassName: ""
+    className: ""
 
     tls:
       enabled: false
@@ -63,7 +63,7 @@ controller:
   image:
     repository:      # defaults to global.image.repository
     tag:             # defaults to global.image.tag
-    imagePullPolicy: # IfNotPresent
+    pullPolicy: # IfNotPresent
 
   replicas: 1
 
@@ -98,9 +98,9 @@ repoServer:
   replicas: 2
 
   image:
-    repository:      # defaults to global.image.repository
-    tag:             # defaults to global.image.tag
-    imagePullPolicy: # IfNotPresent
+    repository: # defaults to global.image.repository
+    tag:        # defaults to global.image.tag
+    pullPolicy: # IfNotPresent
 
   # -- Additional command line arguments to pass to argocd-repo-server
   extraArgs:
@@ -246,7 +246,7 @@ dex:
   image:
     repository: ghcr.io/dexidp/dex
     tag: v2.30.0
-    imagePullPolicy: # IfNotPresent
+    pullPolicy: # IfNotPresent
 
   resources:
   #  limits:
@@ -263,7 +263,7 @@ redis:
   image:
     repository: redis
     tag: 6.2.4-alpine
-    imagePullPolicy: # IfNotPresent
+    pullPolicy: # IfNotPresent
 
   resources:
   #  limits:
@@ -280,7 +280,7 @@ disasterRecovery:
   image:
     repository:      # defaults to global.image.repository
     tag:             # defaults to global.image.tag
-    imagePullPolicy: # IfNotPresent
+    pullPolicy: # IfNotPresent
 
   # -- The cron schedule to perform backup. Recommend no more frequent than 10 minutes
   backupSchedule: "*/10 * * * *"
