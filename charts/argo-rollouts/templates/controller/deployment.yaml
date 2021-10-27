@@ -19,8 +19,10 @@ spec:
       serviceAccountName: argo-rollouts
       containers:
       - name: argo-rollouts
-        image: {{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag | default .Chart.AppVersion }}
-        imagePullPolicy: {{ default .Values.controller.image.pullPolicy }}
+        image: {{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag | default (print "v" .Chart.AppVersion) }}
+        {{ with .Values.controller.image.pullPolicy }}
+        imagePullPolicy: {{ . }}
+        {{- end}}
         {{- with .Values.controller.extraArgs }}
         args:
         {{- . | toYaml | nindent 8 }}

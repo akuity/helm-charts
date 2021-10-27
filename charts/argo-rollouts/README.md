@@ -1,6 +1,6 @@
 # argo-rollouts
 
-![Version: 0.0.14](https://img.shields.io/badge/Version-0.0.14-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
+![Version: 0.0.17](https://img.shields.io/badge/Version-0.0.17-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
 
 A Helm chart for Argo Rollouts
 
@@ -19,15 +19,15 @@ A Helm chart for Argo Rollouts
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | controller.extraArgs | string | `nil` |  |
-| controller.image.pullPolicy | string | `"IfNotPresent"` |  |
+| controller.image.pullPolicy | string | `nil` |  |
 | controller.image.repository | string | `"quay.io/argoproj/argo-rollouts"` |  |
-| controller.image.tag | string | `nil` |  |
+| controller.image.tag | string | `""` |  |
 | controller.resources | string | `nil` |  |
 | controller.serviceAccount.create | bool | `true` |  |
 | dashboard.enabled | bool | `false` | Enables the rollout dashboard |
-| dashboard.image.pullPolicy | string | `"IfNotPresent"` |  |
+| dashboard.image.pullPolicy | string | `nil` |  |
 | dashboard.image.repository | string | `"quay.io/argoproj/kubectl-argo-rollouts"` |  |
-| dashboard.image.tag | string | `nil` |  |
+| dashboard.image.tag | string | `""` |  |
 | dashboard.ingress.annotations | object | `{}` |  |
 | dashboard.ingress.className | string | `""` |  |
 | dashboard.ingress.enabled | bool | `false` | Enable creation of Ingress object |

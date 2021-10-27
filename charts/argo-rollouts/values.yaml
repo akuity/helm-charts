@@ -1,8 +1,8 @@
 controller:
   image:
     repository: quay.io/argoproj/argo-rollouts
-    tag:             # defaults is the chart appVersion.
-    pullPolicy: IfNotPresent
+    tag: ""     # default is the chart appVersion.
+    pullPolicy: # IfNotPresent
 
   serviceAccount:
     # Create the service account. Set to false if service account created in another way
@@ -31,8 +31,8 @@ dashboard:
 
   image:
     repository: quay.io/argoproj/kubectl-argo-rollouts
-    tag:        # defaults is the chart appVersion.
-    pullPolicy: IfNotPresent
+    tag: ""     # default is the chart appVersion.
+    pullPolicy: # IfNotPresent
 
   resources:
   #  limits:

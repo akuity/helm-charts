@@ -20,8 +20,10 @@ spec:
       serviceAccountName: argo-rollouts-dashboard
       containers:
       - name: argo-rollouts-dashboard
-        image: {{ .Values.dashboard.image.repository }}:{{ .Values.dashboard.image.tag | default .Chart.AppVersion }}
-        imagePullPolicy: {{ default .Values.controller.image.pullPolicy }}
+        image: {{ .Values.dashboard.image.repository }}:{{ .Values.dashboard.image.tag | default (print "v" .Chart.AppVersion) }}
+        {{ with .Values.dashboard.image.pullPolicy }}
+        imagePullPolicy: {{ . }}
+        {{- end}}
         {{- with .Values.dashboard.extraArgs }}
         cmd:
         {{- . | toYaml | nindent 8 }}
