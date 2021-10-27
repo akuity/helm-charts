@@ -6,6 +6,7 @@ dashboard:
   enabled: true
   ingress:
     enabled: true
+    className: traefik
     host: rollouts.demo.akuity.io
     annotations:
       alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443},{"HTTP":80}]'
