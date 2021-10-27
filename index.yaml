@@ -3,6 +3,28 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.1.5
+    created: "2021-10-27T09:18:28.561676344Z"
+    description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
+      tool for Kubernetes.
+    digest: ac150d765c31a21765ed27da91c873fcb7bba0a250d8b29b8cc829809d862e0b
+    home: https://charts.akuity.io
+    icon: https://argoproj.github.io/argo-cd/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - email: terrytangyuan@gmail.com
+      name: terrytangyuan
+    - email: jesse@akuity.io
+      name: jessesuen
+    - name: wanghong230
+    name: argo-cd
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-cd-0.0.16/argo-cd-0.0.16.tgz
+    version: 0.0.16
+  - apiVersion: v2
+    appVersion: 2.1.5
     created: "2021-10-26T02:31:20.261299333Z"
     description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
       tool for Kubernetes.
@@ -195,6 +217,21 @@ entries:
     - https://github.com/akuity/helm-builds/releases/download/argo-events-0.0.10/argo-events-0.0.10.tgz
     version: 0.0.10
   argo-rollouts:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2021-10-27T09:18:28.769852862Z"
+    description: A Helm chart for Argo Rollouts
+    digest: e5a3c84a187e7e0019e873d3be807f78644aad145bf0be9b67a5e2bcf9c16731
+    home: https://github.com/akuity/helm-charts
+    icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-rollouts
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-rollouts-0.0.14/argo-rollouts-0.0.14.tgz
+    version: 0.0.14
   - apiVersion: v2
     appVersion: 1.1.0
     created: "2021-10-26T09:57:35.509284081Z"
@@ -417,4 +454,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2021-10-26T09:57:35.509398987Z"
+generated: "2021-10-27T09:18:28.769900662Z"
