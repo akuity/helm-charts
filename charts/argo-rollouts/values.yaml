@@ -4,6 +4,10 @@ controller:
     tag:             # defaults is the chart appVersion.
     pullPolicy: IfNotPresent
 
+  serviceAccount:
+    # Create the service account. Set to false if service account created in another way
+    create: true
+
   resources:
   #  limits:
   #    cpu: 100m
@@ -48,4 +52,4 @@ dashboard:
 
     tls:
       enabled: false
-      secretName:
+      secretName: ""
