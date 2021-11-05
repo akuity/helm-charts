@@ -3,6 +3,28 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.1.5
+    created: "2021-11-05T17:55:21.48595312Z"
+    description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
+      tool for Kubernetes.
+    digest: 4216f278e06211660ee2c5f9f9bb4b7b6c08d76e4319b97b23681f8d504d0b65
+    home: https://charts.akuity.io
+    icon: https://argoproj.github.io/argo-cd/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - email: terrytangyuan@gmail.com
+      name: terrytangyuan
+    - email: jesse@akuity.io
+      name: jessesuen
+    - name: wanghong230
+    name: argo-cd
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-cd-0.0.18/argo-cd-0.0.18.tgz
+    version: 0.0.18
+  - apiVersion: v2
+    appVersion: 2.1.5
     created: "2021-10-27T09:18:28.561676344Z"
     description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
       tool for Kubernetes.
@@ -499,4 +521,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2021-10-27T10:29:29.328749407Z"
+generated: "2021-11-05T17:55:21.486023721Z"
