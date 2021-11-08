@@ -38,6 +38,8 @@ spec:
             env:
             - name: BUCKET_NAME
               value: {{ required "disasterRecovery.bucketName is required" .Values.disasterRecovery.bucketName }}
+            - name: NAMESPACE
+              value: {{ .Release.Namespace }}
             - name: ARGOCD_INSTANCE_NAME
               value: {{ required "disasterRecovery.instanceName is required" .Values.disasterRecovery.instanceName }}
             {{- if .Values.disasterRecovery.aws }}
