@@ -36,8 +36,8 @@ spec:
               - {{ .Values.disasterRecovery.command | quote}}
             {{- end }}
             env:
-            - name: BUCKET
-              value: {{ required "disasterRecovery.bucket is required" .Values.disasterRecovery.bucket }}
+            - name: BUCKET_NAME
+              value: {{ required "disasterRecovery.bucketName is required" .Values.disasterRecovery.bucketName }}
             - name: ARGOCD_INSTANCE_NAME
               value: {{ required "disasterRecovery.instanceName is required" .Values.disasterRecovery.instanceName }}
             {{- if .Values.disasterRecovery.aws }}
