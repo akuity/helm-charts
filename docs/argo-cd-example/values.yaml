@@ -1,0 +1,35 @@
+config:
+  argocd:
+    url: https://cd.example.com
+    admin.enabled: 'false'
+    dex.config: |
+      connectors:
+      - type: github
+        id: github
+        name: GitHub
+        config:
+          clientID: $dex.github.clientID
+          clientSecret: $dex.github.clientSecret
+          orgs:
+          - name: example-org
+          teamNameField: slug
+          useLoginAsID: true
+    kustomize.buildOptions: --enable-helm
+  rbac:
+    policy.csv: |
+      g, example-org:example-team, role:admin
+    policy.default: role:readonly
+
+server:
+  insecure: true
+  ingress:
+    enabled: true
+    className: contour
+    host: cd.example.com
+    tls:
+      enabled: true
+      secretName: argocd-tls
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      ingress.kubernetes.io/force-ssl-redirect: "true"
+      kubernetes.io/tls-acme: "true"

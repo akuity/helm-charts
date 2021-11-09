@@ -1,0 +1,3 @@
+config:
+  argocd:
+    kustomize.buildOptions: --enable-helm
