@@ -31,7 +31,7 @@ This documentation walks through the steps to install Argo CD with disaster reco
     ]
 }
 ```
-* Create an IAM role `argocd-dr-s3` with the above policy attached.
+* Create an IAM role `argocd-dr` with the above policy attached.
 * [Obtain the OIDC ARN and ID](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) via the following:
 ```
 # View your cluster's OIDC provider URL
@@ -55,7 +55,7 @@ aws iam list-open-id-connect-providers | grep <EXAMPLED539D4633E53DE1B716D3041E>
       "Condition": {
         "StringEquals": {
           "oidc.eks.us-west-2.amazonaws.com/id/<OIDC-ID>:aud": "sts.amazonaws.com",
-          "oidc.eks.us-west-2.amazonaws.com/id/<OIDC-ID>:sub": "system:serviceaccount:argocd:argocd-dr-s3"
+          "oidc.eks.us-west-2.amazonaws.com/id/<OIDC-ID>:sub": "system:serviceaccount:argocd:argocd-dr"
         }
       }
     }
@@ -78,20 +78,15 @@ disasterRecovery:
   backupSchedule: "*/10 * * * *"
   # -- Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes
   activeDeadlineSeconds: 540
-  # -- Environment variables to pass to the backup job
-  env:
-    - name: "BUCKET_NAME"
-      value: "argocd-test"
-    - name: "ARGOCD_INSTANCE_NAME"
-      value: "test-argocd"
-    - name: "NAMESPACE"
-      value: "argocd"
-
-  eks:
-    roleARN: "arn:aws:iam::541216676946:role/argocd-dr-s3"
+  bucketName: argocd-test
+  instanceName: test-argocd
+  # -- Configurations for AWS
+  aws:
+    region: us-west-2
+    roleARN: "arn:aws:iam::541216676946:role/argocd-dr"
 ```
 
-Once Argo CD with DR is installed, backups will be saved to the specified bucket, e.g. [s3://argocd-test](https://s3.console.aws.amazon.com/s3/buckets/argocd-test).
+Once Argo CD with DR is installed, backups will be saved to the specified bucket, e.g. `s3://argocd-test`.
 
 ## Recover from a backup
 
@@ -101,8 +96,8 @@ Next, run the following to recover from a previously saved backup:
 
 ```
 kubectl run s3-recover \
-  --image quay.io/akuity/argocd:v2.1.1-ak0 -t -i --rm=true \
-  --serviceaccount argocd-dr-s3  \
+  --image quay.io/akuity/argocd:v2.1.6-ak.0 -t -i --rm=true \
+  --serviceaccount argocd-dr  \
   --env="BUCKET_NAME=argocd-test" \
   --env="ARGOCD_INSTANCE_NAME=test-argocd" \
   --env="NAMESPACE=argocd" \
