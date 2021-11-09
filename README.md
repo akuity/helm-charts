@@ -50,7 +50,7 @@ helmCharts:
   valuesFile: values.yaml   # Helm values file in your git repo
 ```
 
-Here might be a typical values.yaml:
+Here might be a typical `values.yaml`:
 
 `values.yaml`
 ```yaml
@@ -83,7 +83,7 @@ server:
     host: cd.example.com
 ```
 
-For other available Chart parameters see: [charts/argo-cd/Chart.yaml](charts/argo-cd/Chart.yaml).
+For other available Chart parameters see: [charts/argo-cd/values.yaml](charts/argo-cd/values.yaml).
 
 ## Last-mile Modifications
 
