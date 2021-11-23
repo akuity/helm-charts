@@ -1,0 +1,18 @@
+apiVersion: v2
+version: 0.0.1
+appVersion: 0.1.0
+description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
+name: argo-cd-extensions
+home: https://charts.akuity.io
+icon: https://argoproj.github.io/argo-cd/assets/logo.png
+keywords:
+  - argoproj
+  - argocd
+  - gitops
+maintainers:
+  - name: terrytangyuan
+    email: "terrytangyuan@gmail.com"
+  - name: jessesuen
+    email: jesse@akuity.io
+  - name: wanghong230
+    email: hong@akuity.io
