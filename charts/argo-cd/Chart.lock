@@ -1,0 +1,6 @@
+dependencies:
+- name: argo-cd-extensions
+  repository: https://charts.akuity.io
+  version: 0.0.1
+digest: sha256:ac1259e163cb45b1e90616e81d6b0422fbc20a0e64802f1bc2c097fb31ceba10
+generated: "2021-11-22T23:08:58.601379-08:00"

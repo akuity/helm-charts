@@ -50,8 +50,11 @@ server:
 disasterRecovery:
   enabled: true
   backupSchedule: "0 1 * * *"
-  bucket: my-backup-bucket
+  bucketName: my-backup-bucket
   instanceName: argocd-prod
   aws:
     region: us-west-2
     roleARN: "arn:aws:iam::012345678910:role/argocd-dr"
+
+extensions:
+  enabled: true

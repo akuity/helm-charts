@@ -235,6 +235,16 @@ spec:
           name: plugins-home
         - mountPath: /tmp
           name: tmp
+{{- if .Values.extensions.enabled }}
+        - name: extensions
+          mountPath: /tmp/extensions/
+      - name: argocd-extensions
+        image: {{ .Values.extensions.image.repository }}:{{ .Values.extensions.image.tag }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.extensions.image.pullPolicy }}
+        volumeMounts:
+          - name: extensions
+            mountPath: /tmp/extensions/
+{{- end }}
       serviceAccountName: argocd-server
       volumes:
       - emptyDir: {}
@@ -260,4 +270,8 @@ spec:
             path: ca.crt
           optional: true
           secretName: argocd-repo-server-tls
+{{- if .Values.extensions.enabled }}
+      - name: extensions
+        emptyDir: {}
+{{- end }}
 {{- end }}
