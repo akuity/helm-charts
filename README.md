@@ -18,7 +18,7 @@ With the realization that there is no "one size fits all" set of install options
 
 ### Initial Argo CD Installation
 
-It is recommended and encouraged to use Argo CD to manage itself using GitOps. But before Argo CD can manage itself, it itself needs to be installed. To resolve this chicken-and-egg problem for the initial Argo CD installation, you can install Argo CD using normal `kubectl apply`:
+It is recommended and encouraged to use Argo CD to manage itself using GitOps. But before Argo CD can manage itself, Argo CD itself needs to be installed. To resolve this chicken-and-egg problem for the initial Argo CD installation, you can install Argo CD using normal `kubectl apply`:
 
 ```shell
 kustomize build --enable-helm https://github.com/akuity/helm-charts//docs/argo-cd-install | kubectl apply -n argocd -f -
