@@ -1,51 +1,24 @@
 apiVersion: rbac.authorization.k8s.io/v1
-{{- if .Values.singleNamespace }}
 kind: RoleBinding
-{{ else }}
-kind: ClusterRoleBinding
-{{- end }}
 metadata:
-  name: {{ template "argo-workflows.controller.fullname" . }}
-  labels:
-    {{- include "argo-workflows.labels" (dict "context" . "component" .Values.controller.name "name" .Values.controller.name) | nindent 4 }}
+  name: argo-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  {{- if .Values.singleNamespace }}
   kind: Role
-  {{ else }}
-  kind: ClusterRole
-  {{- end }}
-  name: {{ template "argo-workflows.controller.fullname" . }}
+  name: argo-role
 subjects:
-  - kind: ServiceAccount
-    name: {{ template "argo-workflows.controllerServiceAccountName" . }}
-    namespace: {{ .Release.Namespace }}
-{{- if .Values.controller.workflowNamespaces }}
-{{- $uiServiceAccount := (include "argo-workflows.controllerServiceAccountName" .) }}
-{{- $namespace := .Release.Namespace }}
-{{- range $key := .Values.controller.workflowNamespaces }}
-  {{- if not (eq $key $namespace) }}
-  - kind: ServiceAccount
-    name: {{ $uiServiceAccount }}
-    namespace: {{ $key }}
-  {{- end }}
-{{- end }}
-{{- end }}
-
-{{- if .Values.controller.clusterWorkflowTemplates.enabled }}
+- kind: ServiceAccount
+  name: argo
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ template "argo-workflows.controller.fullname" . }}-cluster-template
-  labels:
-    {{- include "argo-workflows.labels" (dict "context" . "component" .Values.controller.name "name" .Values.controller.name) | nindent 4 }}
+  name: argo-binding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ template "argo-workflows.controller.fullname" . }}-cluster-template
+  name: argo-cluster-role
 subjects:
-  - kind: ServiceAccount
-    name: {{ template "argo-workflows.controllerServiceAccountName" . }}
-    namespace: {{ .Release.Namespace }}
-{{- end }}
+- kind: ServiceAccount
+  name: argo
+  namespace: argo
