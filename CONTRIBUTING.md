@@ -25,7 +25,7 @@ helm dependency update
 Installing Argo CD:
 ```
 cd -
-helm install argo-cd charts/argo-cd -n argo
+helm install argo-cd charts/argo-cd -n argocd
 ```
 
 
@@ -42,4 +42,35 @@ Uninstalling Argo CD:
 
 ```
 helm uninstall argo-cd
+```
+
+### Argo Workflows
+
+Installing Argo Workflows:
+
+```
+helm install argo-workflows charts/argo-workflows -n argo
+```
+
+```
+> NAME: argo-workflows
+LAST DEPLOYED: Mon Dec 13 15:59:15 2021
+NAMESPACE: argo
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+1. Get Argo Server external IP/domain by running:
+
+kubectl --namespace argo get services -o wide | grep argo-server
+
+2. Submit the hello-world workflow by running:
+
+argo submit https://raw.githubusercontent.com/argoproj/argo-workflows/master/examples/hello-world.yaml --watch
+```
+
+Uninstalling Argo Workflows:
+
+```
+helm uninstall argo-workflows
 ```
