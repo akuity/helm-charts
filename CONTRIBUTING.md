@@ -69,6 +69,11 @@ kubectl --namespace argo get services -o wide | grep argo-server
 argo submit https://raw.githubusercontent.com/argoproj/argo-workflows/master/examples/hello-world.yaml --watch
 ```
 
+Accessing UI via https://localhost:2746/:
+```
+kubectl port-forward svc/argo-server 2746:2746 -n argo
+```
+
 Uninstalling Argo Workflows:
 
 ```

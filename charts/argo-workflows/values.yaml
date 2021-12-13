@@ -6,11 +6,11 @@ global:
 controller:
   image:
     repository: quay.io/argoproj/workflow-controller
-    # Overrides the image tag whose default is the chart appVersion.
+    # -- Overrides the image tag whose default is the chart appVersion.
     tag: ""
-  # parallelism dictates how many workflows can be running at the same time
+  # -- Parallelism dictates how many workflows can be running at the same time
   parallelism:
-  # Limits the maximum number of incomplete workflows in a namespace
+  # -- Limits the maximum number of incomplete workflows in a namespace
   namespaceParallelism:
   metricsConfig:
     enabled: false
@@ -63,43 +63,43 @@ controller:
     # explicitID: unique-argo-controller-identifier
   resources: {}
 
-  ## Extra environment variables to provide to the controller container
+  # -- Extra environment variables to provide to the controller container
   ## extraEnv:
   ##   - name: FOO
   ##     value: "bar"
   extraEnv: []
 
-  # Extra arguments to be added to the controller
+  # -- Extra arguments to be added to the controller
   extraArgs: []
   replicas: 1
 
-# executor controls how the init and wait container should be customized
+# -- Executor controls how the init and wait container should be customized
 executor:
   image:
     repository: quay.io/argoproj/argoexec
-    # Overrides the image tag whose default is the chart appVersion.
+    # -- Overrides the image tag whose default is the chart appVersion.
     tag: ""
   resources: {}
-  # Adds environment variables for the executor.
+  # -- Adds environment variables for the executor.
   env: {}
 
 server:
   image:
     repository: quay.io/argoproj/argocli
-    # Overrides the image tag whose default is the chart appVersion.
+    # -- Overrides the image tag whose default is the chart appVersion.
     tag: ""
 
-  ## Extra environment variables to provide to the argo-server container
+  # -- Extra environment variables to provide to the argo-server container
   ## extraEnv:
   ##   - name: FOO
   ##     value: "bar"
   extraEnv: []
 
-  # Extra arguments to provide to the Argo server binary.
+  # -- Extra arguments to provide to the Argo server binary.
   extraArgs: []
 
+  # -- SSO configuration when SSO is specified as a server auth mode.
   sso:
-    ## SSO configuration when SSO is specified as a server auth mode.
     ## All the values are required. SSO is activated by adding --auth-mode=sso
     ## to the server command line.
     #
@@ -128,11 +128,11 @@ server:
     # scopes:
     # - groups
 
-# Influences the creation of the ConfigMap for the workflow-controller itself.
+# -- Influences the creation of the ConfigMap for the workflow-controller itself.
 useDefaultArtifactRepo: false
 useStaticCredentials: true
 artifactRepository:
-  # archiveLogs will archive the main container logs as an artifact
+  # -- Archive the main container logs as an artifact
   archiveLogs: false
   s3:
     # Note the `key` attribute is not the actual secret, it's the PATH to
