@@ -22,7 +22,7 @@ A Helm chart for Argo Workflows
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| config | object | `{"containerRuntimeExecutor":"emissary"}` | Configurations for workflow controller configmap. |
+| config | object | `{"containerRuntimeExecutor":"emissary"}` | Configurations for workflow controller configmap. For a list of available configuration settings, see: https://github.com/argoproj/argo-workflows/blob/master/docs/workflow-controller-configmap.yaml |
 | controller | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/workflow-controller","tag":""},"replicas":1,"resources":{}}` | Controller customizes the deployment of Argo Workflows controller. |
 | controller.extraArgs | list | `[]` | Extra arguments to be added to the controller. |
 | controller.extraEnv | list | `[]` | Extra environment variables to provide to the controller container. |

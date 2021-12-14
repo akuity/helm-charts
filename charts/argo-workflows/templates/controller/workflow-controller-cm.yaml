@@ -4,6 +4,5 @@ metadata:
   name: workflow-controller-configmap
 {{- if .Values.config }}
 data:
-  config: |
-{{ toYaml .Values.config | indent 4}}
+{{ toYaml .Values.config | indent 2}}
 {{- end }}

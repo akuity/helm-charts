@@ -43,6 +43,6 @@ server:
   # -- Extra arguments to provide to the Argo Server binary.
   extraArgs: []
 
-# -- Configurations for workflow controller configmap.
+# -- Configurations for workflow controller configmap. For a list of available configuration settings, see: https://github.com/argoproj/argo-workflows/blob/master/docs/workflow-controller-configmap.yaml
 config:
   containerRuntimeExecutor: emissary
