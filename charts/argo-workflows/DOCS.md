@@ -22,44 +22,23 @@ A Helm chart for Argo Workflows
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| artifactRepository.archiveLogs | bool | `false` | Archive the main container logs as an artifact |
-| artifactRepository.s3.accessKeySecret.key | string | `"accesskey"` |  |
-| artifactRepository.s3.insecure | bool | `true` |  |
-| artifactRepository.s3.secretKeySecret.key | string | `"secretkey"` |  |
-| controller.containerRuntimeExecutor | string | `"emissary"` |  |
-| controller.extraArgs | list | `[]` | Extra arguments to be added to the controller |
-| controller.extraEnv | list | `[]` | Extra environment variables to provide to the controller container |
-| controller.image.repository | string | `"quay.io/argoproj/workflow-controller"` |  |
-| controller.image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
-| controller.instanceID.enabled | bool | `false` |  |
-| controller.metricsConfig.enabled | bool | `false` |  |
-| controller.metricsConfig.path | string | `"/metrics"` |  |
-| controller.metricsConfig.port | int | `9090` |  |
-| controller.metricsConfig.servicePort | int | `8080` |  |
-| controller.metricsConfig.servicePortName | string | `"metrics"` |  |
-| controller.namespaceParallelism | string | `nil` | Limits the maximum number of incomplete workflows in a namespace |
-| controller.parallelism | string | `nil` | Parallelism dictates how many workflows can be running at the same time |
-| controller.persistence | object | `{}` |  |
-| controller.replicas | int | `1` |  |
-| controller.resources | object | `{}` |  |
-| controller.telemetryConfig.enabled | bool | `false` |  |
-| controller.telemetryConfig.path | string | `"/telemetry"` |  |
-| controller.telemetryConfig.port | int | `8081` |  |
-| controller.telemetryConfig.servicePort | int | `8081` |  |
-| controller.telemetryConfig.servicePortName | string | `"telemetry"` |  |
-| controller.workflowDefaults | object | `{}` |  |
-| controller.workflowRestrictions | object | `{}` |  |
-| executor | object | `{"env":{},"image":{"repository":"quay.io/argoproj/argoexec","tag":""},"resources":{}}` | Executor controls how the init and wait container should be customized |
-| executor.env | object | `{}` | Adds environment variables for the executor. |
-| executor.image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
-| global.image.tag | string | `"v3.2.4"` | If defined, a tag applied to all Argo Workflows deployments |
-| server.extraArgs | list | `[]` | Extra arguments to provide to the Argo server binary. |
-| server.extraEnv | list | `[]` | Extra environment variables to provide to the argo-server container |
-| server.image.repository | string | `"quay.io/argoproj/argocli"` |  |
-| server.image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
-| server.sso | string | `nil` | SSO configuration when SSO is specified as a server auth mode. |
-| useDefaultArtifactRepo | bool | `false` | Influences the creation of the ConfigMap for the workflow-controller itself. |
-| useStaticCredentials | bool | `true` |  |
+| config | object | `{"containerRuntimeExecutor":"emissary"}` | Configurations for workflow controller configmap. |
+| controller | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/workflow-controller","tag":""},"replicas":1,"resources":{}}` | Controller customizes the deployment of Argo Workflows controller. |
+| controller.extraArgs | list | `[]` | Extra arguments to be added to the controller. |
+| controller.extraEnv | list | `[]` | Extra environment variables to provide to the controller container. |
+| controller.image.repository | string | `"quay.io/argoproj/workflow-controller"` | Image repository. |
+| controller.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
+| controller.replicas | int | `1` | Number of replicas. |
+| controller.resources | object | `{}` | Customizes the controller pod's resources. |
+| executor | object | `{"image":{"repository":"quay.io/argoproj/argoexec","tag":""}}` | Executor controls how the init and wait container should be customized. |
+| executor.image.repository | string | `"quay.io/argoproj/argoexec"` | Image repository. |
+| executor.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
+| global.image.tag | string | `"v3.2.4"` | The default image tag applied to all Argo Workflows deployments. |
+| server | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/argocli","tag":""}}` | Server customizes the deployment of Argo Server |
+| server.extraArgs | list | `[]` | Extra arguments to provide to the Argo Server binary. |
+| server.extraEnv | list | `[]` | Extra environment variables to provide to the argo-server container. |
+| server.image.repository | string | `"quay.io/argoproj/argocli"` | Image repository. |
+| server.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
 
 ----------------------------------------------
 Autogenerated from chart metadata using [helm-docs v1.5.0](https://github.com/norwoodj/helm-docs/releases/v1.5.0)
