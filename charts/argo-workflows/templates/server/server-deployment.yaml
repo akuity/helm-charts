@@ -14,6 +14,9 @@ spec:
       containers:
       - args:
         - server
+        {{- with .Values.server.extraArgs }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         image: {{ .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
         name: argo-server
         ports:
