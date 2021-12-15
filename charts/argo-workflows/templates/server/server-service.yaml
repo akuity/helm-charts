@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: argo-server
 spec:
+{{- if .Values.server.service.type }}
+  type: {{ .Values.server.service.type }}
+{{- end }}
   ports:
   - name: web
     port: 2746

@@ -1,0 +1,35 @@
+{{- if and .Values.server.enabled .Values.server.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argo-server
+{{- if .Values.server.ingress.annotations  }}
+  annotations:
+  {{- range $key, $value := .Values.server.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
+{{- end }}
+spec:
+{{- with .Values.server.ingress.className }}
+  ingressClassName: {{ . }}
+{{- end }}
+  rules:
+    - host: {{ .Values.server.ingress.host }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: argo-server
+                port:
+                  name: web
+            path: /
+            pathType: Prefix
+{{- if .Values.server.ingress.tls.enabled }}
+  tls:
+  - hosts:
+    - {{ .Values.server.ingress.host }}
+{{- with .Values.server.ingress.tls.secretName }}
+    secretName: {{ . }}
+{{- end }}
+{{- end }}
+{{- end }}
