@@ -2,7 +2,7 @@
 
 ## Local Development and Testing
 
-### Pre-commit Hook
+### Pre-commit Hook and Lint Checks
 
 We use [helm-docs](https://github.com/norwoodj/helm-docs) to automatically generate reference for the charts and we use a [pre-commit](https://pre-commit.com/) hook to make sure we always update the docs when there are any changes in `values.yaml`.
 
@@ -11,6 +11,12 @@ To install `pre-commit`, run:
 ```
 brew install pre-commit
 pre-commit install
+```
+
+Install the lint checker tools via `brew install chart-testing yamllint` and then run:
+
+```
+ct lint --debug --config ./.github/configs/ct-lint.yaml --lint-conf ./.github/configs/lintconf.yaml
 ```
 
 ### Argo CD
