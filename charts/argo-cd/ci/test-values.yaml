@@ -29,8 +29,8 @@ config:
     dex.github.clientSecret: aaabbbcccdddeeefffggghhhiiijjjkkklllmm
     server.secretkey: J3bcC2LjNYbCGf8s2sScN7JpPVUiduiiogDK7uvtLAU=
     # bcrypt of the string: "password"
-    admin.password": $2a$04$PJ/GxgRlyVyx/bvKQhlYouPRumbizCm89xy31u/eLbWapmUoFEn1K
-    admin.passwordMtime": "2021-10-21T09:00:07Z"
+    admin.password: $2a$04$PJ/GxgRlyVyx/bvKQhlYouPRumbizCm89xy31u/eLbWapmUoFEn1K
+    admin.passwordMtime: "2021-10-21T09:00:07Z"
 
 server:
   insecure: false
