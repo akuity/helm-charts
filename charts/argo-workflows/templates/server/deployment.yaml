@@ -26,7 +26,11 @@ spec:
           httpGet:
             path: /
             port: 2746
+            {{- if .Values.server.secure }}
+            scheme: HTTPS
+            {{- else }}
             scheme: HTTP
+            {{- end }}
           initialDelaySeconds: 10
           periodSeconds: 20
         securityContext:

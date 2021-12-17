@@ -31,6 +31,7 @@ executor:
 
 # -- Server customizes the deployment of Argo Server
 server:
+  secure: true
   image:
     # -- Image repository.
     repository: quay.io/argoproj/argocli

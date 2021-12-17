@@ -34,7 +34,7 @@ A Helm chart for Argo Workflows
 | executor.image.repository | string | `"quay.io/argoproj/argoexec"` | Image repository. |
 | executor.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
 | global.image.tag | string | `"v3.2.4"` | The default image tag applied to all Argo Workflows deployments. |
-| server | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/argocli","tag":""},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argo-workflows.example.com","tls":{"enabled":false,"secretName":null}},"service":{"type":null}}` | Server customizes the deployment of Argo Server |
+| server | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/argocli","tag":""},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argo-workflows.example.com","tls":{"enabled":false,"secretName":null}},"secure":true,"service":{"type":null}}` | Server customizes the deployment of Argo Server |
 | server.extraArgs | list | `[]` | Extra arguments to provide to the Argo Server binary. |
 | server.extraEnv | list | `[]` | Extra environment variables to provide to the argo-server container. |
 | server.image.repository | string | `"quay.io/argoproj/argocli"` | Image repository. |
