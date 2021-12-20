@@ -18,9 +18,9 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
         {{- if .Values.server.secure }}
-        --secure=true
+        - --secure=true
         {{- else }}
-        --secure=false
+        - --secure=false
         {{- end }}
         image: {{ .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
         name: argo-server
