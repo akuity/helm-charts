@@ -1,6 +1,6 @@
 # argo-workflows
 
-![Version: 0.0.12](https://img.shields.io/badge/Version-0.0.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.2.4](https://img.shields.io/badge/AppVersion-3.2.4-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.2.4](https://img.shields.io/badge/AppVersion-3.2.4-informational?style=flat-square)
 
 A Helm chart for Argo Workflows
 
@@ -23,21 +23,21 @@ A Helm chart for Argo Workflows
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | config | object | `{"containerRuntimeExecutor":"emissary"}` | Configurations for workflow controller configmap. For a list of available configuration settings, see: https://github.com/argoproj/argo-workflows/blob/master/docs/workflow-controller-configmap.yaml |
-| controller | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/workflow-controller","tag":""},"replicas":1,"resources":{}}` | Controller customizes the deployment of Argo Workflows controller. |
+| controller | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/akuity/workflow-controller","tag":""},"replicas":1,"resources":{}}` | Controller customizes the deployment of Argo Workflows controller. |
 | controller.extraArgs | list | `[]` | Extra arguments to be added to the controller. |
 | controller.extraEnv | list | `[]` | Extra environment variables to provide to the controller container. |
-| controller.image.repository | string | `"quay.io/argoproj/workflow-controller"` | Image repository. |
+| controller.image.repository | string | `"quay.io/akuity/workflow-controller"` | Image repository. |
 | controller.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
 | controller.replicas | int | `1` | Number of replicas. |
 | controller.resources | object | `{}` | Customizes the controller pod's resources. |
-| executor | object | `{"image":{"repository":"quay.io/argoproj/argoexec","tag":""}}` | Executor controls how the init and wait container should be customized. |
-| executor.image.repository | string | `"quay.io/argoproj/argoexec"` | Image repository. |
+| executor | object | `{"image":{"repository":"quay.io/akuity/argoexec","tag":""}}` | Executor controls how the init and wait container should be customized. |
+| executor.image.repository | string | `"quay.io/akuity/argoexec"` | Image repository. |
 | executor.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
 | global.image.tag | string | `"v3.2.4"` | The default image tag applied to all Argo Workflows deployments. |
-| server | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/argoproj/argocli","tag":""},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argo-workflows.example.com","tls":{"enabled":false,"secretName":null}},"secure":true,"service":{"type":null}}` | Server customizes the deployment of Argo Server |
+| server | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/akuity/argocli","tag":""},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argo-workflows.example.com","tls":{"enabled":false,"secretName":null}},"secure":true,"service":{"type":null}}` | Server customizes the deployment of Argo Server |
 | server.extraArgs | list | `[]` | Extra arguments to provide to the Argo Server binary. |
 | server.extraEnv | list | `[]` | Extra environment variables to provide to the argo-server container. |
-| server.image.repository | string | `"quay.io/argoproj/argocli"` | Image repository. |
+| server.image.repository | string | `"quay.io/akuity/argocli"` | Image repository. |
 | server.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
 | server.ingress | object | `{"annotations":{},"className":"","enabled":false,"host":"argo-workflows.example.com","tls":{"enabled":false,"secretName":null}}` | Configuration of the creation of Ingress object |
 | server.service | object | `{"type":null}` | Server service configuration |
