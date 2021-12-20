@@ -3,6 +3,34 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.2.0
+    created: "2021-12-20T20:24:56.800873735Z"
+    dependencies:
+    - condition: extensions.enabled
+      name: argo-cd-extensions
+      repository: https://charts.akuity.io
+      version: 0.0.1
+    description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
+      tool for Kubernetes.
+    digest: ec6b14b26bf976ea63956095e339acb384a4e59184e9c24e154219aec881dd93
+    home: https://charts.akuity.io
+    icon: https://argoproj.github.io/argo-cd/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - email: terrytangyuan@gmail.com
+      name: terrytangyuan
+    - email: jesse@akuity.io
+      name: jessesuen
+    - email: hong@akuity.io
+      name: wanghong230
+    name: argo-cd
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-cd-1.0.2/argo-cd-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 2.2.0
     created: "2021-11-23T07:54:44.647183865Z"
     dependencies:
     - condition: extensions.enabled
@@ -457,6 +485,24 @@ entries:
     version: 0.0.10
   argo-workflows:
   - apiVersion: v2
+    appVersion: 3.2.4
+    created: "2021-12-20T20:24:56.934057299Z"
+    description: A Helm chart for Argo Workflows
+    digest: aaeea7f06e7666d8af8a7d4f0defeaa5aae529df2540b705d60a2d30d1d83b75
+    home: https://github.com/akuity/helm-charts
+    icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-workflows
+    sources:
+    - https://github.com/argoproj/argo-workflows
+    type: application
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-workflows-1.0.1/argo-workflows-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 3.1.8
     created: "2021-10-26T01:40:18.578248466Z"
     description: A Helm chart for Argo Workflows
@@ -617,4 +663,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2021-11-23T07:54:44.647268466Z"
+generated: "2021-12-20T20:24:56.9342239Z"
