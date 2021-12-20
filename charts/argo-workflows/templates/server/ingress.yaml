@@ -2,11 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server
-  labels:
-    app.kubernetes.io/component: server
-    app.kubernetes.io/name: argocd-server
-    app.kubernetes.io/part-of: argocd
+  name: argo-server
 {{- if .Values.server.ingress.annotations  }}
   annotations:
   {{- range $key, $value := .Values.server.ingress.annotations }}
@@ -23,9 +19,9 @@ spec:
         paths:
           - backend:
               service:
-                name: argocd-server
+                name: argo-server
                 port:
-                  number: {{ ternary "80" "443" .Values.server.insecure }}
+                  name: web
             path: /
             pathType: Prefix
 {{- if .Values.server.ingress.tls.enabled }}
