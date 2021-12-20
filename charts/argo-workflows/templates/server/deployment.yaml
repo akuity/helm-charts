@@ -17,6 +17,11 @@ spec:
         {{- with .Values.server.extraArgs }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        {{- if .Values.server.secure }}
+        --secure=true
+        {{- else }}
+        --secure=false
+        {{- end }}
         image: {{ .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
         name: argo-server
         ports:
