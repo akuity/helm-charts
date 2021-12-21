@@ -21,7 +21,7 @@ helmCharts:
   includeCRDs: true
   valuesFile: values.yaml
   namespace: argocd  # modify to different namespace
-  # version: 0.0.20  # pin to specific version
+  version: 1.0.2     # pin to specific version
 ```
 
 Once modified run kustomize build from your local workspace to apply the changes:

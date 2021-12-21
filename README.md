@@ -46,7 +46,7 @@ helmCharts:
   repo: https://charts.akuity.io
   includeCRDs: true
   namespace: argocd
-  version: 0.0.20           # pin to a specific version (see charts/argo-cd/Chart.yaml)
+  version: 1.0.2            # pin to a specific version (see charts/argo-cd/Chart.yaml)
   valuesFile: values.yaml   # Helm values file in your git repo
 ```
 

@@ -7,4 +7,4 @@ helmCharts:
   includeCRDs: true
   namespace: argocd
   valuesFile: values.yaml
-  version: 0.0.20           # pin to a version
+  version: 1.0.2           # pin to a version
