@@ -2,15 +2,17 @@
 # Script to compare against upstream version for differences
 
 PROJECT_ROOT=$(cd $(dirname ${BASH_SOURCE})/..; pwd)
-upstream_version=master
+chart_root="${PROJECT_ROOT}/charts/argo-cd"
+upstream_version=v$(grep appVersion ${chart_root}/Chart.yaml | awk '{print $2}')
 
 mytmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 
+helm dependency update ${chart_root} 2>&1 >/dev/null
 helm template \
     --include-crds \
     --set global.image.repository=quay.io/argoproj/argocd \
-    --set global.image.tag=latest \
-    --namespace argocd $PROJECT_ROOT/charts/argo-cd | grep -v imagePullPolicy > $mytmpdir/helm.yaml
+    --set global.image.tag=${upstream_version} \
+    --namespace argocd ${chart_root} | grep -v imagePullPolicy > $mytmpdir/helm.yaml
 
 echo """
 apiVersion: kustomize.config.k8s.io/v1beta1

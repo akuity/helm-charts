@@ -2,19 +2,20 @@
 # Script to compare against upstream version for differences
 
 PROJECT_ROOT=$(cd $(dirname ${BASH_SOURCE})/..; pwd)
-upstream_version=master
+chart_root="${PROJECT_ROOT}/charts/argo-rollouts"
+upstream_version=v$(grep appVersion ${chart_root}/Chart.yaml | awk '{print $2}')
 
 mytmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 
 helm template \
     --include-crds=true \
     --set controller.image.repository=quay.io/argoproj/argo-rollouts \
-    --set controller.image.tag=latest \
+    --set controller.image.tag=${upstream_version} \
     --set controller.image.pullPolicy=Always \
     --set dashboard.image.repository=quay.io/argoproj/kubectl-argo-rollouts \
-    --set dashboard.image.tag=latest \
+    --set dashboard.image.tag=${upstream_version} \
     --set dashboard.image.pullPolicy=Always \
-    --namespace argo-rollouts $PROJECT_ROOT/charts/argo-rollouts > $mytmpdir/helm.yaml
+    --namespace argo-rollouts ${chart_root} > $mytmpdir/helm.yaml
 
 echo """
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -27,7 +28,7 @@ echo $mytmpdir
 helm_out=$(kustomize build $mytmpdir)
 
 upstream_out=$(
-    curl --silent https://raw.githubusercontent.com/argoproj/argo-rollouts/${upstream_version}/manifests/install.yaml | \
+    curl -L --silent https://github.com/argoproj/argo-rollouts/releases/download/${upstream_version}/install.yaml | \
     grep -v "This is an auto-generated file"
 )
 
