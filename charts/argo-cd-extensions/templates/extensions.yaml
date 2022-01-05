@@ -1,0 +1,9 @@
+{{ $currentScope := .}}
+{{ range $path, $_ :=  .Files.Glob  "extensions/*.yaml" }}
+    {{- with $currentScope}}
+      {{- if has ($path | base | split ".")._0 .Values.extensions }}
+{{ .Files.Get $path }}
+---
+      {{- end }}
+    {{- end }}
+{{ end }}
