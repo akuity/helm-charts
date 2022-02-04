@@ -324,3 +324,8 @@ extensions:
     repository: ghcr.io/argoproj-labs/argocd-extensions
     tag: v0.1.0
     pullPolicy: # IfNotPresent
+
+  # -- List of extensions to enable. Default list can be seen here:
+  # https://github.com/akuity/helm-charts/blob/master/charts/argo-cd-extensions/values.yaml
+  # extensions:
+  # - argo-rollouts
