@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=flat-square) ![AppVersion: 2.2.0](https://img.shields.io/badge/AppVersion-2.2.0-informational?style=flat-square)
+![Version: 1.0.6](https://img.shields.io/badge/Version-1.0.6-informational?style=flat-square) ![AppVersion: 2.3.0](https://img.shields.io/badge/AppVersion-2.3.0-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -18,7 +18,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.akuity.io | argo-cd-extensions | 0.0.1 |
+| https://charts.akuity.io | argo-cd-extensions | 0.0.2 |
 
 ## Values
 
@@ -56,7 +56,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | extensions.image.tag | string | `"v0.1.0"` |  |
 | global.image.pullPolicy | string | `nil` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
-| global.image.tag | string | `"v2.2.0-ak.0rc1"` | If defined, a tag applied to all ArgoCD deployments |
+| global.image.tag | string | `"v2.3.0-rc5-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
 | redis | object | `{"enabled":true,"image":{"pullPolicy":null,"repository":"redis","tag":"6.2.4-alpine"},"resources":null}` | Redis configurations |
 | repoServer | object | `{"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"replicas":2,"resources":null}` | Repo Server |
 | repoServer.extraArgs | string | `nil` | Additional command line arguments to pass to argocd-repo-server |
