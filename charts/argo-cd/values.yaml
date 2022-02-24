@@ -115,6 +115,13 @@ repoServer:
     #   cpu: 10m
     #   memory: 64Mi
 
+# -- ApplicationSet Controller
+applicationsetController:
+  image:
+    repository: quay.io/argoproj/argocd-applicationset # defaults to global.image.repository
+    tag:        v0.3.0 # defaults to global.image.tag
+    pullPolicy: # IfNotPresent
+
 # -- Argo Configuration
 config:
   argocd:
