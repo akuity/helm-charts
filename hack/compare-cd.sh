@@ -12,7 +12,6 @@ helm template \
     --include-crds \
     --set global.image.repository=quay.io/argoproj/argocd \
     --set global.image.tag=${upstream_version} \
-    --set config.argocd=null \
     --namespace argocd ${chart_root} | grep -v imagePullPolicy > $mytmpdir/helm.yaml
 
 echo "Helm template output is located in: $mytmpdir"
@@ -32,4 +31,4 @@ upstream_out=$(
     grep -v "This is an auto-generated file"
 )
 
-diff <(echo "$helm_out") <(echo "$upstream_out") | subl -
+diff <(echo "$helm_out") <(echo "$upstream_out")
