@@ -1,3 +1,4 @@
+{{- if .Values.applicationsetController.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -15,3 +16,4 @@ spec:
     targetPort: 7000
   selector:
     app.kubernetes.io/name: argocd-applicationset-controller
+{{- end }}

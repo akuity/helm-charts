@@ -115,8 +115,15 @@ repoServer:
     #   cpu: 10m
     #   memory: 64Mi
 
+# -- Notifications Controller
+notificationsController:
+  # -- Whether to enable Notifications Controller
+  enabled: true
+
 # -- ApplicationSet Controller
 applicationsetController:
+  # -- Whether to enable ApplicationSet Controller
+  enabled: true
   image:
     repository: quay.io/argoproj/argocd-applicationset # defaults to global.image.repository
     tag: v0.3.0 # defaults to global.image.tag

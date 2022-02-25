@@ -1,3 +1,4 @@
+{{- if .Values.notificationsController.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,3 +47,4 @@ spec:
             path: ca.crt
           optional: true
           secretName: argocd-repo-server-tls
+{{- end }}

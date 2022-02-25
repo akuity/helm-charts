@@ -1,3 +1,4 @@
+{{- if .Values.applicationsetController.enabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -87,3 +88,4 @@ metadata:
     app.kubernetes.io/part-of: argocd-applicationset
   name: argocd-applicationset-controller
   namespace: {{ .Release.Namespace }}
+{{- end }}
