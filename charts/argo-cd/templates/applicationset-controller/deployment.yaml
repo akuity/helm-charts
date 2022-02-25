@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd-applicationset
   name: argocd-applicationset-controller
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
@@ -17,7 +18,6 @@ spec:
     spec:
       containers:
       - command:
-        - entrypoint.sh
         - applicationset-controller
         env:
         - name: NAMESPACE
@@ -29,7 +29,6 @@ spec:
         name: argocd-applicationset-controller
         ports:
         - containerPort: 7000
-          name: webhook
         volumeMounts:
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
