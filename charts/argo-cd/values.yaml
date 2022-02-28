@@ -118,12 +118,12 @@ repoServer:
 # -- Notifications Controller
 notificationsController:
   # -- Whether to enable Notifications Controller
-  enabled: true
+  enabled: false
 
 # -- ApplicationSet Controller
 applicationsetController:
   # -- Whether to enable ApplicationSet Controller
-  enabled: true
+  enabled: false
   image:
     repository: quay.io/argoproj/argocd-applicationset # defaults to global.image.repository
     tag: v0.3.0 # defaults to global.image.tag

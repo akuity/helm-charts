@@ -12,6 +12,8 @@ helm template \
     --include-crds \
     --set global.image.repository=quay.io/argoproj/argocd \
     --set global.image.tag=${upstream_version} \
+    --set notificationsController.enabled=true \
+    --set applicationsetController.enabled=true \
     --namespace argocd ${chart_root} | grep -v imagePullPolicy > $mytmpdir/helm.yaml
 
 echo "Helm template output is located in: $mytmpdir"
