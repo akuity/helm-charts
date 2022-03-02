@@ -59,28 +59,9 @@ The `config.registries` value can be used exactly as it looks in the documentati
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` | Kubernetes affinity settings for the deployment |
-| config.argocd.grpcWeb | bool | `true` | Use the gRPC-web protocol to connect to the Argo CD API |
-| config.argocd.insecure | bool | `false` | If specified, the certificate of the Argo CD API server is not verified. |
-| config.argocd.plaintext | bool | `false` | If specified, use an unencrypted HTTP connection to the ArgoCD API instead of TLS. |
-| config.argocd.serverAddress | string | `""` | Connect to the Argo CD API server at server address |
-| config.logLevel | string | `"info"` | ArgoCD Image Update log level |
 | config.registries | list | `[]` | ArgoCD Image Updater registries list configuration. More information [here](https://argocd-image-updater.readthedocs.io/en/stable/configuration/registries/) |
 | extraArgs | list | `[]` | Extra arguments for argocd-image-updater not defined in config.argocd |
-| fullnameOverride | string | `""` | Global fullname (argocd-image-updater.fullname in _helpers.tpl) override |
 | image.pullPolicy | string | `"Always"` | Default image pull policy |
 | image.repository | string | `"argoprojlabs/argocd-image-updater"` | Default image repository |
-| image.tag | string | `"v0.10.1"` | Default image tag |
+| image.tag | string | `"v0.11.3"` | Default image tag |
 | imagePullSecrets | list | `[]` | ImagePullSecrets for the image updater deployment |
-| nameOverride | string | `""` | Global name (argocd-image-updater.name in _helpers.tpl) override |
-| nodeSelector | object | `{}` | Kubernetes nodeSelector settings for the deployment |
-| podAnnotations | object | `{}` | Pod Annotations for the deployment |
-| podSecurityContext | object | `{}` | Pod security context settings for the deployment |
-| rbac.enabled | bool | `true` | Enable RBAC creation |
-| replicaCount | int | `1` | Replica count for the deployment. It is not advised to run more than one replica. |
-| resources | object | `{}` | Pod memory and cpu resource settings for the deployment |
-| securityContext | object | `{}` | Security context settings for the deployment |
-| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
-| serviceAccount.create | bool | `true` | Specifies whether a service account should be created |
-| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
-| tolerations | list | `[]` | Kubernetes toleration settings for the deployment |

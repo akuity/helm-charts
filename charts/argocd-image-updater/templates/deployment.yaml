@@ -1,31 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "argocd-image-updater.fullname" . }}
   labels:
-    {{- include "argocd-image-updater.labels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/name: argocd-image-updater
+    app.kubernetes.io/part-of: argocd-image-updater
+  name: argocd-image-updater
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "argocd-image-updater.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name: argocd-image-updater
   template:
     metadata:
-      annotations:
-      {{- with .Values.podAnnotations }}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
-        {{- include "argocd-image-updater.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/name: argocd-image-updater
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "argocd-image-updater.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           command: 
@@ -35,14 +24,36 @@ spec:
               {{- toYaml . | nindent 12 }}
             {{- end }}
           env:
+          - name: APPLICATIONS_API
+            valueFrom:
+              configMapKeyRef:
+                key: applications_api
+                name: argocd-image-updater-config
+                optional: true
           - name: ARGOCD_GRPC_WEB
-            value: {{ .Values.config.argocd.grpcWeb | quote }}
+            valueFrom:
+              configMapKeyRef:
+                key: argocd.grpc_web
+                name: argocd-image-updater-config
+                optional: true
           - name: ARGOCD_SERVER
-            value: {{ .Values.config.argocd.serverAddress }}
+            valueFrom:
+              configMapKeyRef:
+                key: argocd.server_addr
+                name: argocd-image-updater-config
+                optional: true
           - name: ARGOCD_INSECURE
-            value: {{ .Values.config.argocd.insecure | quote }}
+            valueFrom:
+              configMapKeyRef:
+                key: argocd.insecure
+                name: argocd-image-updater-config
+                optional: true
           - name: ARGOCD_PLAINTEXT
-            value: {{ .Values.config.argocd.plaintext | quote }}
+            valueFrom:
+              configMapKeyRef:
+                key: argocd.plaintext
+                name: argocd-image-updater-config
+                optional: true
           - name: ARGOCD_TOKEN
             valueFrom:
               secretKeyRef:
@@ -50,9 +61,29 @@ spec:
                 name: argocd-image-updater-secret
                 optional: true
           - name: IMAGE_UPDATER_LOGLEVEL
-            value: {{ .Values.config.logLevel }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
+            valueFrom:
+              configMapKeyRef:
+                key: log.level
+                name: argocd-image-updater-config
+                optional: true
+          - name: GIT_COMMIT_USER
+            valueFrom:
+              configMapKeyRef:
+                key: git.user
+                name: argocd-image-updater-config
+                optional: true
+          - name: GIT_COMMIT_EMAIL
+            valueFrom:
+              configMapKeyRef:
+                key: git.email
+                name: argocd-image-updater-config
+                optional: true
+          - name: IMAGE_UPDATER_KUBE_EVENTS
+            valueFrom:
+              configMapKeyRef:
+                key: kube.events
+                name: argocd-image-updater-config
+                optional: true
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -69,27 +100,23 @@ spec:
               port: 8080
             initialDelaySeconds: 3
             periodSeconds: 30
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
           - mountPath: /app/config
-            name: registries-conf
+            name: image-updater-conf
+          - mountPath: /app/config/ssh
+            name: ssh-known-hosts
+      serviceAccountName: argocd-image-updater
       volumes:
       - configMap:
           items:
           - key: registries.conf
             path: registries.conf
+          - key: git.commit-message-template
+            path: commit.template
           name: argocd-image-updater-config
-        name: registries-conf
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+          optional: true
+        name: image-updater-conf
+      - configMap:
+          name: argocd-ssh-known-hosts-cm
+          optional: true
+        name: ssh-known-hosts
