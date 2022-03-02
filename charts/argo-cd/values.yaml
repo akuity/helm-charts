@@ -343,3 +343,12 @@ extensions:
   # https://github.com/akuity/helm-charts/blob/master/charts/argo-cd-extensions/values.yaml
   # extensions:
   # - argo-rollouts
+
+# -- Image Updater
+imageUpdater:
+  # -- Whether to enable image updater
+  enabled: false
+  image:
+    repository: argoprojlabs/argocd-image-updater
+    pullPolicy: Always
+    tag: v0.11.3
