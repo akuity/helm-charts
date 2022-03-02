@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![AppVersion: 2.3.0-rc5](https://img.shields.io/badge/AppVersion-2.3.0--rc5-informational?style=flat-square)
+![Version: 1.1.1](https://img.shields.io/badge/Version-1.1.1-informational?style=flat-square) ![AppVersion: 2.3.0-rc5](https://img.shields.io/badge/AppVersion-2.3.0--rc5-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -19,6 +19,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.akuity.io | argo-cd-extensions | 0.0.2 |
+| https://charts.akuity.io | argocd-image-updater | 0.1.0 |
 
 ## Values
 
@@ -59,6 +60,8 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | global.image.pullPolicy | string | `nil` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
 | global.image.tag | string | `"v2.3.0-rc5-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
+| imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":"Always","repository":"argoprojlabs/argocd-image-updater","tag":"v0.11.3"}}` | Image Updater |
+| imageUpdater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":false}` | Notifications Controller |
 | notificationsController.enabled | bool | `false` | Whether to enable Notifications Controller |
 | redis | object | `{"enabled":true,"image":{"pullPolicy":null,"repository":"redis","tag":"6.2.6-alpine"},"resources":null}` | Redis configurations |
