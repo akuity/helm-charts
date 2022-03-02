@@ -6,8 +6,6 @@ image:
   # -- Default image tag
   tag: v0.11.3
 
-# -- ImagePullSecrets for the image updater deployment
-imagePullSecrets: []
 
 # -- Extra arguments for argocd-image-updater not defined in config.argocd
 extraArgs: []
@@ -22,7 +20,6 @@ extraArgs: []
   # - --registries-conf-path /app/config/registries.conf
 
 config:
-
   # -- ArgoCD Image Updater registries list configuration. More information [here](https://argocd-image-updater.readthedocs.io/en/stable/configuration/registries/)
   registries: []
     # - name: Docker Hub
