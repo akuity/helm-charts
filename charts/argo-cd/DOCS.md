@@ -19,7 +19,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.akuity.io | argo-cd-extensions | 0.0.2 |
-| https://charts.akuity.io | argocd-image-updater | 0.1.0 |
+| https://charts.akuity.io | argocd-image-updater | 0.0.11 |
 
 ## Values
 
