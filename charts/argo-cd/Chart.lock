@@ -1,9 +1,9 @@
 dependencies:
 - name: argo-cd-extensions
   repository: https://charts.akuity.io
-  version: 0.0.2
+  version: 0.0.3
 - name: argocd-image-updater
   repository: https://charts.akuity.io
-  version: 0.0.11
-digest: sha256:42549959600121f157e61ade9e895a3b08555ae94ce84cab61d14e775579919c
-generated: "2022-03-02T16:18:46.065411-05:00"
+  version: 0.1.0
+digest: sha256:56f3ecb708d6c8de965e46e4d037a73aab92f4a281af15b76b0dcb270e452838
+generated: "2022-03-02T17:34:36.923691-05:00"
