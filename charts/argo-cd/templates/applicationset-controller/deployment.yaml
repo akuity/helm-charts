@@ -19,6 +19,7 @@ spec:
     spec:
       containers:
       - command:
+        - entrypoint.sh
         - applicationset-controller
         env:
         - name: NAMESPACE
@@ -30,6 +31,7 @@ spec:
         name: argocd-applicationset-controller
         ports:
         - containerPort: 7000
+          name: webhook
         volumeMounts:
         - mountPath: /app/config/ssh
           name: ssh-known-hosts

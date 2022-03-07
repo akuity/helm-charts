@@ -6,7 +6,7 @@ global:
     # -- If defined, a repository applied to all ArgoCD deployments
     repository: quay.io/akuity/argocd
     # -- If defined, a tag applied to all ArgoCD deployments
-    tag: v2.3.0-rc5-ak.0
+    tag: v2.3.0-ak.0
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     pullPolicy: # IfNotPresent
 
@@ -126,7 +126,7 @@ applicationsetController:
   enabled: false
   image:
     repository: quay.io/argoproj/argocd-applicationset # defaults to global.image.repository
-    tag: v0.3.0 # defaults to global.image.tag
+    tag: v0.4.0
     pullPolicy: # IfNotPresent
 
 # -- Argo Configuration
@@ -350,5 +350,5 @@ imageUpdater:
   enabled: false
   image:
     repository: argoprojlabs/argocd-image-updater
-    pullPolicy: Always
+    pullPolicy: # IfNotPresent
     tag: v0.11.3
