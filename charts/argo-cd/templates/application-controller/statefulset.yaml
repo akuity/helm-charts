@@ -44,7 +44,7 @@ spec:
         {{- with .Values.controller.extraArgs }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}
-        {{- if .Values.controller.resources }}
+        {{- with .Values.controller.resources }}
         resources:
           {{- toYaml . | nindent 10 }}
         {{- end }}
