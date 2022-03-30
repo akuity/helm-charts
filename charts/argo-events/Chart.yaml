@@ -14,5 +14,6 @@ maintainers:
   - name: terrytangyuan
   - name: jessesuen
   - name: wanghong230
+  - name: gdsoumya
 icon: https://argoproj.github.io/argo-events/assets/logo.png
 home: https://github.com/akuity/helm-charts
