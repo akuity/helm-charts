@@ -49,8 +49,10 @@ spec:
         {{- with .Values.server.extraEnv }}
           {{- toYaml . | nindent 12 }}
         {{- end }}
+        {{- with .Values.server.resources }}
         resources:
-          {{- toYaml .Values.server.resources | nindent 12 }}
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:
