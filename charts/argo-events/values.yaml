@@ -29,12 +29,12 @@ eventbusController:
     # - debug
 
     natsStreamingImage:
-      repository: nats-streaming # defaults to global.image.repository
-      tag: "0.22.1" # defaults to global.image.tag
+        repository: nats-streaming # defaults to global.image.repository
+        tag: "0.22.1" # defaults to global.image.tag
 
     natsMetricsExporterImage:
-      repository: natsio/prometheus-nats-exporter # defaults to global.image.repository
-      tag: "0.8.0" # defaults to global.image.tag
+        repository: natsio/prometheus-nats-exporter # defaults to global.image.repository
+        tag: "0.8.0" # defaults to global.image.tag
 
     resources:
         # limits:
