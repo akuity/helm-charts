@@ -6,7 +6,7 @@ global:
         # -- If defined, a repository applied to all argo events deployments
         repository: quay.io/argoproj/argo-events
         # -- If defined, a tag applied to all argo events deployments
-        tag: latest
+        tag: v1.6.3
         # -- If defined, an image pull policy will be applied to all argo events deployments
         pullPolicy: # IfNotPresent
 
@@ -27,6 +27,14 @@ eventbusController:
     extraArgs:
     # - --loglevel
     # - debug
+
+    natsStreamingImage:
+      repository: nats-streaming # defaults to global.image.repository
+      tag: "0.22.1" # defaults to global.image.tag
+
+    natsMetricsExporterImage:
+      repository: natsio/prometheus-nats-exporter # defaults to global.image.repository
+      tag: "0.8.0" # defaults to global.image.tag
 
     resources:
         # limits:
