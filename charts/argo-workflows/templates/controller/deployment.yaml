@@ -32,8 +32,10 @@ spec:
         {{- with .Values.controller.extraEnv }}
           {{- toYaml . | nindent 12 }}
         {{- end }}
+        {{- with .Values.controller.resources }}
         resources:
-          {{- toYaml .Values.controller.resources | nindent 12 }}
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         image: {{ .Values.controller.image.repository }}:{{ default .Values.global.image.tag .Values.controller.image.tag }}
         livenessProbe:
           failureThreshold: 3
@@ -57,6 +59,7 @@ spec:
           runAsNonRoot: true
       nodeSelector:
         kubernetes.io/os: linux
+      priorityClassName: workflow-controller
       securityContext:
         runAsNonRoot: true
       serviceAccountName: argo
