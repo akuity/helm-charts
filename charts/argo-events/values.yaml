@@ -1,99 +1,97 @@
-# docker registry
-registry: quay.io
+## Argo Events configuration
+## Ref: https://github.com/argoproj/argo-events
 
-# The image pull policy
-imagePullPolicy: Always
+global:
+    image:
+        # -- If defined, a repository applied to all argo events deployments
+        repository: quay.io/argoproj/argo-events
+        # -- If defined, a tag applied to all argo events deployments
+        tag: v1.6.3
+        # -- If defined, an image pull policy will be applied to all argo events deployments
+        pullPolicy: # IfNotPresent
 
-# Secrets with credentials to pull images from a private registry
-imagePullSecrets: []
-# - name: argo-pull-secret
+# -- Installs necessary ClusterRoles to allow Argo Events to deploy to the same cluster Argo Events is installed in
+clusterRoles:
+    enabled: true
 
-# ServiceAccount to use for running controller.
-serviceAccount: argo-events-sa
-
-# serviceAccountAnnotations can be used to enable GKE workload identity, or other use-cases
-serviceAccountAnnotations: {}
-
-# Create service accounts in additional namespaces specified
-# The SA will always be created in the release namespaces
-additionalSaNamespaces: []
-  # - argo-prod
-additionalServiceAccountRules:
-- apiGroups:
-    - apiextensions.k8s.io
-  verbs:
-    - create
-    - delete
-    - deletecollection
-    - get
-    - list
-    - patch
-    - update
-    - watch
-  resources:
-    - customresourcedefinitions
-
-instanceID: argo-events
-
-# set `singleNamespace` to false to have the controllers
-# listen on all namespaces.  Otherwise the controllers will listen
-# on the namespace provided
-namespace: argo-events
-singleNamespace: true
-
-# sensor controller
-sensorController:
-  name: sensor-controller
-  image: argoproj/sensor-controller
-  tag: v1.3.1
-  replicaCount: 1
-  extraEnv: []
-    # - name: DEBUG_LOG
-    #   value: "true"
-  sensorImage: argoproj/sensor
-  podAnnotations: {}
-  nodeSelector: {}
-  podLabels: {}
-  priorityClassName: ""
-  tolerations: []
-  affinity: {}
-  resources: {}
-
-eventsourceController:
-  name: eventsource-controller
-  image: argoproj/eventsource-controller
-  tag: v1.3.1
-  replicaCount: 1
-  extraEnv: []
-    # - name: DEBUG_LOG
-    #   value: "true"
-  eventsourceImage: argoproj/eventsource
-  podAnnotations: {}
-  nodeSelector: {}
-  podLabels: {}
-  priorityClassName: ""
-  tolerations: []
-  affinity: {}
-  resources: {}
-
+# -- Argo Event Bus configuration
 eventbusController:
-  name: eventbus-controller
-  image: argoproj/eventbus-controller
-  tag: v1.3.1
-  replicaCount: 1
-  extraEnv: []
-    # - name: DEBUG_LOG
-    #   value: "true"
-  podAnnotations: {}
-  nodeSelector: {}
-  podLabels: {}
-  priorityClassName: ""
-  tolerations: []
-  affinity: {}
-  resources: {}
-  natsStreamingImage: nats-streaming:0.17.0
-  natsMetricsExporterImage: synadia/prometheus-nats-exporter:0.6.2
+    replicas: 1
 
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 9731
+    image:
+        repository: # defaults to global.image.repository
+        tag: # defaults to global.image.tag
+        pullPolicy: # IfNotPresent
+
+    # -- Additional command line arguments to pass
+    extraArgs:
+    # - --loglevel
+    # - debug
+
+    natsStreamingImage:
+        repository: nats-streaming # defaults to global.image.repository
+        tag: "0.22.1" # defaults to global.image.tag
+
+    natsMetricsExporterImage:
+        repository: natsio/prometheus-nats-exporter # defaults to global.image.repository
+        tag: "0.8.0" # defaults to global.image.tag
+
+    resources:
+        # limits:
+        #   cpu: 100m
+        #   memory: 128Mi
+        # requests:
+        #   cpu: 50m
+        #   memory: 64Mi
+
+# -- Argo Event Source configuration
+eventsourceController:
+    replicas: 1
+
+    image:
+        repository: # defaults to global.image.repository
+        tag: # defaults to global.image.tag
+        pullPolicy: # IfNotPresent
+
+    eventsourceImage:
+        repository: # defaults to global.image.repository
+        tag: # defaults to global.image.tag
+
+    # -- Additional command line arguments to pass
+    extraArgs:
+    # - --loglevel
+    # - debug
+
+    resources:
+        # limits:
+        #   cpu: 100m
+        #   memory: 128Mi
+        # requests:
+        #   cpu: 50m
+        #   memory: 64Mi
+
+# -- Argo Sensor configuration
+sensorController:
+    replicas: 1
+
+    image:
+        repository: # defaults to global.image.repository
+        tag: # defaults to global.image.tag
+        pullPolicy: # IfNotPresent
+
+    sensorImage:
+        repository: # defaults to global.image.repository
+        tag: # defaults to global.image.tag
+
+    # -- Additional command line arguments to pass
+    extraArgs:
+    # - --loglevel
+    # - debug
+
+    resources:
+        # limits:
+        #   cpu: 100m
+        #   memory: 128Mi
+        # requests:
+        #   cpu: 50m
+        #   memory: 64Mi

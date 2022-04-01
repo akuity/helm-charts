@@ -1,6 +1,6 @@
 # argo-events
 
-![Version: 0.0.11](https://img.shields.io/badge/Version-0.0.11-informational?style=flat-square) ![AppVersion: 1.3.1](https://img.shields.io/badge/AppVersion-1.3.1-informational?style=flat-square)
+![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: 1.6.3](https://img.shields.io/badge/AppVersion-1.6.3-informational?style=flat-square)
 
 A Helm chart to install Argo-Events in k8s Cluster
 
@@ -13,6 +13,7 @@ A Helm chart to install Argo-Events in k8s Cluster
 | terrytangyuan |  |  |
 | jessesuen |  |  |
 | wanghong230 |  |  |
+| gdsoumya |  |  |
 
 ## Source Code
 
@@ -22,67 +23,14 @@ A Helm chart to install Argo-Events in k8s Cluster
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| additionalSaNamespaces | list | `[]` |  |
-| additionalServiceAccountRules[0].apiGroups[0] | string | `"apiextensions.k8s.io"` |  |
-| additionalServiceAccountRules[0].resources[0] | string | `"customresourcedefinitions"` |  |
-| additionalServiceAccountRules[0].verbs[0] | string | `"create"` |  |
-| additionalServiceAccountRules[0].verbs[1] | string | `"delete"` |  |
-| additionalServiceAccountRules[0].verbs[2] | string | `"deletecollection"` |  |
-| additionalServiceAccountRules[0].verbs[3] | string | `"get"` |  |
-| additionalServiceAccountRules[0].verbs[4] | string | `"list"` |  |
-| additionalServiceAccountRules[0].verbs[5] | string | `"patch"` |  |
-| additionalServiceAccountRules[0].verbs[6] | string | `"update"` |  |
-| additionalServiceAccountRules[0].verbs[7] | string | `"watch"` |  |
-| eventbusController.affinity | object | `{}` |  |
-| eventbusController.extraEnv | list | `[]` |  |
-| eventbusController.image | string | `"argoproj/eventbus-controller"` |  |
-| eventbusController.name | string | `"eventbus-controller"` |  |
-| eventbusController.natsMetricsExporterImage | string | `"synadia/prometheus-nats-exporter:0.6.2"` |  |
-| eventbusController.natsStreamingImage | string | `"nats-streaming:0.17.0"` |  |
-| eventbusController.nodeSelector | object | `{}` |  |
-| eventbusController.podAnnotations | object | `{}` |  |
-| eventbusController.podLabels | object | `{}` |  |
-| eventbusController.priorityClassName | string | `""` |  |
-| eventbusController.replicaCount | int | `1` |  |
-| eventbusController.resources | object | `{}` |  |
-| eventbusController.tag | string | `"v1.3.1"` |  |
-| eventbusController.tolerations | list | `[]` |  |
-| eventsourceController.affinity | object | `{}` |  |
-| eventsourceController.eventsourceImage | string | `"argoproj/eventsource"` |  |
-| eventsourceController.extraEnv | list | `[]` |  |
-| eventsourceController.image | string | `"argoproj/eventsource-controller"` |  |
-| eventsourceController.name | string | `"eventsource-controller"` |  |
-| eventsourceController.nodeSelector | object | `{}` |  |
-| eventsourceController.podAnnotations | object | `{}` |  |
-| eventsourceController.podLabels | object | `{}` |  |
-| eventsourceController.priorityClassName | string | `""` |  |
-| eventsourceController.replicaCount | int | `1` |  |
-| eventsourceController.resources | object | `{}` |  |
-| eventsourceController.tag | string | `"v1.3.1"` |  |
-| eventsourceController.tolerations | list | `[]` |  |
-| imagePullPolicy | string | `"Always"` |  |
-| imagePullSecrets | list | `[]` |  |
-| instanceID | string | `"argo-events"` |  |
-| namespace | string | `"argo-events"` |  |
-| registry | string | `"quay.io"` |  |
-| securityContext.runAsNonRoot | bool | `true` |  |
-| securityContext.runAsUser | int | `9731` |  |
-| sensorController.affinity | object | `{}` |  |
-| sensorController.extraEnv | list | `[]` |  |
-| sensorController.image | string | `"argoproj/sensor-controller"` |  |
-| sensorController.name | string | `"sensor-controller"` |  |
-| sensorController.nodeSelector | object | `{}` |  |
-| sensorController.podAnnotations | object | `{}` |  |
-| sensorController.podLabels | object | `{}` |  |
-| sensorController.priorityClassName | string | `""` |  |
-| sensorController.replicaCount | int | `1` |  |
-| sensorController.resources | object | `{}` |  |
-| sensorController.sensorImage | string | `"argoproj/sensor"` |  |
-| sensorController.tag | string | `"v1.3.1"` |  |
-| sensorController.tolerations | list | `[]` |  |
-| serviceAccount | string | `"argo-events-sa"` |  |
-| serviceAccountAnnotations | object | `{}` |  |
-| singleNamespace | bool | `true` |  |
+| clusterRoles | object | `{"enabled":true}` | Installs necessary ClusterRoles to allow Argo Events to deploy to the same cluster Argo Events is installed in |
+| eventbusController | object | `{"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"natsMetricsExporterImage":{"repository":"natsio/prometheus-nats-exporter","tag":"0.8.0"},"natsStreamingImage":{"repository":"nats-streaming","tag":"0.22.1"},"replicas":1,"resources":null}` | Argo Event Bus configuration |
+| eventbusController.extraArgs | string | `nil` | Additional command line arguments to pass |
+| eventsourceController | object | `{"eventsourceImage":{"repository":null,"tag":null},"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"replicas":1,"resources":null}` | Argo Event Source configuration |
+| eventsourceController.extraArgs | string | `nil` | Additional command line arguments to pass |
+| global.image.pullPolicy | string | `nil` | If defined, an image pull policy will be applied to all argo events deployments |
+| global.image.repository | string | `"quay.io/argoproj/argo-events"` | If defined, a repository applied to all argo events deployments |
+| global.image.tag | string | `"v1.6.3"` | If defined, a tag applied to all argo events deployments |
+| sensorController | object | `{"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"replicas":1,"resources":null,"sensorImage":{"repository":null,"tag":null}}` | Argo Sensor configuration |
+| sensorController.extraArgs | string | `nil` | Additional command line arguments to pass |
 
-----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.5.0](https://github.com/norwoodj/helm-docs/releases/v1.5.0)

@@ -9,7 +9,7 @@ chart-repos:
   - minio=https://helm.min.io/
   - stable=https://charts.helm.sh/stable
   - incubator=https://charts.helm.sh/incubator
-helm-extra-args: "--timeout 600s"  
+helm-extra-args: "--timeout 1200s"  
 validate-chart-schema: false
 validate-maintainers: true
 validate-yaml: true
