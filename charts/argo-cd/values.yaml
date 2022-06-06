@@ -284,6 +284,9 @@ redis:
     repository: redis
     tag: 6.2.6-alpine
     pullPolicy: # IfNotPresent
+  haProxyImage:
+    repository: haproxy
+    tag: 2.0.25-alpine
 
   resources:
   #  limits:
