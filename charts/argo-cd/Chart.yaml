@@ -25,4 +25,4 @@ dependencies:
   - name: argocd-image-updater
     version: 0.1.0
     repository: https://charts.akuity.io
-    condition: imageUpdater.enabled
+    condition: argocd-image-updater.enabled, imageUpdater.enabled

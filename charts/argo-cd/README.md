@@ -60,8 +60,8 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | global.image.pullPolicy | string | `nil` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
 | global.image.tag | string | `"v2.3.4-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
-| imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"argoprojlabs/argocd-image-updater","tag":"v0.11.3"}}` | Image Updater |
-| imageUpdater.enabled | bool | `false` | Whether to enable image updater |
+| argocd-image-updater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"argoprojlabs/argocd-image-updater","tag":"v0.11.3"}}` | Image Updater |
+| argocd-image-updater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":false}` | Notifications Controller |
 | notificationsController.enabled | bool | `false` | Whether to enable Notifications Controller |
 | redis | object | `{"enabled":true,"image":{"pullPolicy":null,"repository":"redis","tag":"6.2.6-alpine"},"resources":null}` | Redis configurations |
