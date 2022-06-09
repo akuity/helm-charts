@@ -348,7 +348,7 @@ extensions:
   # - argo-rollouts
 
 # -- Image Updater
-imageUpdater:
+argocd-image-updater:
   # -- Whether to enable image updater
   enabled: false
   image:
