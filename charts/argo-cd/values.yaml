@@ -58,6 +58,10 @@ server:
       enabled: false
       secretName:
 
+  # -- Enable service monitor
+  serviceMonitor:
+    enabled: false
+
 ## Controller
 controller:
   image:
@@ -93,6 +97,10 @@ controller:
     #   cpu: 250m
     #   memory: 256Mi
 
+  # -- Enable service monitor
+  serviceMonitor:
+    enabled: false
+
 # -- Repo Server
 repoServer:
   replicas: 2
@@ -115,6 +123,10 @@ repoServer:
     #   cpu: 10m
     #   memory: 64Mi
 
+  # -- Enable service monitor
+  serviceMonitor:
+    enabled: false
+
 # -- Notifications Controller
 notificationsController:
   # -- Whether to enable Notifications Controller
@@ -128,6 +140,9 @@ applicationsetController:
     repository: quay.io/argoproj/argocd-applicationset # defaults to global.image.repository
     tag: v0.4.0
     pullPolicy: # IfNotPresent
+  # -- Enable service monitor
+  serviceMonitor:
+    enabled: false
 
 # -- Argo Configuration
 config:
