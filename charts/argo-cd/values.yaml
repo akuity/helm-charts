@@ -9,6 +9,9 @@ global:
     tag: v2.3.4-ak.0
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     pullPolicy: # IfNotPresent
+  # -- Enable service monitor
+  serviceMonitor:
+    enabled: false
 
 # -- Installs necessary ClusterRoles to allow Argo CD to deploy to the same cluster Argo CD is installed in
 clusterRoles:
@@ -58,6 +61,7 @@ server:
       enabled: false
       secretName:
 
+
 ## Controller
 controller:
   image:
@@ -93,6 +97,7 @@ controller:
     #   cpu: 250m
     #   memory: 256Mi
 
+
 # -- Repo Server
 repoServer:
   replicas: 2
@@ -115,6 +120,7 @@ repoServer:
     #   cpu: 10m
     #   memory: 64Mi
 
+
 # -- Notifications Controller
 notificationsController:
   # -- Whether to enable Notifications Controller
@@ -128,6 +134,7 @@ applicationsetController:
     repository: quay.io/argoproj/argocd-applicationset # defaults to global.image.repository
     tag: v0.4.0
     pullPolicy: # IfNotPresent
+
 
 # -- Argo Configuration
 config:
