@@ -115,6 +115,12 @@ spec:
               key: server.x.frame.options
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_SERVER_CONTENT_SECURITY_POLICY
+          valueFrom:
+            configMapKeyRef:
+              key: server.content.security.policy
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_SERVER_REPO_SERVER_PLAINTEXT
           valueFrom:
             configMapKeyRef:
@@ -199,6 +205,12 @@ spec:
               key: server.http.cookie.maxnumber
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_SERVER_OTLP_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              key: otlp.address
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ default .Values.global.image.repository .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.server.image.pullPolicy }}
         livenessProbe:
@@ -251,8 +263,6 @@ spec:
         name: plugins-home
       - emptyDir: {}
         name: tmp
-      - emptyDir: {}
-        name: static-files
       - configMap:
           name: argocd-ssh-known-hosts-cm
         name: ssh-known-hosts
