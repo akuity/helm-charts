@@ -11,7 +11,7 @@ metadata:
     iam.gke.io/gcp-service-account: {{ .Values.disasterRecovery.gcp.serviceAccount | quote }}
     {{- end }}
 
---- 
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -33,7 +33,6 @@ rules:
   - argoproj.io
   resources:
   - applications
-  - appprojects
   - applicationsets
   verbs:
   - get

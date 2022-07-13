@@ -49,10 +49,18 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         env:
+        - name: ARGOCD_CONTROLLER_REPLICAS
+          value: {{ .Values.controller.replicas | quote }}
         - name: ARGOCD_RECONCILIATION_TIMEOUT
           valueFrom:
             configMapKeyRef:
               key: timeout.reconciliation
+              name: argocd-cm
+              optional: true
+        - name: ARGOCD_HARD_RECONCILIATION_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: timeout.hard.reconciliation
               name: argocd-cm
               optional: true
         - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER
@@ -139,8 +147,12 @@ spec:
               key: controller.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        - name: ARGOCD_CONTROLLER_REPLICAS
-          value: {{ .Values.controller.replicas | quote }}
+        - name: ARGOCD_APPLICATION_CONTROLLER_OTLP_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              key: otlp.address
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ default .Values.global.image.repository .Values.controller.image.repository }}:{{ default .Values.global.image.tag .Values.controller.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.controller.image.pullPolicy }}
         livenessProbe:
