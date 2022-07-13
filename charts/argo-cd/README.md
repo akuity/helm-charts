@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 1.1.8](https://img.shields.io/badge/Version-1.1.8-informational?style=flat-square) ![AppVersion: 2.3.4](https://img.shields.io/badge/AppVersion-2.3.4-informational?style=flat-square)
+![Version: 2.4.7-ak.0.0](https://img.shields.io/badge/Version-2.4.7--ak.0.0-informational?style=flat-square) ![AppVersion: 2.4.7](https://img.shields.io/badge/AppVersion-2.4.7-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -13,19 +13,20 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | terrytangyuan | <terry@akuity.io> |  |
 | jessesuen | <jesse@akuity.io> |  |
 | wanghong230 | <hong@akuity.io> |  |
+| evgeny-goldin | <evgeny@akuity.io> |  |
 
 ## Requirements
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.akuity.io | argo-cd-extensions | 0.0.3 |
-| https://charts.akuity.io | argocd-image-updater | 0.1.0 |
+| https://charts.akuity.io | argo-cd-extensions | 0.0.4 |
+| https://charts.akuity.io | argocd-image-updater | 0.1.1 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| applicationsetController | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"quay.io/argoproj/argocd-applicationset","tag":"v0.4.0"}}` | ApplicationSet Controller |
+| applicationsetController | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":null,"tag":null}}` | ApplicationSet Controller |
 | applicationsetController.enabled | bool | `false` | Whether to enable ApplicationSet Controller |
 | clusterRoles | object | `{"enabled":true}` | Installs necessary ClusterRoles to allow Argo CD to deploy to the same cluster Argo CD is installed in |
 | config | object | `{"argocd":{"application.resourceTrackingMethod":"annotation"},"createSecret":true,"gpgKeys":null,"params":null,"rbac":null,"secret":null,"sshKnownHosts":{"additional":"","default":"bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==\ngithub.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==\ngitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=\ngitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf\ngitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9\nssh.dev.azure.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H\nvs-ssh.visualstudio.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H\ngithub.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg=\ngithub.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl\n"},"tlsCerts":null}` | Argo Configuration |
@@ -59,13 +60,13 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | extensions.image.tag | string | `"v0.1.0"` |  |
 | global.image.pullPolicy | string | `nil` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
-| global.image.tag | string | `"v2.3.4-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
+| global.image.tag | string | `"v2.4.7-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
 | global.serviceMonitor | object | `{"enabled":false}` | Enable service monitor |
 | imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"argoprojlabs/argocd-image-updater","tag":"v0.11.3"}}` | Image Updater |
 | imageUpdater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":false}` | Notifications Controller |
 | notificationsController.enabled | bool | `false` | Whether to enable Notifications Controller |
-| redis | object | `{"enabled":true,"haProxyImage":{"repository":"haproxy","tag":"2.0.25-alpine"},"image":{"pullPolicy":null,"repository":"redis","tag":"6.2.6-alpine"},"resources":null}` | Redis configurations |
+| redis | object | `{"enabled":true,"haProxyImage":{"repository":"haproxy","tag":"2.0.25-alpine"},"image":{"pullPolicy":null,"repository":"redis","tag":"7.0.0-alpine"},"resources":null}` | Redis configurations |
 | repoServer | object | `{"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"replicas":2,"resources":null}` | Repo Server |
 | repoServer.extraArgs | string | `nil` | Additional command line arguments to pass to argocd-repo-server |
 | server | object | `{"enabled":true,"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argocd.example.com","tls":{"enabled":false,"secretName":null}},"insecure":false,"replicas":2,"resources":null,"service":{"type":null}}` | Argo Server configuration |
@@ -76,4 +77,4 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | server.service | object | `{"type":null}` | Server service configuration |
 
 ----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.8.1](https://github.com/norwoodj/helm-docs/releases/v1.8.1)
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)

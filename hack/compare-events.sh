@@ -1,6 +1,8 @@
 #!/bin/bash
 # Script to compare against upstream version for differences
 
+set -euo pipefail
+
 PROJECT_ROOT=$(cd $(dirname ${BASH_SOURCE})/..; pwd)
 chart_root="${PROJECT_ROOT}/charts/argo-events"
 upstream_version=v$(grep appVersion ${chart_root}/Chart.yaml | awk '{print $2}')
