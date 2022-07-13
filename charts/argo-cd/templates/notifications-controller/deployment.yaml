@@ -23,6 +23,12 @@ spec:
           tcpSocket:
             port: 9001
         name: argocd-notifications-controller
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
         volumeMounts:
         - mountPath: /app/config/tls
           name: tls-certs

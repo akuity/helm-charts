@@ -38,6 +38,9 @@ spec:
         - containerPort: 5558
         securityContext:
           allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
         volumeMounts:
@@ -54,6 +57,13 @@ spec:
         image: {{ default .Values.global.image.repository }}:{{ default .Values.global.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.dex.image.pullPolicy }}
         name: copyutil
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
         volumeMounts:
         - mountPath: /shared
           name: static-files
