@@ -28,26 +28,56 @@ cd charts/argo-cd
 helm dependency update
 ```
 
-Installing Argo CD:
-```
-cd -
-helm install argo-cd charts/argo-cd -n argocd
-```
-
+Installing Argo CD with k3d and Helm:
 
 ```
+$ k3d cluster create argo-helm -a 3
+$ kubectl create ns argocd
+$ helm install argo-cd charts/argo-cd -n argocd
+...
 > NAME: argo-cd
-LAST DEPLOYED: Tue Aug 31 13:01:21 2021
-NAMESPACE: argo
+LAST DEPLOYED: Thu Jul 14 18:29:32 2022
+NAMESPACE: argocd
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
+NOTES:
+
+$ kubectl get pods -n argocd
+NAME                                       READY   STATUS    RESTARTS   AGE
+argocd-redis-ha-haproxy-5b75bb98dc-2vgvp   1/1     Running   0          5m47s
+argocd-redis-ha-haproxy-5b75bb98dc-hmrb5   1/1     Running   0          5m47s
+argocd-redis-ha-haproxy-5b75bb98dc-kvhq8   1/1     Running   0          5m47s
+argocd-redis-ha-server-0                   2/2     Running   0          5m47s
+argocd-repo-server-779b547c5f-ffsfq        1/1     Running   0          5m47s
+argocd-dex-server-6574d6b46b-7n8ms         1/1     Running   0          5m47s
+argocd-repo-server-779b547c5f-j9l5t        1/1     Running   0          5m47s
+argocd-application-controller-0            1/1     Running   0          5m47s
+argocd-server-58b75bdd9c-b8brr             1/1     Running   0          5m47s
+argocd-server-58b75bdd9c-g92bm             1/1     Running   0          5m47s
+argocd-redis-ha-server-1                   2/2     Running   0          4m15s
+argocd-redis-ha-server-2                   2/2     Running   0          2m59s
+
+$ helm uninstall argo-cd
 ```
 
-Uninstalling Argo CD:
+Installing Argo CD with k3d and chart-testing:
 
 ```
-helm uninstall argo-cd
+k3d cluster create argo-helm -a 3
+ct install --config ./.github/configs/ct-install.yaml
+..
+Creating namespace 'argo-cd-ygkz4nt0fq'...
+namespace/argo-cd-ygkz4nt0fq created
+...
+Deleting namespace 'argo-cd-ygkz4nt0fq'...
+namespace "argo-cd-ygkz4nt0fq" deleted
+..
+Namespace 'argo-cd-ygkz4nt0fq' terminated.
+------------------------------------------------------------------------------------------------------------------------
+ ✔︎ argo-cd => (version: "2.4.7-ak.0.0", path: "charts/argo-cd")
+------------------------------------------------------------------------------------------------------------------------
+All charts installed successfully
 ```
 
 ### Argo Workflows
