@@ -7,31 +7,44 @@ PROJECT_ROOT=$(cd $(dirname ${BASH_SOURCE})/..; pwd)
 chart_root="${PROJECT_ROOT}/charts/argo-rollouts"
 upstream_version=v$(grep appVersion ${chart_root}/Chart.yaml | awk '{print $2}')
 
-mytmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+helm_tmpdir="$(mktemp -d 2>/dev/null || mktemp -d -t 'helm')"
 
 helm template \
     --include-crds=true \
     --set controller.image.repository=quay.io/argoproj/argo-rollouts \
     --set controller.image.tag=${upstream_version} \
     --set controller.image.pullPolicy=Always \
+    --set dashboard.enabled=true \
     --set dashboard.image.repository=quay.io/argoproj/kubectl-argo-rollouts \
     --set dashboard.image.tag=${upstream_version} \
     --set dashboard.image.pullPolicy=Always \
-    --namespace argo-rollouts ${chart_root} > $mytmpdir/helm.yaml
+    --set notifications.enabled=true \
+    --namespace argo-rollouts ${chart_root} > $helm_tmpdir/helm.yaml
 
 echo """
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - helm.yaml
-""" > $mytmpdir/kustomization.yaml
+""" > $helm_tmpdir/kustomization.yaml
 
-echo $mytmpdir
-helm_out=$(kustomize build $mytmpdir)
+upstream_tmpdir="$(mktemp -d 2>/dev/null || mktemp -d -t 'upstream')"
+echo """
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 
-upstream_out=$(
-    curl -L --silent https://github.com/argoproj/argo-rollouts/releases/download/${upstream_version}/install.yaml | \
-    grep -v "This is an auto-generated file"
-)
+namespace: argo-rollouts
+resources:
+- https://github.com/argoproj/argo-rollouts/releases/download/${upstream_version}/install.yaml
+- https://github.com/argoproj/argo-rollouts/releases/download/${upstream_version}/dashboard-install.yaml
+- https://github.com/argoproj/argo-rollouts/releases/download/${upstream_version}/notifications-install.yaml
+""" > "$upstream_tmpdir/kustomization.yaml"
 
-diff <(echo "$helm_out") <(echo "$upstream_out")
+diff_dir="$(mktemp -d 2>/dev/null || mktemp -d -t 'diff')"
+kustomize build "$helm_tmpdir"     | grep -v "^data: null$"  > "$diff_dir/helm.yaml"
+kustomize build "$upstream_tmpdir" | grep -v "^data: null$"  > "$diff_dir/upstream.yaml"
+
+diff "$diff_dir/upstream.yaml" "$diff_dir/helm.yaml" && echo "No diff"
+
+echo "Helm template output is located in: $diff_dir/helm.yaml"
+echo "Upstream output is located in: $diff_dir/upstream.yaml"
