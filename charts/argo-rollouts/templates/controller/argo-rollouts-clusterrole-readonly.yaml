@@ -1,0 +1,193 @@
+{{- if .Values.controller.clusterRole.readOnly -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argo-rollouts
+  labels:
+    app.kubernetes.io/component: rollouts-controller
+    app.kubernetes.io/name: argo-rollouts
+    app.kubernetes.io/part-of: argo-rollouts
+rules:
+- apiGroups:
+  - argoproj.io
+  resources:
+  - rollouts
+  - rollouts/status
+  - rollouts/finalizers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - argoproj.io
+  resources:
+  - analysisruns
+  - analysisruns/finalizers
+  - experiments
+  - experiments/finalizers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - argoproj.io
+  resources:
+  - analysistemplates
+  - clusteranalysistemplates
+  verbs:
+  - get
+  - list
+  - watch
+# replicaset access needed for managing ReplicaSets
+- apiGroups:
+  - apps
+  resources:
+  - replicasets
+  verbs:
+  - get
+  - list
+  - watch
+# deployments and podtemplates read access needed for workload reference support
+- apiGroups:
+  - ""
+  - apps
+  resources:
+  - deployments
+  - podtemplates
+  verbs:
+  - get
+  - list
+  - watch
+# services patch needed to update selector of canary/stable/active/preview services
+# services create needed to create and delete services for experiments
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+# leases create/get/update needed for leader election
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+# secret read access to run analysis templates which reference secrets
+- apiGroups:
+  - ""
+  resources:
+{{ if .Values.controller.clusterRole.readSecrets }}
+  - secrets
+{{- end }}
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+# pod list/update needed for updating ephemeral data
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - list
+# pods eviction needed for restart
+- apiGroups:
+  - ""
+  resources:
+  - pods/eviction
+  verbs:
+# event write needed for emitting events
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+# ingress patch needed for managing ingress annotations, create needed for nginx canary
+- apiGroups:
+  - networking.k8s.io
+  - extensions
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+# job access needed for analysis template job metrics
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+  - watch
+# virtualservice/destinationrule access needed for using the Istio provider
+- apiGroups:
+  - networking.istio.io
+  resources:
+  - virtualservices
+  - destinationrules
+  verbs:
+  - watch
+  - get
+  - list
+# trafficsplit access needed for using the SMI provider
+- apiGroups:
+  - split.smi-spec.io
+  resources:
+  - trafficsplits
+  verbs:
+  - watch
+  - get
+# ambassador access needed for Ambassador provider
+- apiGroups:
+  - getambassador.io
+  - x.getambassador.io
+  resources:
+  - mappings
+  - ambassadormappings
+  verbs:
+  - watch
+  - get
+  - list
+# Endpoints and TargetGroupBindings needed for ALB target group verification
+- apiGroups:
+  - ""
+  resources:
+  - endpoints
+  verbs:
+  - get
+- apiGroups:
+  - elbv2.k8s.aws
+  resources:
+  - targetgroupbindings
+  verbs:
+  - list
+  - get
+# AppMesh virtualservices/virtualrouter CRD read-only access needed for using the App Mesh provider
+- apiGroups:
+  - appmesh.k8s.aws
+  resources:
+  - virtualservices
+  verbs:
+  - watch
+  - get
+  - list
+# AppMesh virtualnode CRD r/w access needed for using the App Mesh provider
+- apiGroups:
+  - appmesh.k8s.aws
+  resources:
+  - virtualnodes
+  - virtualrouters
+  verbs:
+  - watch
+  - get
+  - list
+
+
+
+{{- end }}
