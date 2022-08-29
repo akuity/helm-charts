@@ -50,15 +50,32 @@ for c in ${controller_manifests[*]}; do
 done
 
 # We provide additional options on ClusterRole (readOnly, readSecrets)
+temp_cluster_role_path="templates/controller/argo-rollouts-clusterrole.yaml.tmp"
+curl -fsL https://raw.githubusercontent.com/argoproj/argo-rollouts/${GIT_REF}/manifests/role/argo-rollouts-clusterrole.yaml | \
+    sed -e '/# leases/,+8d' \
+    > $temp_cluster_role_path
+
 echo '{{- if not .Values.controller.clusterRole.readOnly -}}' > templates/controller/argo-rollouts-clusterrole.yaml
-curl -fsL https://raw.githubusercontent.com/argoproj/argo-rollouts/${GIT_REF}/manifests/role/argo-rollouts-clusterrole.yaml >> templates/controller/argo-rollouts-clusterrole.yaml
-sed -i.bak 's/^  - secrets/{{ if .Values.controller.clusterRole.readSecrets }}\n  - secrets\n{{- end }}/' templates/controller/argo-rollouts-clusterrole.yaml
-rm -f templates/controller/argo-rollouts-clusterrole.yaml.bak
+cat $temp_cluster_role_path |  sed 's/^  - secrets/{{ if .Values.controller.clusterRole.readSecrets }}\n  - secrets\n{{- end }}/' >> templates/controller/argo-rollouts-clusterrole.yaml
 echo '{{- end }}' >> templates/controller/argo-rollouts-clusterrole.yaml
 
-egrep -v '(^( )+- (create|update|delete|patch))' templates/controller/argo-rollouts-clusterrole.yaml > templates/controller/argo-rollouts-clusterrole-readonly.yaml
-sed -i.bak "1s/.*/{{- if .Values.controller.clusterRole.readOnly -}}/" templates/controller/argo-rollouts-clusterrole-readonly.yaml
-rm templates/controller/argo-rollouts-clusterrole-readonly.yaml.bak
+echo '{{- if .Values.controller.clusterRole.readOnly -}}' > templates/controller/argo-rollouts-clusterrole-readonly.yaml
+egrep -v '(^( )+- (create|update|delete|patch))' $temp_cluster_role_path | \
+    sed 's/^  - secrets/{{ if .Values.controller.clusterRole.readSecrets }}\n  - secrets\n{{- end }}/' \
+    >> templates/controller/argo-rollouts-clusterrole-readonly.yaml
+echo '{{- end }}' >> templates/controller/argo-rollouts-clusterrole-readonly.yaml
+# corner case. remove rule with empty verbs
+sed -i.bak -e '/# event/,+5d' templates/controller/argo-rollouts-clusterrole-readonly.yaml
+rm -f templates/controller/argo-rollouts-clusterrole-readonly.yaml.bak
+sed -i.bak -e '/# pods eviction/,+5d' templates/controller/argo-rollouts-clusterrole-readonly.yaml
+rm -f templates/controller/argo-rollouts-clusterrole-readonly.yaml.bak
+
+echo '{{- if .Values.controller.clusterRole.writeRole.enabled -}}' > templates/controller/argo-rollouts-clusterrole-write.yaml
+sed 's/^  name: argo-rollouts/  name: argo-rollouts-write/' $temp_cluster_role_path | \
+    sed 's/^  - secrets/{{ if .Values.controller.clusterRole.writeRole.readSecrets }}\n  - secrets\n{{- end }}/' >> templates/controller/argo-rollouts-clusterrole.yaml \
+    >> templates/controller/argo-rollouts-clusterrole-write.yaml
+echo '{{- end }}' >> templates/controller/argo-rollouts-clusterrole-write.yaml
+rm -f $temp_cluster_role_path
 
 perl -pe 's(  namespace:.*)(  namespace: {{ .Release.Namespace }})' templates/controller/argo-rollouts-clusterrolebinding.yaml > /tmp/argo-rollouts-clusterrolebinding.yaml
 mv /tmp/argo-rollouts-clusterrolebinding.yaml templates/controller/argo-rollouts-clusterrolebinding.yaml
