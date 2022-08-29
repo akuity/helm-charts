@@ -1,8 +1,8 @@
-{{- if .Values.controller.clusterRole.readOnly -}}
+{{- if .Values.controller.clusterRole.writeRole.enabled -}}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: argo-rollouts
+  name: argo-rollouts-write
   labels:
     app.kubernetes.io/component: rollouts-controller
     app.kubernetes.io/name: argo-rollouts
@@ -18,6 +18,8 @@ rules:
   - get
   - list
   - watch
+  - update
+  - patch
 - apiGroups:
   - argoproj.io
   resources:
@@ -26,9 +28,13 @@ rules:
   - experiments
   - experiments/finalizers
   verbs:
+  - create
   - get
   - list
   - watch
+  - update
+  - patch
+  - delete
 - apiGroups:
   - argoproj.io
   resources:
@@ -44,9 +50,13 @@ rules:
   resources:
   - replicasets
   verbs:
+  - create
   - get
   - list
   - watch
+  - update
+  - patch
+  - delete
 # deployments and podtemplates read access needed for workload reference support
 - apiGroups:
   - ""
@@ -68,11 +78,14 @@ rules:
   - get
   - list
   - watch
+  - patch
+  - create
+  - delete
 # secret read access to run analysis templates which reference secrets
 - apiGroups:
   - ""
   resources:
-{{ if .Values.controller.clusterRole.readSecrets }}
+{{ if .Values.controller.clusterRole.writeRole.readSecrets }}
   - secrets
 {{- end }}
   - configmaps
@@ -87,6 +100,23 @@ rules:
   - pods
   verbs:
   - list
+  - update
+# pods eviction needed for restart
+- apiGroups:
+  - ""
+  resources:
+  - pods/eviction
+  verbs:
+  - create
+# event write needed for emitting events
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+  - update
+  - patch
 # ingress patch needed for managing ingress annotations, create needed for nginx canary
 - apiGroups:
   - networking.k8s.io
@@ -94,18 +124,24 @@ rules:
   resources:
   - ingresses
   verbs:
+  - create
   - get
   - list
   - watch
+  - patch
 # job access needed for analysis template job metrics
 - apiGroups:
   - batch
   resources:
   - jobs
   verbs:
+  - create
   - get
   - list
   - watch
+  - update
+  - patch
+  - delete
 # virtualservice/destinationrule access needed for using the Istio provider
 - apiGroups:
   - networking.istio.io
@@ -115,6 +151,8 @@ rules:
   verbs:
   - watch
   - get
+  - update
+  - patch
   - list
 # trafficsplit access needed for using the SMI provider
 - apiGroups:
@@ -122,8 +160,11 @@ rules:
   resources:
   - trafficsplits
   verbs:
+  - create
   - watch
   - get
+  - update
+  - patch
 # ambassador access needed for Ambassador provider
 - apiGroups:
   - getambassador.io
@@ -132,9 +173,12 @@ rules:
   - mappings
   - ambassadormappings
   verbs:
+  - create
   - watch
   - get
+  - update
   - list
+  - delete
 # Endpoints and TargetGroupBindings needed for ALB target group verification
 - apiGroups:
   - ""
@@ -168,6 +212,8 @@ rules:
   - watch
   - get
   - list
+  - update
+  - patch
 
 
 

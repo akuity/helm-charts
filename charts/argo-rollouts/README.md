@@ -1,6 +1,6 @@
 # argo-rollouts
 
-![Version: 1.2.2-ak.0.0](https://img.shields.io/badge/Version-1.2.2--ak.0.0-informational?style=flat-square) ![AppVersion: 1.2.2](https://img.shields.io/badge/AppVersion-1.2.2-informational?style=flat-square)
+![Version: 1.2.2-ak.0.1](https://img.shields.io/badge/Version-1.2.2--ak.0.1-informational?style=flat-square) ![AppVersion: 1.2.2](https://img.shields.io/badge/AppVersion-1.2.2-informational?style=flat-square)
 
 A Helm chart for Argo Rollouts
 
@@ -18,8 +18,10 @@ A Helm chart for Argo Rollouts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| controller.clusterRole.readOnly | bool | `false` | readOnly will only grant cluster-level read privileges to the controller but not write. This allows write privileges to be managed separately to selective namespaces (e.g. using a different ClusterRole) |
-| controller.clusterRole.readSecrets | bool | `true` | readSecrets set to false will remove the controllers privilege to read secrets across all namespaces. This may be desired if the controller does not need Secrets (e.g. namespace-level secrets for auth credentials, or analysis is not used). |
+| controller.clusterRole.readOnly | bool | `false` | readOnly will only grant cluster-level read privileges to the controller but not write. This allows write privileges to be managed separately to selective namespaces (e.g. using a different ClusterRole and  ClusterRoleBinding/RoleBinding). This will typically be used in conjunction with writeRole.enabled option to grant the controller write privileges at namespace granularity. |
+| controller.clusterRole.readSecrets | bool | `true` | readSecrets set to false will remove the controller's privilege to read secrets. This may be desired if the controller does not need access to Secrets (e.g. analysis is not used, or Secret privileges are granted at a namespace level). |
+| controller.clusterRole.writeRole.enabled | bool | `false` | writeRole.enabled creates a separate 'argo-rollouts-write' ClusterRole with write privileges. This ClusterRole can then be bound to namespaces using RoleBindings to allow the argo-rollouts ServiceAccount to have write permissions to individual namespaces. |
+| controller.clusterRole.writeRole.readSecrets | bool | `true` | readSecrets set to false will remove the privilege to read secrets from the 'argo-rollouts-write' ClusterRole |
 | controller.extraArgs | string | `nil` |  |
 | controller.image.pullPolicy | string | `nil` |  |
 | controller.image.repository | string | `"quay.io/argoproj/argo-rollouts"` |  |
