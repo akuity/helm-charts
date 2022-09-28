@@ -359,6 +359,6 @@ imageUpdater:
   # -- Whether to enable image updater
   enabled: false
   image:
-    repository: argoprojlabs/argocd-image-updater
+    repository: quay.io/argoprojlabs/argocd-image-updater
     pullPolicy: # IfNotPresent
-    tag: v0.11.3
+    tag: v0.12.0

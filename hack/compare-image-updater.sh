@@ -12,11 +12,9 @@ mytmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 helm dependency update ${chart_root} 2>&1 >/dev/null
 helm template \
     --include-crds \
-    --set global.image.repository=argoprojlabs/argocd-image-updater \
+    --set global.image.repository=quay.io/argoprojlabs/argocd-image-updater \
     --set global.image.tag=${upstream_version} \
     --namespace argocd ${chart_root} | grep -v imagePullPolicy > $mytmpdir/helm.yaml
-
-echo "Helm template output is located in: $mytmpdir"
 
 echo """
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -25,12 +23,16 @@ resources:
 - helm.yaml
 """ > $mytmpdir/kustomization.yaml
 
-helm_out=$(kustomize build $mytmpdir)
+kustomize build $mytmpdir > "$mytmpdir/helm-$upstream_version.yaml"
 
-upstream_out=$(
-    curl --silent https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/${upstream_version}/manifests/install.yaml | \
-    grep -v imagePullPolicy | \
-    grep -v "This is an auto-generated file"
-)
+curl --silent https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/${upstream_version}/manifests/install.yaml | \
+  grep -v imagePullPolicy | \
+  grep -v "This is an auto-generated file" > "$mytmpdir/upstream-$upstream_version.yaml"
 
-diff <(echo "$helm_out") <(echo "$upstream_out")
+echo "----------------------------------------------------------"
+echo "Helm and upstream output is located in: $mytmpdir"
+echo "----------------------------------------------------------"
+
+set -x
+diff "$mytmpdir/helm-$upstream_version.yaml" "$mytmpdir/upstream-$upstream_version.yaml"
+set +x

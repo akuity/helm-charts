@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 2.4.12-ak.0.0](https://img.shields.io/badge/Version-2.4.12--ak.0.0-informational?style=flat-square) ![AppVersion: 2.4.12](https://img.shields.io/badge/AppVersion-2.4.12-informational?style=flat-square)
+![Version: 2.4.12-ak.0.1](https://img.shields.io/badge/Version-2.4.12--ak.0.1-informational?style=flat-square) ![AppVersion: 2.4.12](https://img.shields.io/badge/AppVersion-2.4.12-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -62,7 +62,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
 | global.image.tag | string | `"v2.4.12-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
 | global.serviceMonitor | object | `{"enabled":false}` | Enable service monitor |
-| imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"argoprojlabs/argocd-image-updater","tag":"v0.11.3"}}` | Image Updater |
+| imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"quay.io/argoprojlabs/argocd-image-updater","tag":"v0.12.0"}}` | Image Updater |
 | imageUpdater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":false}` | Notifications Controller |
 | notificationsController.enabled | bool | `false` | Whether to enable Notifications Controller |
