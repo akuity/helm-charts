@@ -4,6 +4,6 @@ dependencies:
   version: 0.0.4
 - name: argocd-image-updater
   repository: https://charts.akuity.io
-  version: 0.1.1
-digest: sha256:021bfc291909f98765a21545c5876d3f34396959d78642faea7c79b3c66cf00e
-generated: "2022-07-13T15:18:10.046655-07:00"
+  version: 0.1.2
+digest: sha256:ab13e2c1536ba105d834c4ac9ff9324e6df9e4ad63061b4dd3be4aa9d2e63037
+generated: "2022-09-28T15:18:30.607897-07:00"
