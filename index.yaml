@@ -3,6 +3,40 @@ entries:
   argo-cd:
   - apiVersion: v2
     appVersion: 2.4.12
+    created: "2022-09-28T21:41:11.776868922Z"
+    dependencies:
+    - condition: extensions.enabled
+      name: argo-cd-extensions
+      repository: https://charts.akuity.io
+      version: 0.0.4
+    - condition: imageUpdater.enabled
+      name: argocd-image-updater
+      repository: https://charts.akuity.io
+      version: 0.1.1
+    description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
+      tool for Kubernetes.
+    digest: fe2902618079fa1a9af3b8ce54630647f37994ed14f092963cf7f862480992f4
+    home: https://charts.akuity.io
+    icon: https://argoproj.github.io/argo-cd/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - email: terry@akuity.io
+      name: terrytangyuan
+    - email: jesse@akuity.io
+      name: jessesuen
+    - email: hong@akuity.io
+      name: wanghong230
+    - email: evgeny@akuity.io
+      name: evgeny-goldin
+    name: argo-cd
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-cd-2.4.12-ak.0.1/argo-cd-2.4.12-ak.0.1.tgz
+    version: 2.4.12-ak.0.1
+  - apiVersion: v2
+    appVersion: 2.4.12
     created: "2022-09-21T16:48:53.887202688Z"
     dependencies:
     - condition: extensions.enabled
@@ -1228,6 +1262,27 @@ entries:
   argocd-image-updater:
   - apiVersion: v2
     appVersion: 0.12.0
+    created: "2022-09-28T21:41:11.963659479Z"
+    description: A Helm chart for Argo CD Image Updater, a tool to automatically update
+      the container images of Kubernetes workloads which are managed by Argo CD
+    digest: 6f72d3062bc3737a9e8db61f023418238b0e33d6c5c7f37ba8a043cf09bff88d
+    home: https://github.com/argoproj-labs/argocd-image-updater
+    icon: https://argocd-image-updater.readthedocs.io/en/stable/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argocd-image-updater
+    type: application
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argocd-image-updater-0.1.2/argocd-image-updater-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.12.0
     created: "2022-06-08T20:16:58.464652606Z"
     description: A Helm chart for Argo CD Image Updater, a tool to automatically update
       the container images of Kubernetes workloads which are managed by Argo CD
@@ -1351,4 +1406,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2022-09-21T16:48:53.88743849Z"
+generated: "2022-09-28T21:41:11.96417408Z"
