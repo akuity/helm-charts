@@ -10,6 +10,8 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: argocd-image-updater
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -17,7 +19,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          command: 
+          command:
             - /usr/local/bin/argocd-image-updater
             - run
             {{- with .Values.extraArgs }}
@@ -105,6 +107,8 @@ spec:
             name: image-updater-conf
           - mountPath: /app/config/ssh
             name: ssh-known-hosts
+          - mountPath: /app/.ssh
+            name: ssh-config
       serviceAccountName: argocd-image-updater
       volumes:
       - configMap:
@@ -120,3 +124,7 @@ spec:
           name: argocd-ssh-known-hosts-cm
           optional: true
         name: ssh-known-hosts
+      - configMap:
+          name: argocd-image-updater-ssh-config
+          optional: true
+        name: ssh-config

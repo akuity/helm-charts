@@ -47,9 +47,13 @@ resources:
 """ > "$upstream_tmpdir/kustomization.yaml"
 
 diff_dir="$(mktemp -d 2>/dev/null || mktemp -d -t 'diff')"
-kustomize build "$helm_tmpdir"     | grep -v "^data: null$"                           > "$diff_dir/helm.yaml"
-kustomize build "$upstream_tmpdir" | grep -v "^data: null$" | grep -v imagePullPolicy > "$diff_dir/upstream.yaml"
-diff "$diff_dir/upstream.yaml" "$diff_dir/helm.yaml" && echo "No diff"
+kustomize build "$helm_tmpdir"     | grep -v "^data: null$"                           > "$diff_dir/helm_$upstream_version.yaml"
+kustomize build "$upstream_tmpdir" | grep -v "^data: null$" | grep -v imagePullPolicy > "$diff_dir/upstream_$upstream_version.yaml"
 
-echo "Helm template output is located in: $diff_dir/helm.yaml"
-echo "Upstream output is located in: $diff_dir/upstream.yaml"
+echo "----------------------------------------------------------"
+echo "Helm and upstream output is located in: $diff_dir"
+echo "----------------------------------------------------------"
+
+set -x
+diff "$diff_dir/helm_$upstream_version.yaml" "$diff_dir/upstream_$upstream_version.yaml"
+set +x
