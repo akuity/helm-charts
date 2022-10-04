@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 2.4.12-ak.0.2](https://img.shields.io/badge/Version-2.4.12--ak.0.2-informational?style=flat-square) ![AppVersion: 2.4.12](https://img.shields.io/badge/AppVersion-2.4.12-informational?style=flat-square)
+![Version: 2.4.13-ak.0.0](https://img.shields.io/badge/Version-2.4.13--ak.0.0-informational?style=flat-square) ![AppVersion: 2.4.13](https://img.shields.io/badge/AppVersion-2.4.13-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -46,7 +46,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.enabled | bool | `true` | Enbable or disables dex. Can be disabled if using native OAuth provider |
 | dex.image.pullPolicy | string | `nil` |  |
 | dex.image.repository | string | `"ghcr.io/dexidp/dex"` |  |
-| dex.image.tag | string | `"v2.32.0"` |  |
+| dex.image.tag | string | `"v2.35.0-distroless"` |  |
 | dex.resources | string | `nil` |  |
 | disasterRecovery | object | `{"activeDeadlineSeconds":540,"backupSchedule":"*/10 * * * *","bucketName":"","command":"argocd-backup.sh","enabled":false,"image":{"pullPolicy":null,"repository":null,"tag":null},"instanceName":""}` | Disaster recovery configurations |
 | disasterRecovery.activeDeadlineSeconds | int | `540` | Limits the maxium runtime when performing backup. This must be within the backup schedule. For example, we might want to limit this to 9-minutes if we run backups every 10 minutes |
@@ -60,7 +60,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | extensions.image.tag | string | `"v0.1.0"` |  |
 | global.image.pullPolicy | string | `nil` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
-| global.image.tag | string | `"v2.4.12-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
+| global.image.tag | string | `"v2.4.13-ak.0"` | If defined, a tag applied to all ArgoCD deployments |
 | global.serviceMonitor | object | `{"enabled":false}` | Enable service monitor |
 | imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"quay.io/argoprojlabs/argocd-image-updater","tag":"v0.12.0"}}` | Image Updater |
 | imageUpdater.enabled | bool | `false` | Whether to enable image updater |
