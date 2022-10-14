@@ -4,13 +4,13 @@ Akuity Helm Charts are a collection of simplified and opinionated Helm charts fo
 
 ## About
 
-The goal of these charts are to remain as close as possible to the official upstream Argo install manifests (which are released and maintained as raw YAML files) and avoid the divergence that occurred with the Argoproj community maintained Helm charts. The Akuity charts also contain contain additional options to implement best practices as well as convenience options for common configurations.
+The goal of these charts are to remain as close as possible to the official upstream Argo install manifests (which are released and maintained as raw YAML files) and avoid the divergence that occurred with the Argoproj community maintained Helm charts. The Akuity charts also contain additional options to implement best practices as well as convenience options for common configurations.
 
 These charts have been designed to be deployed from a git repo using Argo CD / kubectl apply, as opposed to `helm install`. Helm is used for packaging and templating, rather than lifecycle management of the apps.
 
 ## Why this approach?
 
-Typical Helm charts provide dozens, sometimes hundreds of parameters to handle all conceivable options which the chart authors anticipate users might want to customize for their environment. For example, it is common to parameterize resource names, resource quotas, command line parameters, annotations, affinity rules, Ingress, prometheus stats, etc... Over time, the chart becomes unmaintainable and diverges from the official supported manifests. Additionally, helm charts have no ability to add additional resources which were not part of original chart (e.g. SealedSecrets, ExternalSecrets, alternative Ingress resources), which is a common requirement.
+Typical Helm charts provide dozens, sometimes hundreds of parameters to handle all conceivable options which the chart authors anticipate users might want to customize for their environment. For example, it is common to parameterize resource names, resource quotas, command line parameters, annotations, affinity rules, Ingress, prometheus stats, etc. Over time, the chart becomes unmaintainable and diverges from the official supported manifests. Additionally, helm charts have no ability to add additional resources which were not part of original chart (e.g. SealedSecrets, ExternalSecrets, alternative Ingress resources), which is a common requirement.
 
 With the realization that there is no "one size fits all" set of install options, these charts take a different approach to Helm charts. Rather than parameterize all the options for every use case, these charts choose to only parameterize the commonly used options and leave last-mile modifications to be handled using kustomize. This keeps the charts simpler to maintain, and more accurate to the upstream manifests.
 
