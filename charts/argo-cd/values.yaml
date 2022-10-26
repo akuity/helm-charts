@@ -296,7 +296,7 @@ redis:
   haProxyImage:
     # https://hub.docker.com/_/haproxy
     repository: haproxy
-    tag: 2.6.6-alpine
+    tag: 2.6.2-alpine
 
   resources:
   #  limits:
