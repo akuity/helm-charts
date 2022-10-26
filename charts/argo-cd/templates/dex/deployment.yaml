@@ -29,6 +29,13 @@ spec:
       - command:
         - /shared/argocd-dex
         - rundex
+        env:
+        - name: ARGOCD_DEX_SERVER_DISABLE_TLS
+          valueFrom:
+            configMapKeyRef:
+              key: dexserver.disable.tls
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ .Values.dex.image.repository }}:{{ .Values.dex.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.dex.image.pullPolicy }}
         name: dex
@@ -43,11 +50,15 @@ spec:
               - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /shared
           name: static-files
         - mountPath: /tmp
           name: dexconfig
+        - mountPath: /tls
+          name: argocd-dex-server-tls
       initContainers:
       - command:
         - cp
@@ -64,6 +75,8 @@ spec:
               - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /shared
           name: static-files
@@ -75,4 +88,15 @@ spec:
         name: static-files
       - emptyDir: {}
         name: dexconfig
+      - name: argocd-dex-server-tls
+        secret:
+          items:
+          - key: tls.crt
+            path: tls.crt
+          - key: tls.key
+            path: tls.key
+          - key: ca.crt
+            path: ca.crt
+          optional: true
+          secretName: argocd-dex-server-tls
 {{- end }}

@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: c55502ce732f78a70658dc77f00c02444cd6b6bede4b270f56d082fdaed1dc5f
+        checksum/config: 33967cee643b636d6e9a66e82b7f85814ceb8c55fba7a1d8af439ef056934e5c
       labels:
         app.kubernetes.io/name: argocd-redis-ha-haproxy
       name: argocd-redis-ha-haproxy
@@ -49,6 +49,13 @@ spec:
             port: 8888
           initialDelaySeconds: 5
           periodSeconds: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /usr/local/etc/haproxy
           name: data
@@ -62,6 +69,13 @@ spec:
         image: {{ .Values.redis.haProxyImage.repository }}:{{ .Values.redis.haProxyImage.tag }}
         imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
         name: config-init
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /readonly
           name: config-volume
