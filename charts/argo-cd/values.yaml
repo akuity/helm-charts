@@ -6,7 +6,7 @@ global:
     # -- If defined, a repository applied to all ArgoCD deployments
     repository: quay.io/akuity/argocd
     # -- If defined, a tag applied to all ArgoCD deployments
-    tag: v2.4.13-ak.0
+    tag: v2.5.0-ak.0
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     pullPolicy: # IfNotPresent
   # -- Enable service monitor
@@ -272,7 +272,8 @@ dex:
 
   image:
     repository: ghcr.io/dexidp/dex
-    tag: v2.35.0-distroless
+    # https://github.com/dexidp/dex/pkgs/container/dex
+    tag: v2.35.3-distroless
     pullPolicy: # IfNotPresent
 
   resources:
@@ -289,11 +290,13 @@ redis:
 
   image:
     repository: redis
-    tag: 7.0.4-alpine
+    # https://hub.docker.com/_/redis/
+    tag: 7.0.5-alpine
     pullPolicy: # IfNotPresent
   haProxyImage:
+    # https://hub.docker.com/_/haproxy
     repository: haproxy
-    tag: 2.0.29-alpine
+    tag: 2.6.6-alpine
 
   resources:
   #  limits:
@@ -346,6 +349,7 @@ extensions:
 
   image:
     repository: ghcr.io/argoproj-labs/argocd-extensions
+    # https://github.com/argoproj-labs/argocd-extensions/pkgs/container/argocd-extensions
     tag: v0.1.0
     pullPolicy: # IfNotPresent
 
@@ -359,6 +363,7 @@ imageUpdater:
   # -- Whether to enable image updater
   enabled: false
   image:
+    # https://quay.io/repository/argoprojlabs/argocd-image-updater?tab=tags
     repository: quay.io/argoprojlabs/argocd-image-updater
     pullPolicy: # IfNotPresent
     tag: v0.12.0
