@@ -57,4 +57,4 @@ data:
 kind: ConfigMap
 metadata:
   name: argo-events-controller-config
-  namespace: argo-events
+  namespace: {{ .Release.Namespace }}
