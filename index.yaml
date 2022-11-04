@@ -1248,6 +1248,24 @@ entries:
   argo-workflows:
   - apiVersion: v2
     appVersion: 3.4.3
+    created: "2022-11-04T23:05:46.130662649Z"
+    description: A Helm chart for Argo Workflows
+    digest: 2d38a7b063861de987c415d9cc14497748f6f870ba78b76ce80ff9ba6e87dbb7
+    home: https://github.com/akuity/helm-charts
+    icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-workflows
+    sources:
+    - https://github.com/argoproj/argo-workflows
+    type: application
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-workflows-v3.4.3-ak.0/argo-workflows-v3.4.3-ak.0.tgz
+    version: v3.4.3-ak.0
+  - apiVersion: v2
+    appVersion: 3.4.3
     created: "2022-11-03T18:49:23.602664196Z"
     description: A Helm chart for Argo Workflows
     digest: 95c9b034b7ed8e6bd3e2be7396cf6f7431d4e5353a842bbd7185a2c7cd2855eb
@@ -1560,4 +1578,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2022-11-03T18:49:23.602906896Z"
+generated: "2022-11-04T23:05:46.130971049Z"
