@@ -5,7 +5,7 @@ data:
       nats:
         versions:
         - version: 0.22.1
-          natsStreamingImage: nats-streaming:0.22.1
+          natsStreamingImage: {{ .Values.controller.natsStreamingImage.repository }}:{{ .Values.controller.natsStreamingImage.tag }}
           metricsExporterImage: {{ .Values.controller.natsMetricsExporterImage.repository }}:{{ .Values.controller.natsMetricsExporterImage.tag }}
       jetstream:
         # Default JetStream settings, could be overridden by EventBus JetStream specs

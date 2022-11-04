@@ -29,16 +29,16 @@ controller:
     # - debug
 
     natsStreamingImage:
-        repository: nats-streaming # defaults to global.image.repository
-        tag: "0.22.1" # defaults to global.image.tag
+        repository: nats-streaming
+        tag: "0.22.1"
 
     natsMetricsExporterImage:
-        repository: natsio/prometheus-nats-exporter # defaults to global.image.repository
-        tag: "0.9.1" # defaults to global.image.tag
+        repository: natsio/prometheus-nats-exporter
+        tag: "0.9.1"
 
     natsConfigReloaderImage:
-        repository: natsio/nats-server-config-reloader # defaults to global.image.repository
-        tag: "0.7.0" # defaults to global.image.tag
+        repository: natsio/nats-server-config-reloader
+        tag: "0.7.0"
 
     resources:
         # limits:
