@@ -50,7 +50,7 @@ spec:
           name: tmp
         env:
         {{- with .Values.server.extraEnv }}
-          {{- toYaml . | nindent 12 }}
+          {{- toYaml . | nindent 8 }}
         {{- end }}
         {{- with .Values.server.resources }}
         resources:
