@@ -6,7 +6,7 @@ global:
         # -- If defined, a repository applied to all argo events deployments
         repository: quay.io/argoproj/argo-events
         # -- If defined, a tag applied to all argo events deployments
-        tag: v1.6.3
+        tag: v1.7.3
         # -- If defined, an image pull policy will be applied to all argo events deployments
         pullPolicy: # IfNotPresent
 
@@ -14,8 +14,8 @@ global:
 clusterRoles:
     enabled: true
 
-# -- Argo Event Bus configuration
-eventbusController:
+# -- Argo Events controller configuration
+controller:
     replicas: 1
 
     image:
@@ -29,64 +29,16 @@ eventbusController:
     # - debug
 
     natsStreamingImage:
-        repository: nats-streaming # defaults to global.image.repository
-        tag: "0.22.1" # defaults to global.image.tag
+        repository: nats-streaming
+        tag: "0.22.1"
 
     natsMetricsExporterImage:
-        repository: natsio/prometheus-nats-exporter # defaults to global.image.repository
-        tag: "0.8.0" # defaults to global.image.tag
+        repository: natsio/prometheus-nats-exporter
+        tag: "0.9.1"
 
-    resources:
-        # limits:
-        #   cpu: 100m
-        #   memory: 128Mi
-        # requests:
-        #   cpu: 50m
-        #   memory: 64Mi
-
-# -- Argo Event Source configuration
-eventsourceController:
-    replicas: 1
-
-    image:
-        repository: # defaults to global.image.repository
-        tag: # defaults to global.image.tag
-        pullPolicy: # IfNotPresent
-
-    eventsourceImage:
-        repository: # defaults to global.image.repository
-        tag: # defaults to global.image.tag
-
-    # -- Additional command line arguments to pass
-    extraArgs:
-    # - --loglevel
-    # - debug
-
-    resources:
-        # limits:
-        #   cpu: 100m
-        #   memory: 128Mi
-        # requests:
-        #   cpu: 50m
-        #   memory: 64Mi
-
-# -- Argo Sensor configuration
-sensorController:
-    replicas: 1
-
-    image:
-        repository: # defaults to global.image.repository
-        tag: # defaults to global.image.tag
-        pullPolicy: # IfNotPresent
-
-    sensorImage:
-        repository: # defaults to global.image.repository
-        tag: # defaults to global.image.tag
-
-    # -- Additional command line arguments to pass
-    extraArgs:
-    # - --loglevel
-    # - debug
+    natsConfigReloaderImage:
+        repository: natsio/nats-server-config-reloader
+        tag: "0.7.0"
 
     resources:
         # limits:
