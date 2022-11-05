@@ -1028,6 +1028,29 @@ entries:
     version: 0.0.1
   argo-events:
   - apiVersion: v2
+    appVersion: 1.7.3
+    created: "2022-11-05T12:16:31.984346878Z"
+    description: A Helm chart to install Argo-Events in k8s Cluster
+    digest: 8f9058551e69c726fad9d8a346e2196cd09c42a0eb6482882f8dd6e56e81b17d
+    home: https://github.com/akuity/helm-charts
+    icon: https://argoproj.github.io/argo-events/assets/logo.png
+    keywords:
+    - argo-events
+    - sensor-controller
+    - eventsource-controller
+    - eventbus-controller
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    - name: gdsoumya
+    name: argo-events
+    sources:
+    - https://github.com/argoproj/argo-events
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-events-1.7.3-ak.0.0/argo-events-1.7.3-ak.0.0.tgz
+    version: 1.7.3-ak.0.0
+  - apiVersion: v2
     appVersion: 1.6.3
     created: "2022-04-01T19:01:45.05188146Z"
     description: A Helm chart to install Argo-Events in k8s Cluster
@@ -1596,4 +1619,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2022-11-04T23:15:18.686323676Z"
+generated: "2022-11-05T12:16:31.984648479Z"
