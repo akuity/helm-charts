@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 33967cee643b636d6e9a66e82b7f85814ceb8c55fba7a1d8af439ef056934e5c
+        checksum/config: 1f7a9ffcacb3871ceb9b0741c0714e3f7fa656d426a398c1f727fffb01073f35
       labels:
         app.kubernetes.io/name: argocd-redis-ha-haproxy
       name: argocd-redis-ha-haproxy
@@ -83,9 +83,9 @@ spec:
         - mountPath: /data
           name: data
       securityContext:
-        fsGroup: 1000
+        fsGroup: 99
         runAsNonRoot: true
-        runAsUser: 1000
+        runAsUser: 99
       serviceAccountName: argocd-redis-ha-haproxy
       volumes:
       - configMap:
