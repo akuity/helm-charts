@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 3.4.3-ak.0.1
-appVersion: 3.4.3
+version: 3.4.5-ak.1.0
+appVersion: 3.4.5
 name: argo-workflows
 description: A Helm chart for Argo Workflows
 type: application
