@@ -14,6 +14,33 @@ Typical Helm charts provide dozens, sometimes hundreds of parameters to handle a
 
 With the realization that there is no "one size fits all" set of install options, these charts take a different approach to Helm charts. Rather than parameterize all the options for every use case, these charts choose to only parameterize the commonly used options and leave last-mile modifications to be handled using kustomize. This keeps the charts simpler to maintain, and more accurate to the upstream manifests.
 
+## Versioning Scheme
+
+Akuity Helm Charts are versioned using the following scheme: `MAJOR.MINOR.PATCH-ak.X.Y`. The following table explains the meaning of the numbers:
+
+| Version Number    | Meaning |
+|-------------------|---------|
+| `MAJOR.MINOR.PATCH` | Corresponds to the upstream Argo major/minor/patch version. |
+| `-ak.X`             | Indicates the Akuity patch made ontop of upstream container image. `0` indicates no change. |
+| `.Y`                | Indicates a change to the Helm chart (e.g. adding additional helm parameters). |
+
+### Image Versioning
+
+Akuity republishes Argo images under the `quay.io/akuity` organization. Image tags are appended with an `-ak.X` patch number to indicate Akuity specific patches ontop of the upstream image (e.g. `quay.io/akuity/argocd:v2.5.2-ak.1`). An `X` value of `0` indicates that there is no difference from the upstream image. An `X` value of `1` or higher indicates a patch was applied ontop of the upstream `MAJOR.MINOR.PATCH` version.
+
+#### Examples:
+* `quay.io/akuity/argocd:v2.5.2-ak.0` - equivalent to upstream Argo CD v2.5.2 release (image retag)
+* `quay.io/akuity/workflow-controller:v3.4.5-ak.1` - an Akuity patch fix was made ontop of the upstream Argo Workflows v3.4.5 release.
+
+### Helm Chart Versioning
+
+Akuity Helm Chart versioning follow the above image versioning scheme, but additionally appends a `.Y` patch number to indicate any Helm chart changes. This `.Y` value is normally `0`, but is occasionally incremented when the Helm chart is modified and there were no change to the underlying image (e.g. addition of a helm parameter).
+
+####  Examples:
+* `2.5.2-ak.0.0` - image is `quay.io/akuity/argocd:v2.5.2-ak.0`, which is equivalent to upstream Argo CD v2.5.2 with no changes.
+* `2.5.2-ak.1.0` - image is `quay.io/akuity/argocd:v2.5.2-ak.1`, which contains an Akuity patch fix to v2.5.2.
+* `2.5.2-ak.0.1` - image is `quay.io/akuity/argocd:v2.5.2-ak.0`, which is equivalent to upstream Argo CD v2.5.2. The helm chart was somehow modified from version `2.5.2-ak.0.0`.
+
 ## Usage
 
 ### Initial Argo CD Installation
@@ -46,7 +73,7 @@ helmCharts:
   repo: https://charts.akuity.io
   includeCRDs: true
   namespace: argocd
-  version: 1.0.2            # pin to a specific version (see charts/argo-cd/Chart.yaml)
+  version: 2.5.2-ak.0.0     # pin to a specific version (see charts/argo-cd/Chart.yaml)
   valuesFile: values.yaml   # Helm values file in your git repo
 ```
 
