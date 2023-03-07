@@ -14,6 +14,8 @@ spec:
     spec:
       containers:
       - args:
+        - --executor-image
+        - {{ .Values.executor.image.repository }}:{{ default .Values.global.image.tag .Values.executor.image.tag }}
         {{- with .Values.controller.extraArgs }}
           {{- toYaml . | nindent 10 }}
         {{- end }}

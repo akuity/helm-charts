@@ -17,9 +17,7 @@ spec:
         {{- with .Values.server.extraArgs }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        {{- if .Values.server.secure }}
-        - --secure=true
-        {{- else }}
+        {{- if not .Values.server.secure }}
         - --secure=false
         {{- end }}
         image: {{ .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
@@ -31,10 +29,10 @@ spec:
           httpGet:
             path: /
             port: 2746
-            {{- if .Values.server.secure }}
-            scheme: HTTPS
-            {{- else }}
+            {{- if not .Values.server.secure }}
             scheme: HTTP
+            {{- else }}
+            scheme: HTTPS
             {{- end }}
           initialDelaySeconds: 10
           periodSeconds: 20
