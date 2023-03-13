@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/init-config: 84ccf6a9b8a7fa3ae5b62a8f17d6c65a5197e9605da9b2761179bf942828eefe
+        checksum/init-config: 69130412bda04eacad3530cb7bcf26cf121401e725e15d0959dd71a7380afe75
       labels:
         app.kubernetes.io/name: argocd-redis-ha
     spec:
