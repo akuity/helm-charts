@@ -291,7 +291,7 @@ redis:
   image:
     repository: quay.io/akuity/redis
     # https://hub.docker.com/_/redis/
-    tag: 7.0.4-alpine
+    tag: 7.0.9-alpine
     pullPolicy: # IfNotPresent
   haProxyImage:
     # https://hub.docker.com/_/haproxy
