@@ -80,7 +80,9 @@ spec:
         - mountPath: /data
           name: data
       securityContext:
+        fsGroup: 99
         runAsNonRoot: true
+        runAsUser: 99
       serviceAccountName: argocd-redis-ha-haproxy
       volumes:
       - configMap:
