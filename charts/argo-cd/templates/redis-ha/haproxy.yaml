@@ -31,7 +31,7 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
       - image: {{ .Values.redis.haProxyImage.repository }}:{{ .Values.redis.haProxyImage.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         lifecycle: {}
         livenessProbe:
           httpGet:
@@ -49,13 +49,10 @@ spec:
             port: 8888
           initialDelaySeconds: 5
           periodSeconds: 3
+        {{- with .Values.redis.securityContext }}
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          seccompProfile:
-            type: RuntimeDefault
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - mountPath: /usr/local/etc/haproxy
           name: data
@@ -67,7 +64,7 @@ spec:
         command:
         - sh
         image: {{ .Values.redis.haProxyImage.repository }}:{{ .Values.redis.haProxyImage.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: config-init
         securityContext:
           allowPrivilegeEscalation: false

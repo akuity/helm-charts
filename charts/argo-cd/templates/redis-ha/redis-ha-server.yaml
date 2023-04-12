@@ -34,7 +34,11 @@ spec:
         command:
         - redis-server
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
+        {{- with .Values.redis.resources }}
+        resources:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         lifecycle:
           preStop:
             exec:
@@ -67,13 +71,10 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 15
+        {{- with .Values.redis.securityContext }}
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          seccompProfile:
-            type: RuntimeDefault
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - mountPath: /readonly-config
           name: config
@@ -87,7 +88,7 @@ spec:
         command:
         - redis-sentinel
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         lifecycle: {}
         livenessProbe:
           exec:
@@ -115,13 +116,10 @@ spec:
           periodSeconds: 15
           successThreshold: 3
           timeoutSeconds: 15
+        {{- with .Values.redis.securityContext }}
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          seccompProfile:
-            type: RuntimeDefault
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - mountPath: /data
           name: data
@@ -139,16 +137,13 @@ spec:
         - name: SENTINEL_ID_2
           value: 2bbec7894d954a8af3bb54d13eaec53cb024e2ca
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: split-brain-fix
         resources: {}
+        {{- with .Values.redis.securityContext }}
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          seccompProfile:
-            type: RuntimeDefault
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - mountPath: /readonly-config
           name: config
@@ -168,15 +163,12 @@ spec:
         - name: SENTINEL_ID_2
           value: 2bbec7894d954a8af3bb54d13eaec53cb024e2ca
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
-        imagePullPolicy: {{ default .Values.global.image.imagePullPolicy }}
+        imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: config-init
+        {{- with .Values.redis.securityContext }}
         securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          seccompProfile:
-            type: RuntimeDefault
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - mountPath: /readonly-config
           name: config
@@ -184,9 +176,7 @@ spec:
         - mountPath: /data
           name: data
       securityContext:
-        fsGroup: 1000
         runAsNonRoot: true
-        runAsUser: 1000
       serviceAccountName: argocd-redis-ha
       terminationGracePeriodSeconds: 60
       volumes:
