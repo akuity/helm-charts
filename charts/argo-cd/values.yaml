@@ -8,7 +8,7 @@ global:
     # -- If defined, a tag applied to all ArgoCD deployments
     tag: v2.6.7-ak.0
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
-    pullPolicy: # IfNotPresent
+    pullPolicy: IfNotPresent
   # -- Enable service monitor
   serviceMonitor:
     enabled: false
@@ -289,14 +289,21 @@ redis:
   enabled: true
 
   image:
-    repository: redis
+    repository: quay.io/akuity/redis
     # https://hub.docker.com/_/redis/
-    tag: 7.0.8-alpine
+    tag: 7.0.4-alpine
     pullPolicy: # IfNotPresent
   haProxyImage:
     # https://hub.docker.com/_/haproxy
     repository: haproxy
     tag: 2.6.9-alpine
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
 
   resources:
   #  limits:
