@@ -47,6 +47,9 @@ spec:
           {{- toYaml . | nindent 10 }}
         {{- end }}
         env:
+        {{- with .Values.server.env }}
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         - name: ARGOCD_API_SERVER_REPLICAS
           value: {{ .Values.server.replicas | quote }}
         - name: ARGOCD_SERVER_INSECURE
@@ -270,6 +273,9 @@ spec:
           seccompProfile:
             type: RuntimeDefault
         volumeMounts:
+        {{- with .Values.server.volumeMounts }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
         - mountPath: /app/config/ssh
           name: ssh-known-hosts
         - mountPath: /app/config/tls
@@ -294,6 +300,9 @@ spec:
 {{- end }}
       serviceAccountName: argocd-server
       volumes:
+      {{- with .Values.server.volumes }}
+        {{- toYaml . | nindent 6}}
+      {{- end }}
       - emptyDir: {}
         name: plugins-home
       - emptyDir: {}

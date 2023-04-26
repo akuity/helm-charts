@@ -45,6 +45,21 @@ server:
     #   cpu: 50m
     #   memory: 64Mi
 
+  # env:
+  # - name: HTTPS_PROXY
+  #   value: example.com
+  # volumes:
+  # - name: trusted-ca
+  #   configMap:
+  #     name: example
+  #     items:
+  #     - key: ca-bundle.crt
+  #       path: ca-example.crt
+  # volumeMounts:
+  # - name: trusted-ca
+  #   mountPath: /etc/ssl/certs/
+  #   readOnly: true
+
   # -- Server service configuration
   service:
     type: # ClusterIP
@@ -97,6 +112,21 @@ controller:
     #   cpu: 250m
     #   memory: 256Mi
 
+  # env:
+  # - name: HTTPS_PROXY
+  #   value: example.com
+  # volumes:
+  # - name: trusted-ca
+  #   configMap:
+  #     name: example
+  #     items:
+  #     - key: ca-bundle.crt
+  #       path: ca-example.crt
+  # volumeMounts:
+  # - name: trusted-ca
+  #   mountPath: /etc/ssl/certs/
+  #   readOnly: true
+
 
 # -- Repo Server
 repoServer:
@@ -119,6 +149,21 @@ repoServer:
     # requests:
     #   cpu: 10m
     #   memory: 64Mi
+
+  # env:
+  # - name: HTTPS_PROXY
+  #   value: example.com
+  # volumes:
+  # - name: trusted-ca
+  #   configMap:
+  #     name: example
+  #     items:
+  #     - key: ca-bundle.crt
+  #       path: ca-example.crt
+  # volumeMounts:
+  # - name: trusted-ca
+  #   mountPath: /etc/ssl/certs/
+  #   readOnly: true
 
 
 # -- Notifications Controller
