@@ -202,7 +202,14 @@ config:
     #       - name: company
     #       teamNameField: slug
     #       useLoginAsID: true
-
+  repositories: {}
+    # private-helm-repo:
+    #   url: https://my-private-chart-repo.internal
+    #   name: private-repo
+    #   type: helm
+    #   password: my-password
+    #   username: my-username
+      
 
   # -- Disable creation of the argocd-secret (e.g. if it managed elsewhere SealedSecret / ExternalSecret)
   createSecret: true
