@@ -101,6 +101,7 @@ rules:
   verbs:
   - list
   - update
+  - watch
 # pods eviction needed for restart
 - apiGroups:
   - ""
@@ -214,7 +215,20 @@ rules:
   - list
   - update
   - patch
-
-
-
+- apiGroups:
+  - traefik.containo.us
+  resources:
+  - traefikservices
+  verbs:
+  - watch
+  - get
+  - update
+- apiGroups:
+  - apisix.apache.org
+  resources:
+  - apisixroutes
+  verbs:
+  - watch
+  - get
+  - update
 {{- end }}
