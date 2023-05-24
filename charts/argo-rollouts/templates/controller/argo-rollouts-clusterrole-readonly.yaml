@@ -87,6 +87,7 @@ rules:
   - pods
   verbs:
   - list
+  - watch
 # ingress patch needed for managing ingress annotations, create needed for nginx canary
 - apiGroups:
   - networking.k8s.io
@@ -168,7 +169,18 @@ rules:
   - watch
   - get
   - list
-
-
-
+- apiGroups:
+  - traefik.containo.us
+  resources:
+  - traefikservices
+  verbs:
+  - watch
+  - get
+- apiGroups:
+  - apisix.apache.org
+  resources:
+  - apisixroutes
+  verbs:
+  - watch
+  - get
 {{- end }}
