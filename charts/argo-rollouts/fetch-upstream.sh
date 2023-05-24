@@ -39,6 +39,7 @@ controller_manifests=(
     base/argo-rollouts-deployment.yaml
     base/argo-rollouts-metrics-service.yaml
     base/argo-rollouts-sa.yaml
+    base/argo-rollouts-config.yaml
     cluster-install/argo-rollouts-clusterrolebinding.yaml
 )
 

@@ -570,6 +570,11 @@ spec:
                                               type: string
                                             type: object
                                         type: object
+                                      service:
+                                        properties:
+                                          name:
+                                            type: string
+                                        type: object
                                       specRef:
                                         type: string
                                       weight:
@@ -859,9 +864,14 @@ spec:
                                 type: string
                               stableIngress:
                                 type: string
-                            required:
-                            - stableIngress
+                              stableIngresses:
+                                items:
+                                  type: string
+                                type: array
                             type: object
+                          plugins:
+                            type: object
+                            x-kubernetes-preserve-unknown-fields: true
                           smi:
                             properties:
                               rootService:
@@ -2446,6 +2456,8 @@ spec:
                         type: boolean
                       hostPID:
                         type: boolean
+                      hostUsers:
+                        type: boolean
                       hostname:
                         type: string
                       imagePullSecrets:
@@ -3193,12 +3205,21 @@ spec:
                                     type: string
                                   type: object
                               type: object
+                            matchLabelKeys:
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: atomic
                             maxSkew:
                               format: int32
                               type: integer
                             minDomains:
                               format: int32
                               type: integer
+                            nodeAffinityPolicy:
+                              type: string
+                            nodeTaintsPolicy:
+                              type: string
                             topologyKey:
                               type: string
                             whenUnsatisfiable:
@@ -3247,30 +3268,39 @@ spec:
                     properties:
                       arn:
                         type: string
+                      fullName:
+                        type: string
                       name:
                         type: string
                     required:
                     - arn
+                    - fullName
                     - name
                     type: object
                   loadBalancer:
                     properties:
                       arn:
                         type: string
+                      fullName:
+                        type: string
                       name:
                         type: string
                     required:
                     - arn
+                    - fullName
                     - name
                     type: object
                   stableTargetGroup:
                     properties:
                       arn:
                         type: string
+                      fullName:
+                        type: string
                       name:
                         type: string
                     required:
                     - arn
+                    - fullName
                     - name
                     type: object
                 type: object
