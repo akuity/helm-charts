@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
   name: argocd-application-controller
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.controller.replicas }}
   selector:
@@ -33,10 +34,8 @@ spec:
               topologyKey: kubernetes.io/hostname
             weight: 5
       containers:
-      - command:
-        - argocd-application-controller
-        - --redis
-        - argocd-redis-ha-haproxy:6379
+      - args:
+        - /usr/local/bin/argocd-application-controller
         {{- with .Values.controller.extraArgs }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}
@@ -48,6 +47,11 @@ spec:
         {{- with .Values.controller.env }}
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        - name: ARGOCD_REDIS
+          valueFrom:
+            configMapKeyRef:
+              key: redis.server
+              name: argocd-cmd-params-cm
         - name: ARGOCD_CONTROLLER_REPLICAS
           value: {{ .Values.controller.replicas | quote }}
         - name: ARGOCD_RECONCILIATION_TIMEOUT
@@ -170,7 +174,13 @@ spec:
               key: application.namespaces
               name: argocd-cmd-params-cm
               optional: true
-        image: {{ default .Values.global.image.repository .Values.controller.image.repository }}:{{ default .Values.global.image.tag .Values.controller.image.tag }}
+        - name: ARGOCD_APPLICATION_CONTROLLER_KUBECTL_PARALLELISM_LIMIT
+          valueFrom:
+            configMapKeyRef:
+              key: controller.kubectl.parallelism.limit
+              name: argocd-cmd-params-cm
+              optional: true
+        image: {{ include "argo-cd.image" (dict "root" . "image" .Values.controller.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.controller.image.pullPolicy }}
         name: argocd-application-controller
         ports:

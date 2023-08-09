@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-ha-haproxy
     app.kubernetes.io/part-of: argocd
   name: argocd-redis-ha-haproxy
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 3
   revisionHistoryLimit: 1
@@ -49,10 +50,13 @@ spec:
             port: 8888
           initialDelaySeconds: 5
           periodSeconds: 3
-        {{- with .Values.redis.securityContext }}
         securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /usr/local/etc/haproxy
           name: data

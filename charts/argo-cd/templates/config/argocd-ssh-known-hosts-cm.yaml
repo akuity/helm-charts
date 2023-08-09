@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-ssh-known-hosts-cm
   labels:
     app.kubernetes.io/name: argocd-ssh-known-hosts-cm
     app.kubernetes.io/part-of: argocd
+  name: argocd-ssh-known-hosts-cm
+  namespace: {{ .Release.Namespace }}
 data:
-  ssh_known_hosts: |-
+  ssh_known_hosts: |
     {{- .Values.config.sshKnownHosts.default | nindent 4 }}
     {{- .Values.config.sshKnownHosts.additional | nindent 4}}

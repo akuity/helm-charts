@@ -1,39 +1,16 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{/*
-Selector labels
+Returns the supplied image tag if defined, then the global tag, then the chart version
+@param .root      The root scope
+@param .image     Image structure with .repository and .tag fields
 */}}
-{{- define "argo-cd.selectorLabels" -}}
-{{- if .name -}}
-app.kubernetes.io/name: {{ include "argo-cd.name" .context }}-{{ .name }}
-{{ end -}}
-app.kubernetes.io/instance: {{ .context.Release.Name }}
-{{- if .component }}
-app.kubernetes.io/component: {{ .component }}
-{{- end }}
-{{- end }}
-
-{{/*
-Return the target Kubernetes version
-*/}}
-{{- define "argo-cd.kubeVersion" -}}
-  {{- default .Capabilities.KubeVersion.Version .Values.kubeVersionOverride }}
+{{- define "argo-cd.image" -}}
+{{- $repository := default .root.Values.global.image.repository .image.repository }}
+{{- if .image.tag -}}
+  {{- $repository }}:{{- .image.tag -}}
+{{- else -}}
+  {{- $imageFromChartVersion := print "v" (regexReplaceAllLiteral "\\.[0-9]+$" .root.Chart.Version "") }}
+  {{- $repository }}:{{- default $imageFromChartVersion .root.Values.global.image.tag -}}
 {{- end -}}
-
-{{/* 
-Argo Configuration Preset Values (Incluenced by Values configuration)
-*/}}
-{{- define "argo-cd.config.presets" -}}
-  {{- if .Values.configs.styles }}
-ui.cssurl: "./custom/custom.styles.css"
-  {{- end }}
-{{- end -}}
-
-{{/* 
-Merge Argo Configuration with Preset Configuration
-*/}}
-{{- define "argo-cd.config" -}}
-  {{- if .Values.server.configEnabled -}}
-{{- toYaml (mergeOverwrite (default dict (fromYaml (include "argo-cd.config.presets" $))) .Values.server.config) }}
-  {{- end -}}
 {{- end -}}

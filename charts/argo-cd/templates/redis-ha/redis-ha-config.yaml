@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-ha
     app.kubernetes.io/part-of: argocd
   name: argocd-redis-ha-health-configmap
+  namespace: {{ .Release.Namespace }}
 data:
   redis_liveness.sh: |
     response=$(
