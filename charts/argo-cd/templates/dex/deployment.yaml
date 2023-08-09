@@ -65,7 +65,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /shared/argocd-dex
-        image: {{ default .Values.global.image.repository }}:{{ default .Values.global.image.tag }}
+        image: {{ include "argo-cd.image" (dict "root" . "image" .Values.global.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.dex.image.pullPolicy }}
         name: copyutil
         securityContext:

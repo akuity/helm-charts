@@ -244,7 +244,7 @@ spec:
               key: server.enable.proxy.extension
               name: argocd-cmd-params-cm
               optional: true
-        image: {{ default .Values.global.image.repository .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
+        image: {{ include "argo-cd.image" (dict "root" . "image" .Values.server.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.server.image.pullPolicy }}
         livenessProbe:
           httpGet:

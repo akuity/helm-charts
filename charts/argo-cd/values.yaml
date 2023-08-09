@@ -5,8 +5,8 @@ global:
   image:
     # -- If defined, a repository applied to all ArgoCD deployments
     repository: quay.io/akuity/argocd
-    # -- If defined, a tag applied to all ArgoCD deployments
-    tag: v2.6.7-ak.0
+    # Overrides the image tag whose default is the chart version.
+    tag: ""
     # -- If defined, an image pull policy will be applied to all ArgoCD deployments
     pullPolicy: IfNotPresent
   # -- Enable service monitor
