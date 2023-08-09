@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-ha
     app.kubernetes.io/part-of: argocd
   name: argocd-redis-ha-server
+  namespace: {{ .Release.Namespace }}
 spec:
   podManagementPolicy: OrderedReady
   replicas: 3
@@ -71,10 +72,13 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 15
-        {{- with .Values.redis.securityContext }}
         securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /readonly-config
           name: config
@@ -116,10 +120,13 @@ spec:
           periodSeconds: 15
           successThreshold: 3
           timeoutSeconds: 15
-        {{- with .Values.redis.securityContext }}
         securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /data
           name: data
@@ -140,10 +147,13 @@ spec:
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: split-brain-fix
         resources: {}
-        {{- with .Values.redis.securityContext }}
         securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /readonly-config
           name: config
@@ -165,10 +175,13 @@ spec:
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: config-init
-        {{- with .Values.redis.securityContext }}
         securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          seccompProfile:
+            type: RuntimeDefault
         volumeMounts:
         - mountPath: /readonly-config
           name: config
@@ -176,7 +189,9 @@ spec:
         - mountPath: /data
           name: data
       securityContext:
+        fsGroup: 1000
         runAsNonRoot: true
+        runAsUser: 1000
       serviceAccountName: argocd-redis-ha
       terminationGracePeriodSeconds: 60
       volumes:

@@ -3,9 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: controller
+    app.kubernetes.io/component: applicationset-controller
     app.kubernetes.io/name: argocd-applicationset-controller
-    app.kubernetes.io/part-of: argocd-applicationset
+    app.kubernetes.io/part-of: argocd
   name: argocd-applicationset-controller
   namespace: {{ .Release.Namespace }}
 spec:
@@ -18,9 +18,8 @@ spec:
         app.kubernetes.io/name: argocd-applicationset-controller
     spec:
       containers:
-      - command:
-        - entrypoint.sh
-        - argocd-applicationset-controller
+      - args:
+        - /usr/local/bin/argocd-applicationset-controller
         env:
         - name: NAMESPACE
           valueFrom:
@@ -86,7 +85,7 @@ spec:
               key: applicationsetcontroller.enable.progressive.syncs
               name: argocd-cmd-params-cm
               optional: true
-        image: {{ default .Values.global.image.repository .Values.applicationsetController.image.repository }}:{{ default .Values.global.image.tag .Values.applicationsetController.image.tag }}
+        image: {{ include "argo-cd.image" (dict "root" . "image" .Values.applicationsetController.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.applicationsetController.image.pullPolicy }}
         name: argocd-applicationset-controller
         ports:
@@ -98,7 +97,7 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
-              - ALL
+            - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
           seccompProfile:

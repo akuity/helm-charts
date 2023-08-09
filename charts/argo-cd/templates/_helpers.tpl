@@ -10,6 +10,7 @@ Returns the supplied image tag if defined, then the global tag, then the chart v
 {{- if .image.tag -}}
   {{- $repository }}:{{- .image.tag -}}
 {{- else -}}
-  {{- $repository }}:{{- default .root.Chart.Version .root.Values.global.image.tag -}}
+  {{- $imageFromChartVersion := print "v" (regexReplaceAllLiteral "\\.[0-9]+$" .root.Chart.Version "") }}
+  {{- $repository }}:{{- default $imageFromChartVersion .root.Values.global.image.tag -}}
 {{- end -}}
 {{- end -}}

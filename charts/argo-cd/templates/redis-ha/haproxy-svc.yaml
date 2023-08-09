@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-redis-ha-haproxy
     app.kubernetes.io/part-of: argocd
   name: argocd-redis-ha-haproxy
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: tcp-haproxy

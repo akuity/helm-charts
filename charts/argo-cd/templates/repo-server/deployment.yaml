@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
   name: argocd-repo-server
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: {{ .Values.repoServer.replicas }}
   selector:
@@ -23,7 +24,7 @@ spec:
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: argocd-repo-server
-              topologyKey: failure-domain.beta.kubernetes.io/zone
+              topologyKey: topology.kubernetes.io/zone
             weight: 100
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
@@ -32,11 +33,8 @@ spec:
             topologyKey: kubernetes.io/hostname
       automountServiceAccountToken: false
       containers:
-      - command:
-        - entrypoint.sh
-        - argocd-repo-server
-        - --redis
-        - argocd-redis-ha-haproxy:6379
+      - args:
+        - /usr/local/bin/argocd-repo-server
         {{- with .Values.repoServer.extraArgs }}
         {{- . | toYaml | nindent 8 }}
         {{- end }}
@@ -48,6 +46,11 @@ spec:
         {{- with .Values.repoServer.env }}
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        - name: ARGOCD_REDIS
+          valueFrom:
+            configMapKeyRef:
+              key: redis.server
+              name: argocd-cmd-params-cm
         - name: ARGOCD_RECONCILIATION_TIMEOUT
           valueFrom:
             configMapKeyRef:
@@ -225,7 +228,7 @@ spec:
           name: plugins
       initContainers:
       - command:
-        - cp
+        - /bin/cp
         - -n
         - /usr/local/bin/argocd
         - /var/run/argocd/argocd-cmp-server
@@ -236,7 +239,7 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
-              - ALL
+            - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
           seccompProfile:
