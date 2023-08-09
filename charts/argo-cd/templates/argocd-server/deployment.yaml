@@ -51,11 +51,6 @@ spec:
         {{- end }}
         - name: ARGOCD_API_SERVER_REPLICAS
           value: {{ .Values.server.replicas | quote }}
-        - name: ARGOCD_REDIS
-          valueFrom:
-            configMapKeyRef:
-              key: redis.server
-              name: argocd-cmd-params-cm
         - name: ARGOCD_SERVER_INSECURE
           valueFrom:
             configMapKeyRef:
@@ -228,6 +223,18 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: server.http.cookie.maxnumber
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_SERVER_LISTEN_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              key: server.listen.address
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_SERVER_METRICS_LISTEN_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              key: server.metrics.listen.address
               name: argocd-cmd-params-cm
               optional: true
         - name: ARGOCD_SERVER_OTLP_ADDRESS
