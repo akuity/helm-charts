@@ -1,6 +1,6 @@
 # argo-workflows
 
-![Version: 3.4.3-ak.0.1](https://img.shields.io/badge/Version-3.4.3--ak.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.4.3](https://img.shields.io/badge/AppVersion-3.4.3-informational?style=flat-square)
+![Version: 3.5.0-rc1-ak.0.1](https://img.shields.io/badge/Version-3.5.0--rc1--ak.0.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.5.0-rc1](https://img.shields.io/badge/AppVersion-3.5.0--rc1-informational?style=flat-square)
 
 A Helm chart for Argo Workflows
 
@@ -33,7 +33,7 @@ A Helm chart for Argo Workflows
 | executor | object | `{"image":{"repository":"quay.io/akuity/argoexec","tag":""}}` | Executor controls how the init and wait container should be customized. |
 | executor.image.repository | string | `"quay.io/akuity/argoexec"` | Image repository. |
 | executor.image.tag | string | `""` | Overrides the image tag whose default is `global.image.tag`. |
-| global.image.tag | string | `"v3.4.3-ak.0"` | The default image tag applied to all Argo Workflows deployments. |
+| global.image.tag | string | `"v3.5.0-rc1-ak.0"` | The default image tag applied to all Argo Workflows deployments. |
 | server | object | `{"extraArgs":[],"extraEnv":[],"image":{"repository":"quay.io/akuity/argocli","tag":""},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argo-workflows.example.com","tls":{"enabled":false,"secretName":null}},"secure":true,"service":{"type":null}}` | Server customizes the deployment of Argo Server |
 | server.extraArgs | list | `[]` | Extra arguments to provide to the Argo Server binary. |
 | server.extraEnv | list | `[]` | Extra environment variables to provide to the argo-server container. |
