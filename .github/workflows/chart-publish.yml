@@ -30,8 +30,8 @@ jobs:
           git checkout origin/gh-pages index.yaml
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.4.0
-        with:
-          config: "./.github/configs/cr.yaml"
+        uses: helm/chart-releaser-action@v1.6.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: "true"
+          CR_INDEX_PATH: "./index.yaml"
