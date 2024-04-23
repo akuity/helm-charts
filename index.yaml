@@ -2,6 +2,40 @@ apiVersion: v1
 entries:
   argo-cd:
   - apiVersion: v2
+    appVersion: 2.7.18
+    created: "2024-04-23T23:37:20.322572855Z"
+    dependencies:
+    - condition: extensions.enabled
+      name: argo-cd-extensions
+      repository: https://charts.akuity.io
+      version: 0.0.4
+    - condition: imageUpdater.enabled
+      name: argocd-image-updater
+      repository: https://charts.akuity.io
+      version: 0.1.2
+    description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery
+      tool for Kubernetes.
+    digest: 453ba8804c34b8bdb2dbcd13f074783481ecb43071639487f2a7c522c9f70219
+    home: https://charts.akuity.io
+    icon: https://argoproj.github.io/argo-cd/assets/logo.png
+    keywords:
+    - argoproj
+    - argocd
+    - gitops
+    maintainers:
+    - email: jesse@akuity.io
+      name: jessesuen
+    - email: hong@akuity.io
+      name: wanghong230
+    - email: evgeny@akuity.io
+      name: evgeny-goldin
+    - email: justin@akuity.io
+      name: 34fathombelow
+    name: argo-cd
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-cd-2.7.18-ak.0.0/argo-cd-2.7.18-ak.0.0.tgz
+    version: 2.7.18-ak.0.0
+  - apiVersion: v2
     appVersion: 2.7.11
     created: "2023-08-09T09:53:10.01127948Z"
     dependencies:
@@ -1304,6 +1338,21 @@ entries:
     - https://github.com/akuity/helm-charts/releases/download/argo-rollouts-1.4.1-ak.0.0/argo-rollouts-1.4.1-ak.0.0.tgz
     version: 1.4.1-ak.0.0
   - apiVersion: v2
+    appVersion: 1.4.1
+    created: "2024-04-23T23:37:20.527239952Z"
+    description: A Helm chart for Argo Rollouts
+    digest: d86f74722813a6946e30a39a904eca3502b2f09f1cf62c0a4b59c3e38024bd18
+    home: https://github.com/akuity/helm-charts
+    icon: https://argoproj.github.io/argo-rollouts/assets/logo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-rollouts
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-rollouts-1.4.1-ak.0.0/argo-rollouts-1.4.1-ak.0.0.tgz
+    version: 1.4.1-ak.0.0
+  - apiVersion: v2
     appVersion: 1.2.2
     created: "2022-08-29T21:05:09.119483454Z"
     description: A Helm chart for Argo Rollouts
@@ -1454,6 +1503,24 @@ entries:
     - https://github.com/akuity/helm-builds/releases/download/argo-rollouts-0.0.10/argo-rollouts-0.0.10.tgz
     version: 0.0.10
   argo-workflows:
+  - apiVersion: v2
+    appVersion: 3.5.0-rc1
+    created: "2024-04-23T23:37:20.626234051Z"
+    description: A Helm chart for Argo Workflows
+    digest: 2a5d20e322507737494c388b6acaa43f9740bc57865a2d1c00c128ca39fb15ee
+    home: https://github.com/akuity/helm-charts
+    icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
+    maintainers:
+    - name: terrytangyuan
+    - name: jessesuen
+    - name: wanghong230
+    name: argo-workflows
+    sources:
+    - https://github.com/argoproj/argo-workflows
+    type: application
+    urls:
+    - https://github.com/akuity/helm-charts/releases/download/argo-workflows-3.5.0-rc1-ak.0.1/argo-workflows-3.5.0-rc1-ak.0.1.tgz
+    version: 3.5.0-rc1-ak.0.1
   - apiVersion: v2
     appVersion: 3.4.5
     created: "2023-03-07T17:55:58.440311623Z"
@@ -1858,4 +1925,4 @@ entries:
     urls:
     - https://github.com/akuity/helm-builds/releases/download/argocd-notifications-0.0.10/argocd-notifications-0.0.10.tgz
     version: 0.0.10
-generated: "2023-08-09T09:53:10.01178848Z"
+generated: "2024-04-23T23:37:20.626771961Z"
