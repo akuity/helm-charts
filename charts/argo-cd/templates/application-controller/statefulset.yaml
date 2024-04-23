@@ -47,11 +47,6 @@ spec:
         {{- with .Values.controller.env }}
           {{- toYaml . | nindent 10 }}
         {{- end }}
-        - name: ARGOCD_REDIS
-          valueFrom:
-            configMapKeyRef:
-              key: redis.server
-              name: argocd-cmd-params-cm
         - name: ARGOCD_CONTROLLER_REPLICAS
           value: {{ .Values.controller.replicas | quote }}
         - name: ARGOCD_RECONCILIATION_TIMEOUT
@@ -172,6 +167,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: application.namespaces
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_CONTROLLER_SHARDING_ALGORITHM
+          valueFrom:
+            configMapKeyRef:
+              key: controller.sharding.algorithm
               name: argocd-cmd-params-cm
               optional: true
         - name: ARGOCD_APPLICATION_CONTROLLER_KUBECTL_PARALLELISM_LIMIT
