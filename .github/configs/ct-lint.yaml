@@ -6,9 +6,6 @@ chart-dirs:
   - charts
 chart-repos:
   - akuity=https://charts.akuity.io
-  - minio=https://helm.min.io/
-  - stable=https://charts.helm.sh/stable
-  - incubator=https://charts.helm.sh/incubator
 helm-extra-args: "--timeout 600s"  
 validate-chart-schema: false
 validate-maintainers: true
