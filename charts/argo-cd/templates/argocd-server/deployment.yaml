@@ -248,6 +248,12 @@ spec:
               key: server.enable.proxy.extension
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_API_CONTENT_TYPES
+          valueFrom:
+            configMapKeyRef:
+              key: server.api.content.types
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.server.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.server.image.pullPolicy }}
         livenessProbe:

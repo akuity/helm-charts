@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 2.7.11-ak.0.0](https://img.shields.io/badge/Version-2.7.11--ak.0.0-informational?style=flat-square) ![AppVersion: 2.7.11](https://img.shields.io/badge/AppVersion-2.7.11-informational?style=flat-square)
+![Version: 2.7.18-ak.0.0](https://img.shields.io/badge/Version-2.7.18--ak.0.0-informational?style=flat-square) ![AppVersion: 2.7.18](https://img.shields.io/badge/AppVersion-2.7.18-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -10,10 +10,10 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| terrytangyuan | <terry@akuity.io> |  |
 | jessesuen | <jesse@akuity.io> |  |
 | wanghong230 | <hong@akuity.io> |  |
 | evgeny-goldin | <evgeny@akuity.io> |  |
+| 34fathombelow | <justin@akuity.io> |  |
 
 ## Requirements
 
