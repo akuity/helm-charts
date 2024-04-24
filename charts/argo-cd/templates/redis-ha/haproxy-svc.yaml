@@ -13,6 +13,10 @@ spec:
     port: 6379
     protocol: TCP
     targetPort: redis
+  - name: http-exporter-port
+    port: 9101
+    protocol: TCP
+    targetPort: metrics-port
   selector:
     app.kubernetes.io/name: argocd-redis-ha-haproxy
   type: ClusterIP
