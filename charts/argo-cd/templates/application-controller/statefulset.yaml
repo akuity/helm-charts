@@ -223,6 +223,12 @@ spec:
               key: controller.diff.server.side
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_IGNORE_NORMALIZER_JQ_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              name: argocd-cmd-params-cm
+              key: controller.ignore.normalizer.jq.timeout
+              optional: true
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.controller.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.controller.image.pullPolicy }}
         name: argocd-application-controller
