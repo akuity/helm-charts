@@ -11,6 +11,7 @@ data:
   redis_liveness.sh: |
     response=$(
       redis-cli \
+        -a "${AUTH}" --no-auth-warning \
         -h localhost \
         -p 6379 \
         ping
@@ -23,6 +24,7 @@ data:
   redis_readiness.sh: |
     response=$(
       redis-cli \
+        -a "${AUTH}" --no-auth-warning \
         -h localhost \
         -p 6379 \
         ping

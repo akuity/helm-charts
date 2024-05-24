@@ -51,6 +51,11 @@ spec:
         {{- end }}
         - name: ARGOCD_API_SERVER_REPLICAS
           value: {{ .Values.server.replicas | quote }}
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: auth
+              name: argocd-redis
         - name: ARGOCD_SERVER_INSECURE
           valueFrom:
             configMapKeyRef:

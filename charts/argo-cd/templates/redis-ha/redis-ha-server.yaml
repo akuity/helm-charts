@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/init-config: 69130412bda04eacad3530cb7bcf26cf121401e725e15d0959dd71a7380afe75
+        checksum/init-config: 9d3c019a5ea1fd98ab5cde397d8eecd351da884f15e6ba346c607cb2446c2198
       labels:
         app.kubernetes.io/name: argocd-redis-ha
     spec:
@@ -34,6 +34,12 @@ spec:
         - /data/conf/redis.conf
         command:
         - redis-server
+        env:
+        - name: AUTH
+          valueFrom:
+            secretKeyRef:
+              name: argocd-redis
+              key: auth
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         {{- with .Values.redis.resources }}
@@ -92,6 +98,12 @@ spec:
         - /data/conf/sentinel.conf
         command:
         - redis-sentinel
+        env:
+        - name: AUTH
+          valueFrom:
+            secretKeyRef:
+              name: argocd-redis
+              key: auth
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         lifecycle: {}
@@ -145,6 +157,11 @@ spec:
           value: 40000915ab58c3fa8fd888fb8b24711944e6cbb4
         - name: SENTINEL_ID_2
           value: 2bbec7894d954a8af3bb54d13eaec53cb024e2ca
+        - name: AUTH
+          valueFrom:
+            secretKeyRef:
+              name: argocd-redis
+              key: auth
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: split-brain-fix
@@ -175,6 +192,11 @@ spec:
           value: 40000915ab58c3fa8fd888fb8b24711944e6cbb4
         - name: SENTINEL_ID_2
           value: 2bbec7894d954a8af3bb54d13eaec53cb024e2ca
+        - name: AUTH
+          valueFrom:
+            secretKeyRef:
+              name: argocd-redis
+              key: auth
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         name: config-init

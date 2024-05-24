@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 2.8.16-ak.0.0](https://img.shields.io/badge/Version-2.8.16--ak.0.0-informational?style=flat-square) ![AppVersion: 2.8.16](https://img.shields.io/badge/AppVersion-2.8.16-informational?style=flat-square)
+![Version: 2.10.11-ak.0.0](https://img.shields.io/badge/Version-2.10.11--ak.0.0-informational?style=flat-square) ![AppVersion: 2.8.16](https://img.shields.io/badge/AppVersion-2.8.16-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -60,7 +60,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | imageUpdater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":true}` | Notifications Controller |
 | notificationsController.enabled | bool | `true` | Whether to enable Notifications Controller |
-| redis | object | `{"enabled":true,"haProxyImage":{"repository":"haproxy","tag":"2.6.14-alpine"},"image":{"pullPolicy":null,"repository":"quay.io/akuity/redis","tag":"7.0.14-alpine"},"resources":null}` | Redis configurations |
+| redis | object | `{"enabled":true,"haProxyImage":{"repository":"haproxy","tag":"2.6.14-alpine"},"image":{"pullPolicy":null,"repository":"quay.io/akuity/redis","tag":"7.0.15-alpine"},"resources":null}` | Redis configurations |
 | repoServer | object | `{"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"replicas":2,"resources":null}` | Repo Server |
 | repoServer.extraArgs | string | `nil` | Additional command line arguments to pass to argocd-repo-server |
 | server | object | `{"enabled":true,"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argocd.example.com","tls":{"enabled":false,"secretName":null}},"insecure":false,"replicas":2,"resources":null,"service":{"type":null}}` | Argo Server configuration |
