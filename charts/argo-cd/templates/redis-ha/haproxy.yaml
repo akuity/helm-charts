@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 492a6adabb741e0cee39be9aa5155c41a4456629f862d0006a2d892dbecfbcae
+        checksum/config: e34e8124c38bcfd2f16e75620bbde30158686692b13bc449eecc44c51b207d54
         prometheus.io/path: /metrics
         prometheus.io/port: "9101"
         prometheus.io/scrape: "true"
@@ -34,7 +34,13 @@ spec:
                 app.kubernetes.io/name: argocd-redis-ha-haproxy
             topologyKey: kubernetes.io/hostname
       containers:
-      - image: {{ .Values.redis.haProxyImage.repository }}:{{ .Values.redis.haProxyImage.tag }}
+      - env:
+        - name: AUTH
+          valueFrom:
+            secretKeyRef:
+              key: auth
+              name: argocd-redis
+        image: {{ .Values.redis.haProxyImage.repository }}:{{ .Values.redis.haProxyImage.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
         lifecycle: {}
         livenessProbe:
@@ -69,6 +75,22 @@ spec:
         - mountPath: /run/haproxy
           name: shared-socket
       initContainers:
+      - command:
+        - argocd
+        - admin
+        - redis-initial-password
+        image: quay.io/argoproj/argocd:v2.10.11
+        imagePullPolicy: IfNotPresent
+        name: secret-init
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
       - args:
         - /readonly/haproxy_init.sh
         command:

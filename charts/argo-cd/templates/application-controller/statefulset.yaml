@@ -47,6 +47,11 @@ spec:
         {{- with .Values.controller.env }}
           {{- toYaml . | nindent 10 }}
         {{- end }}
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: auth
+              name: argocd-redis
         - name: ARGOCD_CONTROLLER_REPLICAS
           value: {{ .Values.controller.replicas | quote }}
         - name: ARGOCD_RECONCILIATION_TIMEOUT
