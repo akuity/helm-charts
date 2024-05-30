@@ -1,7 +1,7 @@
 global:
   image:
     # -- The default image tag applied to all Argo Workflows deployments.
-    tag: v3.5.6-ak.0
+    tag: v3.5.7-ak.0
 
 # -- Controller customizes the deployment of Argo Workflows controller.
 controller:
