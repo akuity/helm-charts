@@ -79,7 +79,7 @@ spec:
         - argocd
         - admin
         - redis-initial-password
-        image: quay.io/argoproj/argocd:v2.10.11
+        image: {{ include "argo-cd.image" (dict "root" . "image" .Values ) }}
         imagePullPolicy: IfNotPresent
         name: secret-init
         securityContext:
