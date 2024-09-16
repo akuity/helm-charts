@@ -355,7 +355,9 @@ redis:
     # https://hub.docker.com/_/haproxy
     repository: haproxy
     tag: 2.6.14-alpine
-
+  networkPolicy:
+    egress:
+      enabled: true
   resources:
   #  limits:
   #    cpu: 200m

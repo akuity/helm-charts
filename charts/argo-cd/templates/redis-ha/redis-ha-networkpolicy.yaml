@@ -4,21 +4,6 @@ metadata:
   name: argocd-redis-ha-server-network-policy
   namespace: {{ .Release.Namespace }}
 spec:
-  egress:
-  - ports:
-    - port: 6379
-      protocol: TCP
-    - port: 26379
-      protocol: TCP
-    to:
-    - podSelector:
-        matchLabels:
-          app.kubernetes.io/name: argocd-redis-ha
-  - ports:
-    - port: 53
-      protocol: UDP
-    - port: 53
-      protocol: TCP
   ingress:
   - from:
     - podSelector:
@@ -37,4 +22,21 @@ spec:
       app.kubernetes.io/name: argocd-redis-ha
   policyTypes:
   - Ingress
+  {{- if .Values.redis.networkPolicy.egress.enabled }}
   - Egress
+  egress:
+  - ports:
+    - port: 6379
+      protocol: TCP
+    - port: 26379
+      protocol: TCP
+    to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/name: argocd-redis-ha
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+  {{- end }}
