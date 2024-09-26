@@ -17,7 +17,11 @@ data:
     maxmemory 0
     maxmemory-policy volatile-lru
     min-replicas-max-lag 5
+{{- range .Values.redis.config }}
+    {{ . }}
+    {{- else }}
     min-replicas-to-write 1
+    {{- end }}
     rdbchecksum yes
     rdbcompression yes
     repl-diskless-sync yes
