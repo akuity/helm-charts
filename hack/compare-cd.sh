@@ -14,6 +14,7 @@ helm template \
     --set global.image.repository=quay.io/argoproj/argocd \
     --set global.image.tag="v$upstream_version" \
     --set global.image.pullPolicy=Always \
+    --set redis.config=null \
     --namespace foo "$chart_root" | grep -v imagePullPolicy > "$helm_tmpdir/helm.yaml"
 
 echo """
