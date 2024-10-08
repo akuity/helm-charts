@@ -79,6 +79,10 @@ server:
 
 ## Controller
 controller:
+
+  # Deploys the application controller as a Deployment. This is useful if you are only deploying to a single cluster or
+  # want to enable the dynamic cluster distribution feature.
+  deployment: false
   image:
     repository:      # defaults to global.image.repository
     tag:             # defaults to global.image.tag
