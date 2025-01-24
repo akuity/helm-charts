@@ -362,8 +362,8 @@ redis:
     pullPolicy: # IfNotPresent
   haProxyImage:
     # https://hub.docker.com/_/haproxy
-    repository: haproxy
-    tag: 2.6.14-alpine
+    repository: public.ecr.aws/docker/library/haproxy
+    tag: 2.6.17-alpine
   networkPolicy:
     egress:
       enabled: true

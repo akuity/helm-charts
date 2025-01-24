@@ -45,7 +45,7 @@ kind: Kustomization
 namespace: foo
 
 images:
-- name: redis
+- name: public.ecr.aws/docker/library/redis
   newName: quay.io/akuity/redis
 
 resources:
