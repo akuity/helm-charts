@@ -349,12 +349,12 @@ dex:
 # -- Redis configurations
 redis:
   enabled: true
-  config:
+  config: []
     ## Additional redis conf options can be added below
     ## For all available options see http://download.redis.io/redis-stable/redis.conf
-    - min-replicas-to-write 0
-    - client-output-buffer-limit replica 512mb 128mb 60
-    - repl-backlog-size 512mb
+    # - min-replicas-to-write 0
+    # - client-output-buffer-limit replica 512mb 128mb 60
+    # - repl-backlog-size 512mb
   image:
     repository: quay.io/akuity/redis
     # https://hub.docker.com/_/redis/
