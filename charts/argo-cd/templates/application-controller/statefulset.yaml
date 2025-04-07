@@ -273,6 +273,7 @@ spec:
           runAsNonRoot: true
           seccompProfile:
             type: RuntimeDefault
+        workingDir: /home/argocd
         volumeMounts:
         {{- with .Values.controller.volumeMounts }}
           {{- toYaml . | nindent 8 }}
@@ -281,7 +282,8 @@ spec:
           name: argocd-repo-server-tls
         - mountPath: /home/argocd
           name: argocd-home
-        workingDir: /home/argocd
+        - mountPath: /home/argocd/params
+          name: argocd-cmd-params-cm
       serviceAccountName: argocd-application-controller
       volumes:
       {{- with .Values.controller.volumes }}
@@ -300,4 +302,11 @@ spec:
             path: ca.crt
           optional: true
           secretName: argocd-repo-server-tls
+      - name: argocd-cmd-params-cm
+        configMap:
+          optional: true
+          name: argocd-cmd-params-cm
+          items:
+          - key: controller.profile.enabled
+            path: profiler.enabled
 {{- end }}

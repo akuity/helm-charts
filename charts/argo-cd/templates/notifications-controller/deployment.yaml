@@ -47,6 +47,12 @@ spec:
               key: notificationscontroller.selfservice.enabled
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_NOTIFICATION_CONTROLLER_REPO_SERVER_PLAINTEXT
+          valueFrom:
+            configMapKeyRef:
+              key: notificationscontroller.repo.server.plaintext
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.controller.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.controller.image.pullPolicy }}
         livenessProbe:
