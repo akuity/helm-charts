@@ -151,6 +151,12 @@ spec:
               key: applicationsetcontroller.enable.scm.providers
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_APPLICATIONSET_CONTROLLER_WEBHOOK_PARALLELISM_LIMIT
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.webhook.parallelism.limit
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.applicationsetController.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.applicationsetController.image.pullPolicy }}
         name: argocd-applicationset-controller
