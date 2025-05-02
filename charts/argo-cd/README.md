@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 2.13.6-ak.0.0](https://img.shields.io/badge/Version-2.13.6--ak.0.0-informational?style=flat-square) ![AppVersion: 2.13.6](https://img.shields.io/badge/AppVersion-2.13.6-informational?style=flat-square)
+![Version: 2.13.7-ak.0.0](https://img.shields.io/badge/Version-2.13.7--ak.0.0-informational?style=flat-square) ![AppVersion: 2.13.7](https://img.shields.io/badge/AppVersion-2.13.7-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -46,7 +46,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | dex.enabled | bool | `true` | Enbable or disables dex. Can be disabled if using native OAuth provider |
 | dex.image.pullPolicy | string | `nil` |  |
 | dex.image.repository | string | `"ghcr.io/dexidp/dex"` |  |
-| dex.image.tag | string | `"v2.38.0"` |  |
+| dex.image.tag | string | `"v2.41.1"` |  |
 | dex.resources | string | `nil` |  |
 | extensions.enabled | bool | `false` |  |
 | extensions.image.pullPolicy | string | `nil` |  |
