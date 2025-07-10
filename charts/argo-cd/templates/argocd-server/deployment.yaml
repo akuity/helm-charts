@@ -372,8 +372,6 @@ spec:
           name: tmp
         - mountPath: /home/argocd/params
           name: argocd-cmd-params-cm
-      nodeSelector:
-        kubernetes.io/os: linux
 {{- if .Values.extensions.enabled }}
         - name: extensions
           mountPath: /tmp/extensions/
@@ -384,6 +382,8 @@ spec:
           - name: extensions
             mountPath: /tmp/extensions/
 {{- end }}
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-server
       volumes:
       {{- with .Values.server.volumes }}
