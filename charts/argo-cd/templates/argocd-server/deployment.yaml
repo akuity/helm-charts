@@ -320,6 +320,12 @@ spec:
               key: applicationsetcontroller.enable.scm.providers
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_HYDRATOR_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              key: hydrator.enabled
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.server.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.server.image.pullPolicy }}
         livenessProbe:
@@ -366,6 +372,8 @@ spec:
           name: tmp
         - mountPath: /home/argocd/params
           name: argocd-cmd-params-cm
+      nodeSelector:
+        kubernetes.io/os: linux
 {{- if .Values.extensions.enabled }}
         - name: extensions
           mountPath: /tmp/extensions/

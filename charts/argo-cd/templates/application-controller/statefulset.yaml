@@ -145,6 +145,12 @@ spec:
               name: argocd-cmd-params-cm
               key: controller.self.heal.backoff.cap.seconds
               optional: true
+        - name: ARGOCD_APPLICATION_CONTROLLER_SYNC_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: controller.sync.timeout.seconds
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_APPLICATION_CONTROLLER_REPO_SERVER_PLAINTEXT
           valueFrom:
             configMapKeyRef:
@@ -253,6 +259,26 @@ spec:
               name: argocd-cmd-params-cm
               key: controller.ignore.normalizer.jq.timeout
               optional: true
+        - name: ARGOCD_HYDRATOR_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              key: hydrator.enabled
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_CLUSTER_CACHE_BATCH_EVENTS_PROCESSING
+          valueFrom:
+            configMapKeyRef:
+              key: controller.cluster.cache.batch.events.processing
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_CLUSTER_CACHE_EVENTS_PROCESSING_INTERVAL
+          valueFrom:
+            configMapKeyRef:
+              key: controller.cluster.cache.events.processing.interval
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: KUBECACHEDIR
+          value: /tmp/kubecache
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.controller.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.controller.image.pullPolicy }}
         name: argocd-application-controller
@@ -273,7 +299,6 @@ spec:
           runAsNonRoot: true
           seccompProfile:
             type: RuntimeDefault
-        workingDir: /home/argocd
         volumeMounts:
         {{- with .Values.controller.volumeMounts }}
           {{- toYaml . | nindent 8 }}
@@ -284,6 +309,11 @@ spec:
           name: argocd-home
         - mountPath: /home/argocd/params
           name: argocd-cmd-params-cm
+        - mountPath: /tmp
+          name: argocd-application-controller-tmp
+        workingDir: /home/argocd
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-application-controller
       volumes:
       {{- with .Values.controller.volumes }}
@@ -291,6 +321,8 @@ spec:
       {{- end }}
       - emptyDir: {}
         name: argocd-home
+      - emptyDir: {}
+        name: argocd-application-controller-tmp
       - name: argocd-repo-server-tls
         secret:
           items:

@@ -106,7 +106,13 @@ spec:
               key: auth
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
-        lifecycle: {}
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - sleep 30; redis-cli -p 26379 sentinel reset argocd
         livenessProbe:
           exec:
             command:

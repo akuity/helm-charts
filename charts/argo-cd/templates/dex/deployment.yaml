@@ -95,6 +95,8 @@ spec:
           name: static-files
         - mountPath: /tmp
           name: dexconfig
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-dex-server
       volumes:
       - emptyDir: {}

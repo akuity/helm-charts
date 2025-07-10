@@ -97,6 +97,12 @@ spec:
               key: applicationsetcontroller.enable.progressive.syncs
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_APPLICATIONSET_CONTROLLER_TOKENREF_STRICT_MODE
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.enable.tokenref.strict.mode
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_NEW_GIT_FILE_GLOBBING
           valueFrom:
             configMapKeyRef:
@@ -157,6 +163,12 @@ spec:
               key: applicationsetcontroller.webhook.parallelism.limit
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_APPLICATIONSET_CONTROLLER_REQUEUE_AFTER
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.requeue.after
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.applicationsetController.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.applicationsetController.image.pullPolicy }}
         name: argocd-applicationset-controller
@@ -187,6 +199,8 @@ spec:
           name: tmp
         - mountPath: /app/config/reposerver/tls
           name: argocd-repo-server-tls
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-applicationset-controller
       volumes:
       - configMap:

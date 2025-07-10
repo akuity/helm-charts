@@ -171,6 +171,12 @@ spec:
               key: reposerver.plugin.tar.exclusions
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_REPO_SERVER_PLUGIN_USE_MANIFEST_GENERATE_PATHS
+          valueFrom:
+            configMapKeyRef:
+              key: reposerver.plugin.use.manifest.generate.paths
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_REPO_SERVER_ALLOW_OUT_OF_BOUNDS_SYMLINKS
           valueFrom:
             configMapKeyRef:
@@ -313,6 +319,8 @@ spec:
         volumeMounts:
         - mountPath: /var/run/argocd
           name: var-files
+      nodeSelector:
+        kubernetes.io/os: linux
       serviceAccountName: argocd-repo-server
       volumes:
       {{- with .Values.repoServer.volumes }}
