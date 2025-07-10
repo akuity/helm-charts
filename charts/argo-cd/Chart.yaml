@@ -1,6 +1,6 @@
 apiVersion: v2
-version: 2.14.10-ak.0.0
-appVersion: 2.14.10
+version: 2.14.15-ak.0.0
+appVersion: 2.14.15
 description: A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 name: argo-cd
 home: https://charts.akuity.io
