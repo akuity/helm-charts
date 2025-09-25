@@ -12,6 +12,8 @@ global:
   # -- Enable service monitor
   serviceMonitor:
     enabled: false
+    # -- Additional Prometheus ServiceMonitor labels
+    additionalLabels: {}
 
 # -- Installs necessary ClusterRoles to allow Argo CD to deploy to the same cluster Argo CD is installed in
 clusterRoles:
