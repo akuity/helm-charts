@@ -55,7 +55,8 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | global.image.pullPolicy | string | `"IfNotPresent"` | If defined, an image pull policy will be applied to all ArgoCD deployments |
 | global.image.repository | string | `"quay.io/akuity/argocd"` | If defined, a repository applied to all ArgoCD deployments |
 | global.image.tag | string | `""` |  |
-| global.serviceMonitor | object | `{"enabled":false}` | Enable service monitor |
+| global.serviceMonitor | object | `{"additionalLabels":{},"enabled":false}` | Enable service monitor |
+| global.serviceMonitor.additionalLabels | object | `{}` | Additional Prometheus ServiceMonitor labels |
 | imageUpdater | object | `{"enabled":false,"image":{"pullPolicy":null,"repository":"quay.io/argoprojlabs/argocd-image-updater","tag":"v0.12.0"}}` | Image Updater |
 | imageUpdater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":true}` | Notifications Controller |

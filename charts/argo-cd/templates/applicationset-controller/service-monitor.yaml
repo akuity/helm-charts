@@ -5,6 +5,9 @@ metadata:
   name: argocd-applicationset-controller-metrics
   labels:
     release: argocd-service
+    {{- with .Values.global.serviceMonitor.additionalLabels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   selector:
     matchLabels:
