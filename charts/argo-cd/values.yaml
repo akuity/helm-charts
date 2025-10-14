@@ -360,7 +360,7 @@ redis:
   image:
     repository: quay.io/akuity/redis
     # https://hub.docker.com/_/redis/
-    tag: 7.0.15-alpine
+    tag: 7.2.11-alpine
     pullPolicy: # IfNotPresent
   haProxyImage:
     # https://hub.docker.com/_/haproxy
