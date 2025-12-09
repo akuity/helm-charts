@@ -365,7 +365,7 @@ redis:
   haProxyImage:
     # https://hub.docker.com/_/haproxy
     repository: public.ecr.aws/docker/library/haproxy
-    tag: 2.6.17-alpine
+    tag: 3.0.8-alpine
   networkPolicy:
     egress:
       enabled: true

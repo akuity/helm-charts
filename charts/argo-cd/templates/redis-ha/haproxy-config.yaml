@@ -278,7 +278,7 @@ data:
     identify_announce_ip
 
     if [ -z "${ANNOUNCE_IP}" ]; then
-        "Error: Could not resolve the announce ip for this pod."
+        "Error: Could not resolve the announce ip for this pod"
         exit 1
     elif [ "${MASTER}" ]; then
         find_master
@@ -675,6 +675,9 @@ data:
       stats enable
       stats uri /stats
       stats refresh 10s
+    # Additional configuration
+    global
+      maxconn 4096
   haproxy_init.sh: |
     HAPROXY_CONF=/data/haproxy.cfg
     cp /readonly/haproxy.cfg "$HAPROXY_CONF"

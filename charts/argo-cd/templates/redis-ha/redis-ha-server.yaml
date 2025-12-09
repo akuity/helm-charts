@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/init-config: 9d3c019a5ea1fd98ab5cde397d8eecd351da884f15e6ba346c607cb2446c2198
+        checksum/init-config: bd30e83dfdad9912b6c1cc32a8c26d7d01429a0730f5ee7af380fb593e874d54
       labels:
         app.kubernetes.io/name: argocd-redis-ha
     spec:
@@ -63,10 +63,6 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 15
-        name: redis
-        ports:
-        - containerPort: 6379
-          name: redis
         readinessProbe:
           exec:
             command:
@@ -78,6 +74,21 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 15
+        startupProbe:
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 15
+          successThreshold: 1
+          failureThreshold: 3
+          exec:
+            command:
+              - sh
+              - -c
+              - /health/redis_readiness.sh
+        name: redis
+        ports:
+        - containerPort: 6379
+          name: redis
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -124,10 +135,6 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 15
-        name: sentinel
-        ports:
-        - containerPort: 26379
-          name: sentinel
         readinessProbe:
           exec:
             command:
@@ -139,6 +146,21 @@ spec:
           periodSeconds: 15
           successThreshold: 3
           timeoutSeconds: 15
+        startupProbe:
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 15
+          successThreshold: 1
+          failureThreshold: 3
+          exec:
+            command:
+              - sh
+              - -c
+              - /health/sentinel_liveness.sh
+        name: sentinel
+        ports:
+        - containerPort: 26379
+          name: sentinel
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
