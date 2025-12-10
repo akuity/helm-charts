@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: e34e8124c38bcfd2f16e75620bbde30158686692b13bc449eecc44c51b207d54
+        checksum/config: cd6508bdf9819601c454d0cc491fb77a209e3a88761d92514d105b6681829953
         prometheus.io/path: /metrics
         prometheus.io/port: "9101"
         prometheus.io/scrape: "true"
@@ -46,11 +46,13 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8888
+            port: probe
           initialDelaySeconds: 5
           periodSeconds: 3
         name: haproxy
         ports:
+        - containerPort: 8888
+          name: probe
         - containerPort: 6379
           name: redis
         - containerPort: 9101
@@ -58,7 +60,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 8888
+            port: probe
           initialDelaySeconds: 5
           periodSeconds: 3
         securityContext:
@@ -117,6 +119,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 99
       serviceAccountName: argocd-redis-ha-haproxy
+      automountServiceAccountToken: true
       volumes:
       - configMap:
           name: argocd-redis-ha-configmap

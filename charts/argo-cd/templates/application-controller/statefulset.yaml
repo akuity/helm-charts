@@ -115,6 +115,12 @@ spec:
               key: controller.log.level
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_LOG_FORMAT_TIMESTAMP
+          valueFrom:
+            configMapKeyRef:
+              name: argocd-cmd-params-cm
+              key: log.format.timestamp
+              optional: true
         - name: ARGOCD_APPLICATION_CONTROLLER_METRICS_CACHE_EXPIRATION
           valueFrom:
             configMapKeyRef:
@@ -222,6 +228,12 @@ spec:
             configMapKeyRef:
               key: otlp.headers
               name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_APPLICATION_CONTROLLER_OTLP_ATTRS
+          valueFrom:
+            configMapKeyRef:
+              name: argocd-cmd-params-cm
+              key: otlp.attrs
               optional: true
         - name: ARGOCD_APPLICATION_NAMESPACES
           valueFrom:
