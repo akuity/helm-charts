@@ -337,7 +337,7 @@ dex:
   image:
     repository: ghcr.io/dexidp/dex
     # https://github.com/dexidp/dex/pkgs/container/dex
-    tag: v2.41.1
+    tag: v2.43.0
     pullPolicy: # IfNotPresent
 
   resources:
