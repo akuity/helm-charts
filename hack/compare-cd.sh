@@ -47,7 +47,7 @@ namespace: foo
 images:
 - name: public.ecr.aws/docker/library/redis
   newName: quay.io/akuity/redis
-  newTag: 7.2.12-alpine
+  newTag: 8.2.2-alpine
 
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v${upstream_version}/manifests/ha/install.yaml
