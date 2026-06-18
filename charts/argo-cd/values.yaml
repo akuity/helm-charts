@@ -369,6 +369,8 @@ redis:
   networkPolicy:
     egress:
       enabled: true
+  nodeSelector: {}
+  #  kubernetes.io/os: linux
   resources:
   #  limits:
   #    cpu: 200m

@@ -21,6 +21,8 @@ spec:
       labels:
         app.kubernetes.io/name: argocd-redis-ha
     spec:
+      nodeSelector:
+{{ toYaml .Values.redis.nodeSelector | indent 8 }}
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

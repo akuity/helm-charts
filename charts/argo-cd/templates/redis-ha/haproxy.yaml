@@ -26,6 +26,8 @@ spec:
         app.kubernetes.io/name: argocd-redis-ha-haproxy
       name: argocd-redis-ha-haproxy
     spec:
+      nodeSelector:
+{{ toYaml .Values.redis.nodeSelector | indent 8 }}
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
