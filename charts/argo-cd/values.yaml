@@ -84,6 +84,7 @@ controller:
 
   # Deploys the application controller as a Deployment. This is useful if you are only deploying to a single cluster or
   # want to enable the dynamic cluster distribution feature.
+  # -- Deploys the application controller as a Deployment
   deployment: false
   image:
     repository:      # defaults to global.image.repository
@@ -360,7 +361,7 @@ redis:
   image:
     repository: quay.io/akuity/redis
     # https://hub.docker.com/_/redis/
-    tag: 8.2.2-alpine
+    tag: 8.2.3-alpine
     pullPolicy: # IfNotPresent
   haProxyImage:
     # https://hub.docker.com/_/haproxy

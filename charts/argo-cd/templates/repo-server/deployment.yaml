@@ -335,11 +335,12 @@ spec:
         - mountPath: /home/argocd/cmp-server/plugins
           name: plugins
       initContainers:
-      - command:
-        - /bin/cp
-        - -n
-        - /usr/local/bin/argocd
-        - /var/run/argocd/argocd-cmp-server
+      - args:
+        - /bin/cp /usr/local/bin/argocd /var/run/argocd/argocd && /bin/ln -sf /var/run/argocd/argocd
+          /var/run/argocd/argocd-cmp-server
+        command:
+        - sh
+        - -c
         image: {{ include "argo-cd.image" (dict "root" . "image" .Values.repoServer.image ) }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.repoServer.image.pullPolicy }}
         name: copyutil

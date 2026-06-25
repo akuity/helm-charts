@@ -47,7 +47,7 @@ namespace: foo
 images:
 - name: public.ecr.aws/docker/library/redis
   newName: quay.io/akuity/redis
-  newTag: 8.2.2-alpine
+  newTag: 8.2.3-alpine
 
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v${upstream_version}/manifests/ha/install.yaml
@@ -70,7 +70,7 @@ patches:
 """ > "$upstream_tmpdir/kustomization.yaml"
 
 diff_dir="$(mktemp -d 2>/dev/null || mktemp -d -t 'diff')"
-kustomize build "$helm_tmpdir"     | grep -v "^data: null$"                           > "$diff_dir/helm_$upstream_version.yaml"
+kustomize build "$helm_tmpdir"     | grep -v "^data: null$" | grep -v "nodeSelector: {}" > "$diff_dir/helm_$upstream_version.yaml"
 kustomize build "$upstream_tmpdir" | grep -v "^data: null$" | grep -v imagePullPolicy > "$diff_dir/upstream_$upstream_version.yaml"
 
 echo "----------------------------------------------------------"
