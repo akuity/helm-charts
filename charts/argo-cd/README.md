@@ -1,6 +1,6 @@
 # argo-cd
 
-![Version: 3.2.12-ak.0.0](https://img.shields.io/badge/Version-3.2.12--ak.0.0-informational?style=flat-square) ![AppVersion: 3.2.12](https://img.shields.io/badge/AppVersion-3.2.12-informational?style=flat-square)
+![Version: 3.3.12-ak.0.0](https://img.shields.io/badge/Version-3.3.12--ak.0.0-informational?style=flat-square) ![AppVersion: 3.3.12](https://img.shields.io/badge/AppVersion-3.3.12-informational?style=flat-square)
 
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
@@ -61,7 +61,7 @@ A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kube
 | imageUpdater.enabled | bool | `false` | Whether to enable image updater |
 | notificationsController | object | `{"enabled":true}` | Notifications Controller |
 | notificationsController.enabled | bool | `true` | Whether to enable Notifications Controller |
-| redis | object | `{"config":[],"enabled":true,"haProxyImage":{"repository":"public.ecr.aws/docker/library/haproxy","tag":"3.0.8-alpine"},"image":{"pullPolicy":null,"repository":"quay.io/akuity/redis","tag":"8.2.2-alpine"},"networkPolicy":{"egress":{"enabled":true}},"nodeSelector":{},"resources":null}` | Redis configurations |
+| redis | object | `{"config":[],"enabled":true,"haProxyImage":{"repository":"public.ecr.aws/docker/library/haproxy","tag":"3.0.8-alpine"},"image":{"pullPolicy":null,"repository":"quay.io/akuity/redis","tag":"8.2.3-alpine"},"networkPolicy":{"egress":{"enabled":true}},"nodeSelector":{},"resources":null}` | Redis configurations |
 | repoServer | object | `{"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"replicas":2,"resources":null}` | Repo Server |
 | repoServer.extraArgs | string | `nil` | Additional command line arguments to pass to argocd-repo-server |
 | server | object | `{"enabled":true,"extraArgs":null,"image":{"pullPolicy":null,"repository":null,"tag":null},"ingress":{"annotations":{},"className":"","enabled":false,"host":"argocd.example.com","tls":{"enabled":false,"secretName":null}},"insecure":false,"replicas":2,"resources":null,"service":{"type":null}}` | Argo Server configuration |
