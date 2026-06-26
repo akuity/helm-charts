@@ -1,0 +1,12 @@
+{{- if .Values.redis.pdb.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: argocd-redis-server
+  namespace: {{ .Release.Namespace }}
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-redis-ha
+{{- end }}
