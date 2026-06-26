@@ -367,6 +367,8 @@ redis:
     # https://hub.docker.com/_/haproxy
     repository: public.ecr.aws/docker/library/haproxy
     tag: 3.0.8-alpine
+  pdb:
+    enabled: false
   networkPolicy:
     egress:
       enabled: true
