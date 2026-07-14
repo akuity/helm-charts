@@ -361,12 +361,12 @@ redis:
   image:
     repository: quay.io/akuity/redis
     # https://hub.docker.com/_/redis/
-    tag: 8.2.3-alpine
+    tag: 8.6.4-alpine
     pullPolicy: # IfNotPresent
   haProxyImage:
     # https://hub.docker.com/_/haproxy
     repository: public.ecr.aws/docker/library/haproxy
-    tag: 3.0.8-alpine
+    tag: 3.0.25-alpine
   pdb:
     enabled: false
   networkPolicy:
