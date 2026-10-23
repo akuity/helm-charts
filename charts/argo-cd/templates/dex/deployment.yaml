@@ -55,6 +55,12 @@ spec:
               key: dexserver.disable.tls
               name: argocd-cmd-params-cm
               optional: true
+        - name: DEX_CONTINUE_ON_CONNECTOR_FAILURE
+          valueFrom:
+            configMapKeyRef:
+              key: dexserver.connector.failure.continue
+              name: argocd-cmd-params-cm
+              optional: true
         image: {{ .Values.dex.image.repository }}:{{ .Values.dex.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.dex.image.pullPolicy }}
         name: dex
@@ -69,6 +75,7 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
+          runAsUser: 1001
           seccompProfile:
             type: RuntimeDefault
         volumeMounts:
