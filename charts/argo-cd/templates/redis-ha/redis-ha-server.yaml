@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/init-config: fd74f7d84e39b3f6eac1d7ce5deb0083e58f218376faf363343d91a0fb4f2563
+        checksum/init-config: cb9ebad11d288a7327d836f5f0fa63a61806e11078082ffaf78cd15e5b6f04fa
       labels:
         app.kubernetes.io/name: argocd-redis-ha
     spec:
@@ -194,7 +194,28 @@ spec:
               key: auth
         image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
         imagePullPolicy: {{ default .Values.global.image.pullPolicy }}
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /readonly-config/redis.conf
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
         name: split-brain-fix
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - test -d /proc/1
+          failureThreshold: 5
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
